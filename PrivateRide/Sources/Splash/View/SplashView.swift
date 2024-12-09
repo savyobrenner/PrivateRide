@@ -16,7 +16,7 @@ struct SplashView<ViewModel: SplashViewModelProtocol>: View {
     
     var body: some View {
         ZStack {
-            Color.Brand.black
+            Color.red
 
             EmptyView()
         }
