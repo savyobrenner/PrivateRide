@@ -16,11 +16,12 @@ struct SplashView<ViewModel: SplashViewModelProtocol>: View {
     
     var body: some View {
         ZStack {
-            Color.red
-
-            EmptyView()
+            Color.Brand.white
+            
+            Image(.logoWithTitle)
+                .resizable()
+                .frame(width: 200, height: 200)
         }
-        .ignoresSafeArea()
         .onAppear { viewModel.load() }
     }
 }
