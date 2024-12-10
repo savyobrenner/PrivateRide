@@ -55,6 +55,7 @@
 		F84DC4B32D08EC6B0069E1BA /* Inter-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F84DC4A32D08EC6B0069E1BA /* Inter-Black.ttf */; };
 		F84DC4B42D08EC6B0069E1BA /* Inter-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F84DC4A72D08EC6B0069E1BA /* Inter-Light.ttf */; };
 		F84DC6072D08FB950069E1BA /* PRAddressFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84DC6062D08FB8D0069E1BA /* PRAddressFormView.swift */; };
+		F84DC6092D0904E40069E1BA /* PRFormSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84DC6082D0904DC0069E1BA /* PRFormSectionHeader.swift */; };
 		F89DD1042D0670DB00EC2319 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = F89DD1032D0670DB00EC2319 /* Factory */; };
 		F89DD1062D06715200EC2319 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F89DD1052D06715200EC2319 /* Launch Screen.storyboard */; };
 		F89DD1102D067E9100EC2319 /* HomeServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89DD10B2D067E9100EC2319 /* HomeServices.swift */; };
@@ -115,6 +116,7 @@
 		F84DC4AA2D08EC6B0069E1BA /* Inter-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-SemiBold.ttf"; sourceTree = "<group>"; };
 		F84DC4AB2D08EC6B0069E1BA /* Inter-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Thin.ttf"; sourceTree = "<group>"; };
 		F84DC6062D08FB8D0069E1BA /* PRAddressFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRAddressFormView.swift; sourceTree = "<group>"; };
+		F84DC6082D0904DC0069E1BA /* PRFormSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRFormSectionHeader.swift; sourceTree = "<group>"; };
 		F89DD1052D06715200EC2319 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		F89DD1072D0671E300EC2319 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		F89DD10A2D067E9100EC2319 /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
@@ -449,6 +451,7 @@
 		F84DC3E82D08EB000069E1BA /* Atoms */ = {
 			isa = PBXGroup;
 			children = (
+				F84DC6082D0904DC0069E1BA /* PRFormSectionHeader.swift */,
 				F84DC4A12D08EBBE0069E1BA /* PRTextField.swift */,
 			);
 			path = Atoms;
@@ -624,6 +627,7 @@
 				F80761742D0669EC0011D3A6 /* Codable+Extensions.swift in Sources */,
 				F80761752D0669EC0011D3A6 /* Color+Extensions.swift in Sources */,
 				F80761762D0669EC0011D3A6 /* String+Extensions.swift in Sources */,
+				F84DC6092D0904E40069E1BA /* PRFormSectionHeader.swift in Sources */,
 				F80761772D0669EC0011D3A6 /* View+Extensions.swift in Sources */,
 				F80761782D0669EC0011D3A6 /* Factory+Container.swift in Sources */,
 				F80761792D0669EC0011D3A6 /* AppConstants.swift in Sources */,

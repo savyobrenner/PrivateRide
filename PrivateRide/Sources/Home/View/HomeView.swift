@@ -21,14 +21,20 @@ struct HomeView<ViewModel: HomeViewModelProtocol>: View {
             Map(coordinateRegion: .constant(viewModel.region), showsUserLocation: true)
                 .ignoresSafeArea()
             
-            PRAddressFormView(
-                currentAddress: $viewModel.currentAddress,
-                dropOffAddress: $viewModel.dropOffAddress,
-                isSwapping: $viewModel.isSwapping
-            ) {
-                viewModel.swapAddresses()
+            VStack {
+                PRAddressFormView(
+                    identification: .constant("123"),
+                    currentAddress: $viewModel.currentAddress,
+                    dropOffAddress: $viewModel.dropOffAddress,
+                    isSwapping: $viewModel.isSwapping
+                ) {
+                    viewModel.swapAddresses()
+                }
+                
+                Spacer()
             }
-            
+            .padding(.horizontal, 20)
+            .padding(.top, 100)
         }
         .ignoresSafeArea()
         .onAppear { }
