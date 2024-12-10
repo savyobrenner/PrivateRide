@@ -23,14 +23,14 @@ struct PRTextField: View {
             VStack(alignment: .leading, spacing: 4) {
                 if !text.isEmpty {
                     Text(placeholder)
-                        .font(.caption)
-                        .foregroundColor(.gray)
+                        .font(.brand(.regular, size: 12))
+                        .foregroundStyle(Color.Brand.gray)
                         .transition(.move(edge: .top).combined(with: .opacity))
                 }
                 
                 TextField(placeholder, text: $text)
-                    .font(.body)
-                    .foregroundColor(.black)
+                    .font(.brand(.semibold, size: 14))
+                    .foregroundStyle(Color.Brand.black)
             }
             .animation(.easeInOut(duration: 0.2), value: text)
         }

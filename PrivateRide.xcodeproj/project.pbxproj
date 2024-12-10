@@ -54,6 +54,7 @@
 		F84DC4B22D08EC6B0069E1BA /* Inter-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F84DC4AA2D08EC6B0069E1BA /* Inter-SemiBold.ttf */; };
 		F84DC4B32D08EC6B0069E1BA /* Inter-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F84DC4A32D08EC6B0069E1BA /* Inter-Black.ttf */; };
 		F84DC4B42D08EC6B0069E1BA /* Inter-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F84DC4A72D08EC6B0069E1BA /* Inter-Light.ttf */; };
+		F84DC6072D08FB950069E1BA /* PRAddressFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84DC6062D08FB8D0069E1BA /* PRAddressFormView.swift */; };
 		F89DD1042D0670DB00EC2319 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = F89DD1032D0670DB00EC2319 /* Factory */; };
 		F89DD1062D06715200EC2319 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F89DD1052D06715200EC2319 /* Launch Screen.storyboard */; };
 		F89DD1102D067E9100EC2319 /* HomeServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89DD10B2D067E9100EC2319 /* HomeServices.swift */; };
@@ -113,6 +114,7 @@
 		F84DC4A92D08EC6B0069E1BA /* Inter-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Regular.ttf"; sourceTree = "<group>"; };
 		F84DC4AA2D08EC6B0069E1BA /* Inter-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-SemiBold.ttf"; sourceTree = "<group>"; };
 		F84DC4AB2D08EC6B0069E1BA /* Inter-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Thin.ttf"; sourceTree = "<group>"; };
+		F84DC6062D08FB8D0069E1BA /* PRAddressFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRAddressFormView.swift; sourceTree = "<group>"; };
 		F89DD1052D06715200EC2319 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		F89DD1072D0671E300EC2319 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		F89DD10A2D067E9100EC2319 /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
@@ -439,6 +441,7 @@
 			isa = PBXGroup;
 			children = (
 				F84DC3E82D08EB000069E1BA /* Atoms */,
+				F84DC6052D08FB0F0069E1BA /* Molecules */,
 			);
 			path = DesignSystem;
 			sourceTree = "<group>";
@@ -462,6 +465,14 @@
 				F84DC4AB2D08EC6B0069E1BA /* Inter-Thin.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		F84DC6052D08FB0F0069E1BA /* Molecules */ = {
+			isa = PBXGroup;
+			children = (
+				F84DC6062D08FB8D0069E1BA /* PRAddressFormView.swift */,
+			);
+			path = Molecules;
 			sourceTree = "<group>";
 		};
 		F89DD1082D0671F500EC2319 /* Storyboards */ = {
@@ -646,6 +657,7 @@
 				F89DD1132D067E9100EC2319 /* HomeView.swift in Sources */,
 				F89DD1142D067E9100EC2319 /* HomeServicesProtocol.swift in Sources */,
 				F89DD1152D067E9100EC2319 /* HomeViewModel.swift in Sources */,
+				F84DC6072D08FB950069E1BA /* PRAddressFormView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
