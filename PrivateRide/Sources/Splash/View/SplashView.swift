@@ -8,7 +8,11 @@
 import SwiftUI
 
 struct SplashView<ViewModel: SplashViewModelProtocol>: View {
-    @ObservedObject private var viewModel: ViewModel
+    @ObservedObject
+    private var viewModel: ViewModel
+    
+    @State
+    private var scaleEffect: CGFloat = 0.5
     
     init(viewModel: ViewModel) {
         _viewModel = ObservedObject(wrappedValue: viewModel)
@@ -21,8 +25,16 @@ struct SplashView<ViewModel: SplashViewModelProtocol>: View {
             Image(.logoWithTitle)
                 .resizable()
                 .frame(width: 200, height: 200)
+                .scaleEffect(scaleEffect)
+                .animation(
+                    Animation.spring(duration: 2),
+                    value: scaleEffect
+                )
         }
-        .onAppear { viewModel.load() }
+        .onAppear {
+            scaleEffect = 1.0
+            viewModel.load()
+        }
     }
 }
 

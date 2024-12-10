@@ -8,13 +8,8 @@
 import Foundation
 
 enum AppEnvironment {
-    
-    static var websiteURL: String {
-        return "https://google.com.br"
-    }
-    
     static var baseURL: String {
-        return "https://google.com.br"
+        return "https://xd5zl5kk2yltomvw5fb37y3bm40vsyrx.lambda-url.sa-east-1.on.aws"
     }
     
     static var isDebug: Bool {
