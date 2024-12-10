@@ -9,34 +9,39 @@ import SwiftUI
 
 struct PRTextField: View {
     let icon: ImageResource
-    let title: String
     let placeholder: String
     
     @Binding
     var text: String
-
+    
     var body: some View {
-        VStack(alignment: .leading, spacing: 4) {
-            Text(title)
-                .font(.caption)
-                .foregroundColor(.gray)
-
-            HStack {
-                Image(icon)
-                    .foregroundColor(.green)
-                    .frame(width: 24, height: 24)
+        HStack(spacing: 14) {
+            Image(icon)
+                .resizable()
+                .frame(width: 24, height: 24)
+            
+            VStack(alignment: .leading, spacing: 4) {
+                if !text.isEmpty {
+                    Text(placeholder)
+                        .font(.caption)
+                        .foregroundColor(.gray)
+                        .transition(.move(edge: .top).combined(with: .opacity))
+                }
                 
                 TextField(placeholder, text: $text)
                     .font(.body)
                     .foregroundColor(.black)
             }
-            .padding(8)
-            .background(RoundedRectangle(cornerRadius: 8).fill(Color.white))
-            .shadow(radius: 2)
+            .animation(.easeInOut(duration: 0.2), value: text)
         }
     }
 }
 
 #Preview {
-    PRTextField(icon: .logo, title: "Current Address", placeholder: "Address", text: .constant(""))
+    VStack(spacing: 20) {
+        PRTextField(icon: .circlePinIcon, placeholder: "Current Address", text: .constant("Rua Palmira Ramos Teles 1600"))
+        
+        PRTextField(icon: .flagCircleIcon, placeholder: "Drop Off", text: .constant("Shopping Jardins"))
+    }
+    .padding(.horizontal, 16)
 }
