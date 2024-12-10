@@ -32,7 +32,6 @@ struct PRFormSectionHeader: View {
                     .animation(.easeInOut(duration: 0.3), value: isExpanded)
                     .foregroundColor(Color.Brand.black)
             }
-            .padding(.horizontal, 16)
             .padding(.vertical, 8)
         }
     }

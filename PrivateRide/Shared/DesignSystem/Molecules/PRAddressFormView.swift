@@ -40,7 +40,6 @@ struct PRAddressFormView: View {
                         text: $identification
                     )
                 }
-                .padding(.horizontal, 16)
             }
 
             PRFormSectionHeader(title: "Where To?", isExpanded: $isWhereToExpanded)
@@ -70,7 +69,6 @@ struct PRAddressFormView: View {
                     .offset(y: isSwapping ? -10 : 0)
                     .animation(.easeInOut(duration: 0.3), value: isSwapping)
                 }
-                .padding(.horizontal, 16)
             }
         }
         .padding(16)
