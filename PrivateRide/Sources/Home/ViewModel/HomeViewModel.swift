@@ -15,11 +15,35 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
         span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
     )
     
+    @Published
+    var currentAddress: String
+    
+    @Published
+    var dropOffAddress: String
+    
+    @Published
+    var isSwapping = false
+    
     override init(coordinator: HomeCoordinator?) {
+        self.currentAddress = "457 Castle Street, New York"
+        self.dropOffAddress = "Universal Airport, New York"
+        
         super.init(coordinator: coordinator)
     }
     
-    func load() {
+    func swapAddresses() {
+        withAnimation {
+            isSwapping = true
+        }
         
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            let temp = self.currentAddress
+            self.currentAddress = self.dropOffAddress
+            self.dropOffAddress = temp
+            
+            withAnimation {
+                self.isSwapping = false
+            }
+        }
     }
 }

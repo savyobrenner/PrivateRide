@@ -20,6 +20,15 @@ struct HomeView<ViewModel: HomeViewModelProtocol>: View {
         ZStack {
             Map(coordinateRegion: .constant(viewModel.region), showsUserLocation: true)
                 .ignoresSafeArea()
+            
+            PRAddressFormView(
+                currentAddress: $viewModel.currentAddress,
+                dropOffAddress: $viewModel.dropOffAddress,
+                isSwapping: $viewModel.isSwapping
+            ) {
+                viewModel.swapAddresses()
+            }
+            
         }
         .ignoresSafeArea()
         .onAppear { }

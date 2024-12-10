@@ -13,9 +13,12 @@ struct PRAddressFormView: View {
     
     @Binding
     var dropOffAddress: String
+
+    @Binding
+    var isSwapping: Bool
     
     let action: (() -> Void)
-
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             HStack {
@@ -40,6 +43,9 @@ struct PRAddressFormView: View {
                     placeholder: "Pick Up",
                     text: $currentAddress
                 )
+                .opacity(isSwapping ? 0.5 : 1)
+                .offset(y: isSwapping ? +10 : 0)
+                .animation(.easeInOut(duration: 0.3), value: isSwapping)
                 
                 Rectangle()
                     .foregroundStyle(Color.Brand.lightGray)
@@ -51,6 +57,9 @@ struct PRAddressFormView: View {
                     placeholder: "Drop Off",
                     text: $dropOffAddress
                 )
+                .opacity(isSwapping ? 0.5 : 1)
+                .offset(y: isSwapping ? -10 : 0)
+                .animation(.easeInOut(duration: 0.3), value: isSwapping)
             }
         }
         .padding(16)
@@ -65,7 +74,8 @@ struct PRAddressFormView: View {
 #Preview {
     PRAddressFormView(
         currentAddress: .constant("Rua Palmira Ramos Teles 1600"),
-        dropOffAddress: .constant("Shopping Jardins")
+        dropOffAddress: .constant("Shopping Jardins"),
+        isSwapping: .constant(false)
     ) {}
     .padding()
 }
