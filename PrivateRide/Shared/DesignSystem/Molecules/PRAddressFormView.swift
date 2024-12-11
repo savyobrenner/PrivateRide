@@ -11,6 +11,7 @@ struct PRAddressFormView: View {
     enum Action {
         case swapAddresses
         case searchRide
+        case selectAutocomplete(String, Field)
     }
     
     enum Field {
@@ -38,15 +39,15 @@ struct PRAddressFormView: View {
 
     @Binding
     var isButtonEnabled: Bool
+    
+    @Binding
+    var activeField: Field
 
     @State
     private var isIdentificationExpanded = true
     
     @State
     private var isWhereToExpanded = true
-
-    @State
-    private var activeField: Field?
     
     let action: ((Action) -> Void)
 
@@ -74,9 +75,6 @@ struct PRAddressFormView: View {
                             placeholder: "Pick Up",
                             text: $currentAddress
                         )
-                        .onTapGesture {
-                            activeField = .pickUp
-                        }
                         .opacity(isSwapping ? 0.5 : 1)
                         .offset(y: isSwapping ? +10 : 0)
                         .animation(.easeInOut(duration: 0.3), value: isSwapping)
@@ -91,9 +89,6 @@ struct PRAddressFormView: View {
                             placeholder: "Drop Off",
                             text: $dropOffAddress
                         )
-                        .onTapGesture {
-                            activeField = .dropOff
-                        }
                         .opacity(isSwapping ? 0.5 : 1)
                         .offset(y: isSwapping ? -10 : 0)
                         .animation(.easeInOut(duration: 0.3), value: isSwapping)
@@ -109,10 +104,11 @@ struct PRAddressFormView: View {
                                             .cornerRadius(6)
                                             .onTapGesture {
                                                 if activeField == .pickUp {
-                                                    currentAddress = result
+                                                    action(.selectAutocomplete(result, .pickUp))
                                                 } else if activeField == .dropOff {
-                                                    dropOffAddress = result
+                                                    action(.selectAutocomplete(result, .dropOff))
                                                 }
+                                                
                                                 autocompleteResults = []
                                             }
                                     }
@@ -154,7 +150,8 @@ struct PRAddressFormView: View {
         autocompleteResults: .constant([]),
         isSwapping: .constant(false),
         isLoading: .constant(true),
-        isButtonEnabled: .constant(true)
+        isButtonEnabled: .constant(true),
+        activeField: .constant(.pickUp)
     ) {_ in }
     .padding()
 }

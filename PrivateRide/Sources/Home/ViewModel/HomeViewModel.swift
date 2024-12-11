@@ -40,6 +40,13 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
     @Published
     var autocompleteResults: [String] = []
     
+    @Published
+    var selectedField: PRAddressFormView.Field = .pickUp
+    
+    private var debounceTimer: Timer?
+    private let debounceDelay: TimeInterval = 0.5
+    private var isAutoCompleteSelected = false
+    
     private var userLocation: CLLocationCoordinate2D? {
         didSet {
             guard let location = userLocation else { return }
@@ -110,12 +117,38 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
         }
     }
     
+    func selectAutocompleteResult(_ result: String, and field: PRAddressFormView.Field) {
+        isAutoCompleteSelected = true
+        
+        switch field {
+        case .pickUp:
+            currentAddress = result
+        case .dropOff:
+            dropOffAddress = result
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.isAutoCompleteSelected = false
+        }
+    }
+    
     private func triggerAutocomplete(for query: String, field: PRAddressFormView.Field) {
+        guard !isAutoCompleteSelected else { return }
+        
+        debounceTimer?.invalidate()
+        selectedField = field
+        
         guard !query.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
             autocompleteResults = []
             return
         }
-        
+
+        debounceTimer = Timer.scheduledTimer(withTimeInterval: debounceDelay, repeats: false) { [weak self] _ in
+            self?.performAutocomplete(for: query, field: field)
+        }
+    }
+
+    private func performAutocomplete(for query: String, field: PRAddressFormView.Field) {
         let request = MKLocalSearch.Request()
         request.naturalLanguageQuery = query
         request.resultTypes = .address

@@ -29,13 +29,16 @@ struct HomeView<ViewModel: HomeViewModelProtocol>: View {
                     autocompleteResults: $viewModel.autocompleteResults,
                     isSwapping: $viewModel.isSwapping,
                     isLoading: $viewModel.isLoading,
-                    isButtonEnabled: $viewModel.isButtonEnabled
+                    isButtonEnabled: $viewModel.isButtonEnabled,
+                    activeField: $viewModel.selectedField
                 ) { action in
                     switch action {
                     case .swapAddresses:
                         viewModel.swapAddresses()
                     case .searchRide:
                         viewModel.searchRide()
+                    case let .selectAutocomplete(result, field):
+                        viewModel.selectAutocompleteResult(result, and: field)
                     }
                 }
                 .padding(.horizontal, 20)
