@@ -11,12 +11,6 @@ struct PRAddressFormView: View {
     enum Action {
         case swapAddresses
         case searchRide
-        case selectAutocomplete(String, Field)
-    }
-    
-    enum Field {
-        case pickUp
-        case dropOff
     }
     
     @Binding
@@ -29,9 +23,6 @@ struct PRAddressFormView: View {
     var dropOffAddress: String
     
     @Binding
-    var autocompleteResults: [String]
-    
-    @Binding
     var isSwapping: Bool
 
     @Binding
@@ -39,9 +30,6 @@ struct PRAddressFormView: View {
 
     @Binding
     var isButtonEnabled: Bool
-    
-    @Binding
-    var activeField: Field
 
     @State
     private var isIdentificationExpanded = true
@@ -92,30 +80,6 @@ struct PRAddressFormView: View {
                         .opacity(isSwapping ? 0.5 : 1)
                         .offset(y: isSwapping ? -10 : 0)
                         .animation(.easeInOut(duration: 0.3), value: isSwapping)
-                        
-                        if !autocompleteResults.isEmpty {
-                            ScrollView(.horizontal, showsIndicators: false) {
-                                HStack(spacing: 8) {
-                                    ForEach(autocompleteResults, id: \.self) { result in
-                                        Text(result)
-                                            .font(.caption)
-                                            .padding(8)
-                                            .background(Color.gray.opacity(0.2))
-                                            .cornerRadius(6)
-                                            .onTapGesture {
-                                                if activeField == .pickUp {
-                                                    action(.selectAutocomplete(result, .pickUp))
-                                                } else if activeField == .dropOff {
-                                                    action(.selectAutocomplete(result, .dropOff))
-                                                }
-                                                
-                                                autocompleteResults = []
-                                            }
-                                    }
-                                }
-                                .padding(.top, 8)
-                            }
-                        }
                     }
                     
                     Button {
@@ -147,11 +111,9 @@ struct PRAddressFormView: View {
         identification: .constant("123dd"),
         currentAddress: .constant("Rua Palmira Ramos Teles 1600"),
         dropOffAddress: .constant("Shopping Jardins"),
-        autocompleteResults: .constant([]),
         isSwapping: .constant(false),
         isLoading: .constant(true),
-        isButtonEnabled: .constant(true),
-        activeField: .constant(.pickUp)
+        isButtonEnabled: .constant(true)
     ) {_ in }
     .padding()
 }

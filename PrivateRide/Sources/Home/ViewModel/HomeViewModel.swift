@@ -10,6 +10,12 @@ import MapKit
 import SwiftUI
 
 class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
+    enum Field {
+        case pickUp
+        case dropOff
+    }
+    
+    
     @Published
     var region: MKCoordinateRegion = MKCoordinateRegion(
         center: CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194), // Default Location
@@ -41,7 +47,7 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
     var autocompleteResults: [String] = []
     
     @Published
-    var selectedField: PRAddressFormView.Field = .pickUp
+    var selectedField: Field = .pickUp
     
     private var debounceTimer: Timer?
     private let debounceDelay: TimeInterval = 0.5
@@ -117,7 +123,7 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
         }
     }
     
-    func selectAutocompleteResult(_ result: String, and field: PRAddressFormView.Field) {
+    func selectAutocompleteResult(_ result: String, and field: Field) {
         isAutoCompleteSelected = true
         
         switch field {
@@ -129,10 +135,11 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.isAutoCompleteSelected = false
+            self.validateForm()
         }
     }
     
-    private func triggerAutocomplete(for query: String, field: PRAddressFormView.Field) {
+    private func triggerAutocomplete(for query: String, field: Field) {
         guard !isAutoCompleteSelected else { return }
         
         debounceTimer?.invalidate()
@@ -148,7 +155,7 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
         }
     }
 
-    private func performAutocomplete(for query: String, field: PRAddressFormView.Field) {
+    private func performAutocomplete(for query: String, field: Field) {
         let request = MKLocalSearch.Request()
         request.naturalLanguageQuery = query
         request.resultTypes = .address

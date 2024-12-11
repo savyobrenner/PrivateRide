@@ -16,10 +16,10 @@ protocol HomeViewModelProtocol: BaseViewModelProtocol {
     var autocompleteResults: [String] { get set }
     var isSwapping: Bool { get set }
     var isButtonEnabled: Bool { get set }
-    var selectedField: PRAddressFormView.Field { get set }
+    var selectedField: HomeViewModel.Field { get set }
     
     func swapAddresses()
     func searchRide()
     func locateUser()
-    func selectAutocompleteResult(_ result: String, and field: PRAddressFormView.Field)
+    func selectAutocompleteResult(_ result: String, and field: HomeViewModel.Field)
 }

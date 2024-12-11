@@ -21,30 +21,61 @@ struct HomeView<ViewModel: HomeViewModelProtocol>: View {
             Map(coordinateRegion: $viewModel.region, showsUserLocation: true)
                 .ignoresSafeArea()
 
-            VStack {
+            VStack(alignment: .leading, spacing: 16) {
                 PRAddressFormView(
                     identification: $viewModel.userId,
                     currentAddress: $viewModel.currentAddress,
                     dropOffAddress: $viewModel.dropOffAddress,
-                    autocompleteResults: $viewModel.autocompleteResults,
                     isSwapping: $viewModel.isSwapping,
                     isLoading: $viewModel.isLoading,
-                    isButtonEnabled: $viewModel.isButtonEnabled,
-                    activeField: $viewModel.selectedField
+                    isButtonEnabled: $viewModel.isButtonEnabled
                 ) { action in
                     switch action {
                     case .swapAddresses:
                         viewModel.swapAddresses()
                     case .searchRide:
                         viewModel.searchRide()
-                    case let .selectAutocomplete(result, field):
-                        viewModel.selectAutocompleteResult(result, and: field)
                     }
                 }
-                .padding(.horizontal, 20)
+                
+                if !viewModel.autocompleteResults.isEmpty {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Suggestions")
+                            .font(.brand(.semibold, size: 14))
+                            .foregroundColor(Color.Brand.black.opacity(0.8))
+                            .padding(.horizontal, 16)
+                        
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(spacing: 8) {
+                                ForEach(viewModel.autocompleteResults, id: \.self) { result in
+                                    Text(result)
+                                        .font(.brand(.regular, size: 12))
+                                        .padding(8)
+                                        .background(
+                                            RoundedRectangle(cornerRadius: 8)
+                                                .fill(Color.Brand.gray.opacity(0.2))
+                                        )
+                                        .onTapGesture {
+                                            viewModel.selectAutocompleteResult(result, and: viewModel.selectedField)
+                                            viewModel.autocompleteResults = []
+                                        }
+                                }
+                            }
+                            .padding(.horizontal, 16)
+                        }
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 8)
+                    .background(
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(Color.Brand.white)
+                            .shadow(color: Color.Brand.gray.opacity(0.1), radius: 5, x: 0, y: 2)
+                    )
+                }
                 
                 Spacer()
             }
+            .padding(.horizontal, 20)
 
             VStack {
                 Spacer()
