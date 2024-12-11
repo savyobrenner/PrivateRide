@@ -110,7 +110,7 @@ import Factory
 
 #Preview {
 HomeView(viewModel: HomeViewModel(
-        coordinator: HomeCoordinator(navigationController: .init())
+    coordinator: HomeCoordinator(navigationController: .init()), services: Container.shared.homeServices()
     ))
 }
 #endif

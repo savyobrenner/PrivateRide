@@ -29,5 +29,9 @@ extension Container {
             )
         }.singleton
     }
+    
+    var homeServices: Factory<HomeServicesProtocol> {
+        self { HomeServices(network: self.networkService.resolve()) }
+    }
 }
 

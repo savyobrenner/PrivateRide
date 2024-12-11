@@ -50,10 +50,13 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
     var selectedField: Field = .pickUp
 
     // MARK: - Private Properties
+    private var currentAddressCoordinate: CLLocationCoordinate2D?
+    private var dropOffAddressCoordinate: CLLocationCoordinate2D?
     private var debounceTimer: Timer?
     private let debounceDelay: TimeInterval = 0.5
     private var isAutoCompleteSelected = false
     private var lastAutocompleteQuery: String?
+    private let locationManager = CLLocationManager()
     
     private var userLocation: CLLocationCoordinate2D? {
         didSet {
@@ -61,11 +64,14 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
             updateRegion(to: location)
         }
     }
-    private let locationManager = CLLocationManager()
+
+    private let services: HomeServicesProtocol
 
     // MARK: - Initializer
-    override init(coordinator: HomeCoordinator?) {
+    init(coordinator: HomeCoordinator?, services: HomeServicesProtocol) {
+        self.services = services
         super.init(coordinator: coordinator)
+        
         configureLocationManager()
     }
 
@@ -137,12 +143,20 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
         switch field {
         case .pickUp:
             currentAddress = result
+            geocodeAddress(result) { [weak self] coordinate in
+                self?.currentAddressCoordinate = coordinate
+                self?.updateRegionForSelectedAddresses()
+            }
         case .dropOff:
             dropOffAddress = result
+            geocodeAddress(result) { [weak self] coordinate in
+                self?.dropOffAddressCoordinate = coordinate
+                self?.updateRegionForSelectedAddresses()
+            }
         }
 
         lastAutocompleteQuery = result
-        
+
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.isAutoCompleteSelected = false
             self.validateForm()
@@ -217,6 +231,44 @@ private extension HomeViewModel {
                 center: location,
                 span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
             )
+        }
+    }
+
+    func geocodeAddress(_ address: String, completion: @escaping (CLLocationCoordinate2D?) -> Void) {
+        let geocoder = CLGeocoder()
+        geocoder.geocodeAddressString(address) { placemarks, error in
+            if let error = error {
+                print("Geocoding error: \(error.localizedDescription)")
+                completion(nil)
+                return
+            }
+
+            let coordinate = placemarks?.first?.location?.coordinate
+            completion(coordinate)
+        }
+    }
+
+    func updateRegionForSelectedAddresses() {
+        if let current = currentAddressCoordinate, let dropOff = dropOffAddressCoordinate {
+            let center = CLLocationCoordinate2D(
+                latitude: (current.latitude + dropOff.latitude) / 2,
+                longitude: (current.longitude + dropOff.longitude) / 2
+            )
+            let span = MKCoordinateSpan(
+                latitudeDelta: abs(current.latitude - dropOff.latitude) * 2,
+                longitudeDelta: abs(current.longitude - dropOff.longitude) * 2
+            )
+            updateRegion(to: center, span: span)
+        } else if let current = currentAddressCoordinate {
+            updateRegion(to: current)
+        } else if let dropOff = dropOffAddressCoordinate {
+            updateRegion(to: dropOff)
+        }
+    }
+
+    func updateRegion(to center: CLLocationCoordinate2D, span: MKCoordinateSpan = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)) {
+        withAnimation {
+            self.region = MKCoordinateRegion(center: center, span: span)
         }
     }
 }
