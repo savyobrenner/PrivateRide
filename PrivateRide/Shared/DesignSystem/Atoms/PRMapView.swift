@@ -13,7 +13,7 @@ struct PRMapView: UIViewRepresentable {
     var region: MKCoordinateRegion
     
     let pins: [CLLocationCoordinate2D]
-    let route: MKPolyline?
+    let polyline: MKPolyline?
     
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView()
@@ -36,19 +36,19 @@ struct PRMapView: UIViewRepresentable {
             mapView.addAnnotation(annotation)
         }
         
-        if let route = route {
-            mapView.addOverlay(route)
+        if let polyline {
+            mapView.addOverlay(polyline)
         }
         
-        if !pins.isEmpty || route != nil {
+        if !pins.isEmpty || polyline != nil {
             var mapRect = pins.reduce(MKMapRect.null) { rect, coordinate in
                 let point = MKMapPoint(coordinate)
                 let pinRect = MKMapRect(x: point.x, y: point.y, width: 0.1, height: 0.1)
                 return rect.union(pinRect)
             }
             
-            if let route = route {
-                mapRect = mapRect.union(route.boundingMapRect)
+            if let polyline {
+                mapRect = mapRect.union(polyline.boundingMapRect)
             }
             
             mapView.setVisibleMapRect(

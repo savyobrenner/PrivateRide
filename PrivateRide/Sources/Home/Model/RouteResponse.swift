@@ -36,10 +36,6 @@ struct RouteResponse: Codable {
 
     struct RouteDetails: Codable {
         let routes: [Route]
-        let distanceMeters: Int
-        let duration: String
-        let staticDuration: String
-        let polyline: Polyline
 
         struct Route: Codable {
             let legs: [Leg]
@@ -47,45 +43,13 @@ struct RouteResponse: Codable {
             let duration: String
             let staticDuration: String
             let polyline: Polyline
-            let startLocation: LatLng
-            let endLocation: LatLng
+            let description: String
+            let warnings: [String]
             let localizedValues: LocalizedValues
-            let travelMode: String
 
             struct Leg: Codable {
-                let distanceMeters: Int
-                let duration: String
-                let staticDuration: String
-                let polyline: Polyline
                 let startLocation: LatLng
                 let endLocation: LatLng
-                let steps: [Step]
-                let localizedValues: LocalizedValues
-
-                struct Step: Codable {
-                    let distanceMeters: Int
-                    let staticDuration: String
-                    let polyline: Polyline
-                    let startLocation: LatLng
-                    let endLocation: LatLng
-                    let navigationInstruction: NavigationInstruction
-                    let localizedValues: LocalizedValues
-                    let travelMode: String
-
-                    struct NavigationInstruction: Codable {
-                        let maneuver: String
-                        let instructions: String
-                    }
-
-                    struct LocalizedValues: Codable {
-                        let distance: TextValue
-                        let staticDuration: TextValue
-
-                        struct TextValue: Codable {
-                            let text: String
-                        }
-                    }
-                }
             }
         }
 
@@ -104,27 +68,22 @@ struct RouteResponse: Codable {
         }
 
         struct LatLng: Codable {
-            let latitude: Double
-            let longitude: Double
+            let latLng: Location
         }
         
-        enum CodingKeys: String, CodingKey {
+        enum CodingKeys: CodingKey {
             case routes
-            case distanceMeters
-            case duration
-            case staticDuration
-            case polyline
         }
     }
-
+    
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
-        origin = try container.decode(Location.self, forKey: .origin)
-        destination = try container.decode(Location.self, forKey: .destination)
-        distance = try container.decode(Int.self, forKey: .distance)
-        duration = try container.decode(Int.self, forKey: .duration)
-        options = try container.decode([Option].self, forKey: .options)
+        origin = try container.decodeIfPresent(Location.self, forKey: .origin) ?? Location(latitude: 0.0, longitude: 0.0)
+        destination = try container.decodeIfPresent(Location.self, forKey: .destination) ?? Location(latitude: 0.0, longitude: 0.0)
+        distance = try container.decodeIfPresent(Int.self, forKey: .distance) ?? 0
+        duration = try container.decodeIfPresent(Int.self, forKey: .duration) ?? 0
+        options = try container.decodeIfPresent([Option].self, forKey: .options) ?? []
 
         let routeResponseContainer = try? container.nestedContainer(
             keyedBy: RouteDetails.CodingKeys.self, forKey: .routeResponse

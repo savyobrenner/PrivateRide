@@ -43,6 +43,8 @@ final class NetworkClient: NetworkProtocol {
             }
         } catch let urlError as URLError {
             throw AppError.urlError(urlError)
+        } catch let appError as AppError {
+            throw appError
         } catch {
             throw AppError.unknown
         }

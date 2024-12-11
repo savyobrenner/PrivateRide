@@ -24,7 +24,7 @@ struct HomeView<ViewModel: HomeViewModelProtocol>: View {
                     viewModel.currentAddressCoordinate,
                     viewModel.dropOffAddressCoordinate
                 ].compactMap { $0 },
-                route: viewModel.route?.polyline
+                polyline: viewModel.polyline
             )
             .ignoresSafeArea()
             

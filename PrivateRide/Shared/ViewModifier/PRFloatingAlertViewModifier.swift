@@ -34,7 +34,7 @@ struct PRFloatingAlertModifier: ViewModifier {
                 } else {
                     Spacer()
                     PRFloatingAlertView(alert: alert)
-                        .padding(.bottom, 80)
+                        .padding(.bottom, 20)
                 }
             }
             .transition(.move(edge: alert.position == .top ? .top : .bottom))

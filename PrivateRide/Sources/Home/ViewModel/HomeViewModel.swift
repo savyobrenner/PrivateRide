@@ -38,7 +38,7 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
     }
     
     @Published
-    var route: MKRoute?
+    var polyline: MKPolyline?
     
     @Published
     var isSwapping = false
@@ -123,7 +123,22 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
                     destination: self.dropOffAddress
                 )
                 
-                print(response)
+                let origin = response.origin
+                let destination = response.destination
+                
+                self.currentAddressCoordinate = CLLocationCoordinate2D(
+                    latitude: origin.latitude, longitude: origin.longitude
+                )
+                
+                self.dropOffAddressCoordinate = CLLocationCoordinate2D(
+                    latitude: destination.latitude, longitude: destination.longitude
+                )
+                
+                if let encodedPolyline = response.routeResponse?.routes.first?.polyline.encodedPolyline {
+                    self.decodeAndSetPolyline(encodedPolyline)
+                }
+                
+                self.updateRegionForSelectedAddresses()
             } catch {
                 self.handleNetworkError(error)
             }
@@ -190,8 +205,8 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
             guard let route = response?.routes.first else { return }
             
             DispatchQueue.main.async {
-                self.route = route
-                self.updateRegionToFitRoute(route)
+                self.polyline = route.polyline
+                self.updateRegionToFitRoute(route.polyline)
             }
         }
     }
@@ -309,8 +324,51 @@ private extension HomeViewModel {
         }
     }
     
+    func decodeAndSetPolyline(_ encodedPolyline: String) {
+        var coordinates: [CLLocationCoordinate2D] = []
+        var index = encodedPolyline.startIndex
+        var lat: Int32 = 0
+        var lng: Int32 = 0
+
+        while index < encodedPolyline.endIndex {
+            var b: Int32 = 0
+            var shift: Int32 = 0
+            var result: Int32 = 0
+            repeat {
+                b = Int32(encodedPolyline[index].asciiValue! - 63)
+                result |= (b & 0x1F) << shift
+                shift += 5
+                index = encodedPolyline.index(after: index)
+            } while b >= 0x20
+            let dLat = ((result & 1) != 0 ? ~(result >> 1) : (result >> 1))
+            lat += dLat
+
+            shift = 0
+            result = 0
+            repeat {
+                b = Int32(encodedPolyline[index].asciiValue! - 63)
+                result |= (b & 0x1F) << shift
+                shift += 5
+                index = encodedPolyline.index(after: index)
+            } while b >= 0x20
+            let dLng = ((result & 1) != 0 ? ~(result >> 1) : (result >> 1))
+            lng += dLng
+
+            let coordinate = CLLocationCoordinate2D(latitude: Double(lat) / 1e5, longitude: Double(lng) / 1e5)
+            coordinates.append(coordinate)
+        }
+
+        let polyline = MKPolyline(coordinates: coordinates, count: coordinates.count)
+        
+        DispatchQueue.main.async {
+            self.polyline = polyline
+        }
+    }
+    
     func updateRegionForSelectedAddresses() {
-        if let current = currentAddressCoordinate, let dropOff = dropOffAddressCoordinate {
+        if let polyline {
+            updateRegionToFitRoute(polyline)
+        } else if let current = currentAddressCoordinate, let dropOff = dropOffAddressCoordinate {
             let center = CLLocationCoordinate2D(
                 latitude: (current.latitude + dropOff.latitude) / 2,
                 longitude: (current.longitude + dropOff.longitude) / 2
@@ -340,8 +398,8 @@ private extension HomeViewModel {
         }
     }
     
-    func updateRegionToFitRoute(_ route: MKRoute) {
-        let routeRect = route.polyline.boundingMapRect
+    func updateRegionToFitRoute(_ polyline: MKPolyline) {
+        let routeRect = polyline.boundingMapRect
         
         withAnimation {
             self.region = MKCoordinateRegion(routeRect)
@@ -360,3 +418,8 @@ extension HomeViewModel: CLLocationManagerDelegate {
         print("Failed to get user location: \(error.localizedDescription)")
     }
 }
+//{
+//  "origin": "Av. Pres. Kenedy, 2385 - Remédios, Osasco - SP, 02675-031",
+//  "destination": "Av. Paulista, 1538 - Bela Vista, São Paulo - SP, 01310-200",
+//  "customer_id": "1234"
+//}
