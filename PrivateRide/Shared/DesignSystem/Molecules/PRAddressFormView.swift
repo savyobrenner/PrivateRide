@@ -99,23 +99,26 @@ struct PRAddressFormView: View {
                         .animation(.easeInOut(duration: 0.3), value: isSwapping)
                         
                         if !autocompleteResults.isEmpty {
-                            VStack(alignment: .leading, spacing: 4) {
-                                ForEach(autocompleteResults, id: \.self) { result in
-                                    Text(result)
-                                        .padding()
-                                        .background(Color.gray.opacity(0.1))
-                                        .cornerRadius(8)
-                                        .onTapGesture {
-                                            if activeField == .pickUp {
-                                                currentAddress = result
-                                            } else if activeField == .dropOff {
-                                                dropOffAddress = result
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                HStack(spacing: 8) {
+                                    ForEach(autocompleteResults, id: \.self) { result in
+                                        Text(result)
+                                            .font(.caption)
+                                            .padding(8)
+                                            .background(Color.gray.opacity(0.2))
+                                            .cornerRadius(6)
+                                            .onTapGesture {
+                                                if activeField == .pickUp {
+                                                    currentAddress = result
+                                                } else if activeField == .dropOff {
+                                                    dropOffAddress = result
+                                                }
+                                                autocompleteResults = []
                                             }
-                                            autocompleteResults = []
-                                        }
+                                    }
                                 }
+                                .padding(.top, 8)
                             }
-                            .padding(.top, 8)
                         }
                     }
                     

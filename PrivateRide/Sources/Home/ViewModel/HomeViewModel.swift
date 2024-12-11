@@ -122,8 +122,8 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
         
         let search = MKLocalSearch(request: request)
         search.start { [weak self] response, error in
-            guard let self = self else { return }
-            if let error = error {
+            guard let self else { return }
+            if let error {
                 print("Autocomplete error: \(error.localizedDescription)")
                 return
             }
