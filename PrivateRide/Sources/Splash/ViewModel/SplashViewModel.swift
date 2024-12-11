@@ -22,6 +22,8 @@ class SplashViewModel: BaseViewModel<SplashCoordinator>, SplashViewModelProtocol
     }
     
     func load() {
-
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            self.coordinator?.navigate(to: .home)
+        }
     }
 }

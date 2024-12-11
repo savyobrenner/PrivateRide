@@ -9,7 +9,7 @@ import Foundation
 import MapKit
 
 protocol HomeViewModelProtocol: BaseViewModelProtocol {
-    var region: MKCoordinateRegion { get }
+    var region: MKCoordinateRegion { get set }
     var userId: String { get set }
     var currentAddress: String { get set }
     var dropOffAddress: String { get set }
@@ -18,4 +18,5 @@ protocol HomeViewModelProtocol: BaseViewModelProtocol {
     
     func swapAddresses()
     func searchRide()
+    func locateUser()
 }

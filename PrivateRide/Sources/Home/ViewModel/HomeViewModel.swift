@@ -5,14 +5,15 @@
 //  Created by Savyo Brenner on 09/12/24.
 //
 
+import CoreLocation
 import MapKit
 import SwiftUI
 
 class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
     @Published
     var region: MKCoordinateRegion = MKCoordinateRegion(
-        center: CLLocationCoordinate2D(latitude: 40.7128, longitude: -74.0060),
-        span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+        center: CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194), // Default Value
+        span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)       // Default Zoom
     )
     
     @Published
@@ -37,20 +38,31 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
     var isButtonEnabled = false
     
     // MARK: - Validators
-    var isUserIdValid: Bool {
+    private var isUserIdValid: Bool {
         !userId.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
     }
     
-    var isCurrentAddressValid: Bool {
+    private var isCurrentAddressValid: Bool {
         !currentAddress.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
     }
     
-    var isDropOffAddressValid: Bool {
+    private var isDropOffAddressValid: Bool {
         !dropOffAddress.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
     }
     
+    private var userLocation: CLLocationCoordinate2D? {
+        didSet {
+            guard let location = userLocation else { return }
+            updateRegion(to: location)
+        }
+    }
+    
+    private let locationManager = CLLocationManager()
+    
     override init(coordinator: HomeCoordinator?) {
         super.init(coordinator: coordinator)
+        
+        configureLocationManager()
     }
     
     func swapAddresses() {
@@ -77,7 +89,40 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
         // TODO: Implementar a lógica para buscar rides
     }
     
+    func locateUser() {
+        guard let userLocation else { return }
+        
+        updateRegion(to: userLocation)
+    }
+    
     private func validateForm() {
         isButtonEnabled = isUserIdValid && isCurrentAddressValid && isDropOffAddressValid
+    }
+    
+    private func configureLocationManager() {
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+    }
+    
+    private func updateRegion(to location: CLLocationCoordinate2D) {
+        withAnimation {
+            self.region = MKCoordinateRegion(
+                center: location,
+                span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+            )
+        }
+    }
+}
+
+extension HomeViewModel: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.last else { return }
+        userLocation = location.coordinate
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Failed to get user location: \(error.localizedDescription)")
     }
 }

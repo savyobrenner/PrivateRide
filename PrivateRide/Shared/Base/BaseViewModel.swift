@@ -15,7 +15,7 @@ protocol BaseViewModelProtocol: ObservableObject {
     func dismiss(animated: Bool)
 }
 
-class BaseViewModel<CoordinatorType: BaseCoordinator>: BaseViewModelProtocol {
+class BaseViewModel<CoordinatorType: BaseCoordinator>: NSObject, BaseViewModelProtocol {
     @Published var isLoading: Bool = false
     var coordinator: CoordinatorType?
 

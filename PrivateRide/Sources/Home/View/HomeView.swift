@@ -11,16 +11,16 @@ import SwiftUI
 struct HomeView<ViewModel: HomeViewModelProtocol>: View {
     @ObservedObject
     private var viewModel: ViewModel
-    
+
     init(viewModel: ViewModel) {
         _viewModel = ObservedObject(wrappedValue: viewModel)
     }
-    
+
     var body: some View {
         ZStack {
-            Map(coordinateRegion: .constant(viewModel.region), showsUserLocation: true)
+            Map(coordinateRegion: $viewModel.region, showsUserLocation: true)
                 .ignoresSafeArea()
-            
+
             VStack {
                 PRAddressFormView(
                     identification: $viewModel.userId,
@@ -34,16 +34,38 @@ struct HomeView<ViewModel: HomeViewModelProtocol>: View {
                     case .swapAddresses:
                         viewModel.swapAddresses()
                     case .searchRide:
-                        viewModel.swapAddresses()
+                        viewModel.searchRide()
                     }
                 }
+                .padding(.horizontal, 20)
                 
                 Spacer()
             }
-            .padding(.horizontal, 20)
-            .padding(.top, 100)
+
+            VStack {
+                Spacer()
+                
+                HStack {
+                    Spacer()
+                    
+                    Button {
+                        viewModel.locateUser()
+                    } label: {
+                        Image(systemName: "location.fill")
+                            .resizable()
+                            .frame(width: 24, height: 24)
+                            .foregroundStyle(Color.Brand.primary)
+                            .padding()
+                            .background(
+                                Circle()
+                                    .fill(Color.Brand.white)
+                                    .shadow(radius: 3)
+                            )
+                    }
+                    .padding()
+                }
+            }
         }
-        .ignoresSafeArea()
         .onAppear { }
     }
 }
