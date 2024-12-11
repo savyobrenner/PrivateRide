@@ -8,11 +8,16 @@
 enum HttpMethods {
     case get
     case post
+    case patch
 
     var methodName: String {
         switch self {
-        case .get: return "GET"
-        case .post: return "POST"
+        case .get:
+            return "GET"
+        case .post:
+            return "POST"
+        case .patch:
+            return "PATCH"
         }
     }
 }

@@ -76,6 +76,7 @@
 		F8AD8F962D0A1713001CAADE /* RouteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AD8F952D0A1713001CAADE /* RouteResponse.swift */; };
 		F8AD8FF32D0A3646001CAADE /* PRBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AD8FF22D0A3644001CAADE /* PRBottomSheet.swift */; };
 		F8AD8FF52D0A417F001CAADE /* PRRideOptionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AD8FF42D0A417F001CAADE /* PRRideOptionCard.swift */; };
+		F8AD8FF72D0A4B06001CAADE /* ConfirmeRideRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AD8FF62D0A4B01001CAADE /* ConfirmeRideRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -148,6 +149,7 @@
 		F8AD8F952D0A1713001CAADE /* RouteResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteResponse.swift; sourceTree = "<group>"; };
 		F8AD8FF22D0A3644001CAADE /* PRBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRBottomSheet.swift; sourceTree = "<group>"; };
 		F8AD8FF42D0A417F001CAADE /* PRRideOptionCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRRideOptionCard.swift; sourceTree = "<group>"; };
+		F8AD8FF62D0A4B01001CAADE /* ConfirmeRideRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmeRideRequest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -585,6 +587,7 @@
 		F8AD8F942D0A1710001CAADE /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				F8AD8FF62D0A4B01001CAADE /* ConfirmeRideRequest.swift */,
 				F8AD8F952D0A1713001CAADE /* RouteResponse.swift */,
 			);
 			path = Model;
@@ -703,6 +706,7 @@
 				F807617E2D0669EC0011D3A6 /* CacheManagerProtocol.swift in Sources */,
 				F807617F2D0669EC0011D3A6 /* CacheProtocol.swift in Sources */,
 				F80761802D0669EC0011D3A6 /* StorageError.swift in Sources */,
+				F8AD8FF72D0A4B06001CAADE /* ConfirmeRideRequest.swift in Sources */,
 				F8AD8F8D2D0A0E96001CAADE /* PRFloatingAlertType.swift in Sources */,
 				F8AD8F8E2D0A0E96001CAADE /* PRFloatingAlertModel.swift in Sources */,
 				F8AD8F8F2D0A0E96001CAADE /* PRFloatingAlertView.swift in Sources */,

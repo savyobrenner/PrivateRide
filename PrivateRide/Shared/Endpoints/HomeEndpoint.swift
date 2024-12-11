@@ -9,6 +9,7 @@ import Foundation
 
 enum HomeEndpoint {
     case estimateRide(userId: String, origin: String, destination: String)
+    case confirmRide(model: ConfirmeRideRequest)
 }
 
 extension HomeEndpoint: Endpoint {
@@ -16,6 +17,8 @@ extension HomeEndpoint: Endpoint {
         switch self {
         case .estimateRide:
             return "ride/estimate"
+        case .confirmRide:
+            return "ride/confirm"
         }
     }
 
@@ -23,12 +26,14 @@ extension HomeEndpoint: Endpoint {
         switch self {
         case .estimateRide:
             return .post
+        case .confirmRide:
+            return .patch
         }
     }
     
     var requestSpecificHeaders: [String: String] {
         switch self {
-        case .estimateRide:
+        case .estimateRide, .confirmRide:
             return ["Content-Type": "application/json"]
         }
     }
@@ -45,6 +50,8 @@ extension HomeEndpoint: Endpoint {
                 "origin": origin,
                 "destination": destination
             ]
+        case let .confirmRide(model):
+            return model.asDictionary()
         }
     }
 }
