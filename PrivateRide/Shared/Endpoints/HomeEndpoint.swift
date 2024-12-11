@@ -15,7 +15,7 @@ extension HomeEndpoint: Endpoint {
     var path: String {
         switch self {
         case .estimateRide:
-            return "/ride/estimate"
+            return "ride/estimate"
         }
     }
 
@@ -26,8 +26,11 @@ extension HomeEndpoint: Endpoint {
         }
     }
     
-    var requestSpecificHeaders: [String : String] {
-        return [:]
+    var requestSpecificHeaders: [String: String] {
+        switch self {
+        case .estimateRide:
+            return ["Content-Type": "application/json"]
+        }
     }
     
     var queryParameters: [URLQueryItem] {

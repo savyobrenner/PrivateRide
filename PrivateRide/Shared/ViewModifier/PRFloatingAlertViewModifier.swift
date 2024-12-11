@@ -69,7 +69,7 @@ struct PRFloatingAlertModifier: ViewModifier {
 }
 
 extension View {
-    func showLAPAlert(alert: Binding<PRFloatingAlertModel?>) -> some View {
+    func showPRAlert(alert: Binding<PRFloatingAlertModel?>) -> some View {
         self.modifier(PRFloatingAlertModifier(alert: alert))
     }
 }

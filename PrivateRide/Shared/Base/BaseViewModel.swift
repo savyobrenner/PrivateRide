@@ -11,6 +11,7 @@ protocol BaseViewModelProtocol: ObservableObject {
     associatedtype CoordinatorType: BaseCoordinator
     var isLoading: Bool { get set }
     var coordinator: CoordinatorType? { get set }
+    var currentAlert: PRFloatingAlertModel? { get set }
     
     func dismiss(animated: Bool)
 }
@@ -19,6 +20,7 @@ class BaseViewModel<CoordinatorType: BaseCoordinator>: NSObject, BaseViewModelPr
     @Published var isLoading: Bool = false
     var coordinator: CoordinatorType?
 
+    @Published var currentAlert: PRFloatingAlertModel?
     
     // MARK: - Analytics parameters
     private var startTime: Date?
@@ -38,5 +40,13 @@ class BaseViewModel<CoordinatorType: BaseCoordinator>: NSObject, BaseViewModelPr
     
     func handleNetworkError(_ error: Error) {
         
+    }
+    
+    func showAlert(
+        message: String,
+        type: PRFloatingAlertType = .error,
+        position: PRFloatingAlertModel.PRAlertPosition = .bottom
+    ) {
+        currentAlert = PRFloatingAlertModel(type: type, title: message, position: position)
     }
 }

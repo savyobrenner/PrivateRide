@@ -14,7 +14,7 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
         case pickUp
         case dropOff
     }
-
+    
     // MARK: - Published Properties
     @Published var region: MKCoordinateRegion = MKCoordinateRegion(
         center: CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194),
@@ -57,7 +57,7 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
     
     @Published
     var dropOffAddressCoordinate: CLLocationCoordinate2D?
-
+    
     // MARK: - Private Properties
     private var debounceTimer: Timer?
     private let debounceDelay: TimeInterval = 0.5
@@ -71,9 +71,9 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
             updateRegion(to: location)
         }
     }
-
+    
     private let services: HomeServicesProtocol
-
+    
     // MARK: - Initializer
     init(coordinator: HomeCoordinator?, services: HomeServicesProtocol) {
         self.services = services
@@ -81,42 +81,63 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
         
         configureLocationManager()
     }
-
+    
     // MARK: - Public Methods
     func swapAddresses() {
         guard !currentAddress.isEmpty && !dropOffAddress.isEmpty else { return }
-
+        
         withAnimation {
             isSwapping = true
         }
-
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             let temp = self.currentAddress
             self.currentAddress = self.dropOffAddress
             self.dropOffAddress = temp
-
+            
             withAnimation {
                 self.isSwapping = false
             }
         }
     }
-
+    
     func searchRide() {
-        guard isButtonEnabled else { return }
-        print("Searching for ride...")
-        // TODO: Implement ride search logic
+        guard isButtonEnabled, !isLoading else { return }
+        
+        guard !userId.trimmed.isEmpty, !currentAddress.trimmed.isEmpty, !dropOffAddress.trimmed.isEmpty else {
+            // TODO: - Maybe add a error treatment ?
+            return
+        }
+        
+        isLoading = true
+        
+        coordinator?.autoCancellingTask { @MainActor in
+            defer { self.isLoading = false }
+            
+            do {
+                let response = try await self.services.estimateRide(
+                    id: self.userId,
+                    origin: self.currentAddress,
+                    destination: self.dropOffAddress
+                )
+                
+                print(response)
+            } catch {
+                self.coordinator?.handleError(error)
+            }
+        }
     }
-
+    
     func locateUser() {
         guard let userLocation else { return }
-
+        
         isAutoCompleteSelected = true
         
         updateRegion(to: userLocation)
         
         let geocoder = CLGeocoder()
         let location = CLLocation(latitude: userLocation.latitude, longitude: userLocation.longitude)
-
+        
         geocoder.reverseGeocodeLocation(location) { [weak self] placemarks, error in
             guard let self else { return }
             if let error {
@@ -134,12 +155,12 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
                 ]
                     .compactMap { $0 }
                     .joined(separator: ", ")
-
+                
                 DispatchQueue.main.async {
                     self.currentAddress = address
                     self.currentAddressCoordinate = location.coordinate
                 }
-
+                
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     self.isAutoCompleteSelected = false
                     self.validateForm()
@@ -150,12 +171,12 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
     
     func calculateRoute() {
         guard let current = currentAddressCoordinate, let dropOff = dropOffAddressCoordinate else { return }
-
+        
         let request = MKDirections.Request()
         request.source = MKMapItem(placemark: MKPlacemark(coordinate: current))
         request.destination = MKMapItem(placemark: MKPlacemark(coordinate: dropOff))
         request.transportType = .automobile
-
+        
         let directions = MKDirections(request: request)
         directions.calculate { [weak self] response, error in
             guard let self else { return }
@@ -163,7 +184,7 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
                 print("Error calculating route: \(error.localizedDescription)")
                 return
             }
-
+            
             guard let route = response?.routes.first else { return }
             
             DispatchQueue.main.async {
@@ -172,10 +193,10 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
             }
         }
     }
-
+    
     func selectAutocompleteResult(_ result: String, and field: Field) {
         isAutoCompleteSelected = true
-
+        
         switch field {
         case .pickUp:
             currentAddress = result
@@ -190,9 +211,9 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
                 self?.updateRegionForSelectedAddresses()
             }
         }
-
+        
         lastAutocompleteQuery = result
-
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.isAutoCompleteSelected = false
             self.validateForm()
@@ -203,8 +224,8 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
 // MARK: - Private Extension
 private extension HomeViewModel {
     func checkAndTriggerAutocomplete(for query: String, field: Field) {
-        guard !isAutoCompleteSelected, !query.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
-
+        guard !isAutoCompleteSelected, !query.trimmed.isEmpty else { return }
+        
         if query == lastAutocompleteQuery {
             return
         }
@@ -212,26 +233,26 @@ private extension HomeViewModel {
         lastAutocompleteQuery = query
         triggerAutocomplete(for: query, field: field)
     }
-
+    
     func triggerAutocomplete(for query: String, field: Field) {
         debounceTimer?.invalidate()
         selectedField = field
-
-        guard !query.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+        
+        guard !query.trimmed.isEmpty else {
             autocompleteResults = []
             return
         }
-
+        
         debounceTimer = Timer.scheduledTimer(withTimeInterval: debounceDelay, repeats: false) { [weak self] _ in
             self?.performAutocomplete(for: query, field: field)
         }
     }
-
+    
     func performAutocomplete(for query: String, field: Field) {
         let request = MKLocalSearch.Request()
         request.naturalLanguageQuery = query
         request.resultTypes = .address
-
+        
         let search = MKLocalSearch(request: request)
         search.start { [weak self] response, error in
             guard let self else { return }
@@ -239,28 +260,28 @@ private extension HomeViewModel {
                 print("Autocomplete error: \(error.localizedDescription)")
                 return
             }
-
+            
             self.autocompleteResults = response?.mapItems.compactMap { $0.placemark.title } ?? []
         }
     }
-
+    
     func validateForm() {
-        isButtonEnabled = !userId.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
-        !currentAddress.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
-        !dropOffAddress.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
-
+        isButtonEnabled = !userId.trimmed.isEmpty &&
+        !currentAddress.trimmed.isEmpty &&
+        !dropOffAddress.trimmed.isEmpty
+        
         if isButtonEnabled {
             autocompleteResults = []
         }
     }
-
+    
     func configureLocationManager() {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
     }
-
+    
     func updateRegion(to location: CLLocationCoordinate2D) {
         withAnimation {
             self.region = MKCoordinateRegion(
@@ -269,7 +290,7 @@ private extension HomeViewModel {
             )
         }
     }
-
+    
     func geocodeAddress(_ address: String, completion: @escaping (CLLocationCoordinate2D?) -> Void) {
         let geocoder = CLGeocoder()
         geocoder.geocodeAddressString(address) { placemarks, error in
@@ -278,12 +299,12 @@ private extension HomeViewModel {
                 completion(nil)
                 return
             }
-
+            
             let coordinate = placemarks?.first?.location?.coordinate
             completion(coordinate)
         }
     }
-
+    
     func updateRegionForSelectedAddresses() {
         if let current = currentAddressCoordinate, let dropOff = dropOffAddressCoordinate {
             let center = CLLocationCoordinate2D(
@@ -305,7 +326,7 @@ private extension HomeViewModel {
             updateRegion(to: dropOff)
         }
     }
-
+    
     func updateRegion(
         to center: CLLocationCoordinate2D,
         span: MKCoordinateSpan = MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
@@ -330,7 +351,7 @@ extension HomeViewModel: CLLocationManagerDelegate {
         guard let location = locations.last else { return }
         userLocation = location.coordinate
     }
-
+    
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Failed to get user location: \(error.localizedDescription)")
     }

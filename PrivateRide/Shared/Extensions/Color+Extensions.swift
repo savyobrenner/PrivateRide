@@ -15,7 +15,7 @@ extension Color {
     }
 
     private var components: (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {
-        var scanner = Scanner(string: self.description.trimmingCharacters(in: CharacterSet.alphanumerics.inverted))
+        let scanner = Scanner(string: self.description.trimmingCharacters(in: CharacterSet.alphanumerics.inverted))
         var hexNumber: UInt64 = 0
         var r: CGFloat = 0
         var g: CGFloat = 0
