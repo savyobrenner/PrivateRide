@@ -62,18 +62,31 @@ extension PRBottomSheet.Model {
 }
 
 struct PRBottomSheet: View {
+    enum Action {
+        case cancel
+        case confirm(Int)
+    }
+    
+    @Binding
+    var isLoading: Bool
+    
     let model: Model
-    let action: () -> Void
+    let action: (Action) -> Void
+    
+    @State
+    private var selectedDriverID: Int?
     
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             HStack {
-                PRButton(title: "Cancel", style: .outline, isLoading: false, isEnabled: true) {
-                    
+                PRButton(title: "Cancel", style: .outline, isLoading: false, isEnabled: !isLoading) {
+                    action(.cancel)
                 }
                 
-                PRButton(title: "Confirm", style: .defaultStyle, isLoading: false, isEnabled: true) {
-                    
+                PRButton(title: "Confirm", style: .defaultStyle, isLoading: isLoading, isEnabled: selectedDriverID != nil) {
+                    if let selectedDriverID {
+                        action(.confirm(selectedDriverID))
+                    }
                 }
             }
             .padding([.top, .horizontal], 16)
@@ -112,20 +125,30 @@ struct PRBottomSheet: View {
                     .foregroundStyle(Color.Brand.black)
                     .padding(.horizontal, 16)
                 
-                TabView {
-                    ForEach(model.drivers, id: \.id) { driver in
-                        PRRideOptionCard(
-                            name: driver.name,
-                            price: driver.value,
-                            description: driver.description,
-                            vehicle: driver.vehicle,
-                            rating: driver.rating,
-                            comment: driver.comment
-                        )
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 16) {
+                        ForEach(model.drivers, id: \.id) { driver in
+                            PRRideOptionCard(
+                                name: driver.name,
+                                price: driver.value,
+                                description: driver.description,
+                                vehicle: driver.vehicle,
+                                rating: driver.rating,
+                                comment: driver.comment,
+                                isSelected: selectedDriverID == driver.id
+                            )
+                            .onTapGesture {
+                                if selectedDriverID == driver.id {
+                                    selectedDriverID = nil
+                                } else {
+                                    selectedDriverID = driver.id
+                                }
+                            }
+                        }
                     }
+                    .padding(.horizontal, 16)
                 }
-                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
-                .frame(height: 180)
+                .frame(height: 160)
             }
         }
         .frame(maxWidth: .infinity)
@@ -148,6 +171,7 @@ struct PRBottomSheet: View {
             )
         
         PRBottomSheet(
+            isLoading: .constant(false),
             model: .init(
                 title: "Marginal Pinheiros",
                 description: "3,5 KM | 20 minutos",
@@ -163,7 +187,7 @@ struct PRBottomSheet: View {
                         value: 50.5
                     ),
                     .init(
-                        id: 1,
+                        id: 2,
                         name: "Homer Simpson",
                         description: "Olá! Sou o Homer, seu motorista camarada! Relaxe e aproveite o passeio, com direito a rosquinhas e boas risadas (e talvez alguns desvios).",
                         vehicle: "Plymouth Valiant 1973 rosa e enferrujado",
@@ -172,7 +196,7 @@ struct PRBottomSheet: View {
                         value: 50.5
                     ),
                     .init(
-                        id: 1,
+                        id: 3,
                         name: "Homer Simpson",
                         description: "Olá! Sou o Homer, seu motorista camarada! Relaxe e aproveite o passeio, com direito a rosquinhas e boas risadas (e talvez alguns desvios).",
                         vehicle: "Plymouth Valiant 1973 rosa e enferrujado",
@@ -182,7 +206,7 @@ struct PRBottomSheet: View {
                     )
                 ]
             )
-        ) {
+        ) { _ in
             
         }
     }

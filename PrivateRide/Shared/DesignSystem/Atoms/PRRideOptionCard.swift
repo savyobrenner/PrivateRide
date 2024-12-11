@@ -14,6 +14,7 @@ struct PRRideOptionCard: View {
     let vehicle: String
     let rating: Double?
     let comment: String?
+    let isSelected: Bool
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -52,10 +53,10 @@ struct PRRideOptionCard: View {
             }
         }
         .padding()
-        .frame(width: UIScreen.main.bounds.width - 32, height: 160)
+        .frame(width: UIScreen.main.bounds.width - 40, height: 160)
         .background(
-            RoundedRectangle(cornerRadius: 12)
-                .stroke(Color.Brand.lightGray, lineWidth: 1)
+            RoundedRectangle(cornerRadius: 8)
+                .stroke(isSelected ? Color.Brand.primary : Color.Brand.lightGray, lineWidth: 1)
         )
     }
 }
