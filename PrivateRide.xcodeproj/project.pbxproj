@@ -77,6 +77,7 @@
 		F8AD8FF32D0A3646001CAADE /* PRBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AD8FF22D0A3644001CAADE /* PRBottomSheet.swift */; };
 		F8AD8FF52D0A417F001CAADE /* PRRideOptionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AD8FF42D0A417F001CAADE /* PRRideOptionCard.swift */; };
 		F8AD8FF72D0A4B06001CAADE /* ConfirmeRideRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AD8FF62D0A4B01001CAADE /* ConfirmeRideRequest.swift */; };
+		F8AD8FF92D0A4FE3001CAADE /* ConfirmRideResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AD8FF82D0A4FDE001CAADE /* ConfirmRideResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -150,6 +151,7 @@
 		F8AD8FF22D0A3644001CAADE /* PRBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRBottomSheet.swift; sourceTree = "<group>"; };
 		F8AD8FF42D0A417F001CAADE /* PRRideOptionCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRRideOptionCard.swift; sourceTree = "<group>"; };
 		F8AD8FF62D0A4B01001CAADE /* ConfirmeRideRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmeRideRequest.swift; sourceTree = "<group>"; };
+		F8AD8FF82D0A4FDE001CAADE /* ConfirmRideResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmRideResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -587,6 +589,7 @@
 		F8AD8F942D0A1710001CAADE /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				F8AD8FF82D0A4FDE001CAADE /* ConfirmRideResponse.swift */,
 				F8AD8FF62D0A4B01001CAADE /* ConfirmeRideRequest.swift */,
 				F8AD8F952D0A1713001CAADE /* RouteResponse.swift */,
 			);
@@ -688,6 +691,7 @@
 				F8AD8F882D0A0ACF001CAADE /* MkCoordinatorRegion+Extensions.swift in Sources */,
 				F80761702D0669EC0011D3A6 /* BrandFontName.swift in Sources */,
 				F80761712D0669EC0011D3A6 /* ViewAwareHostingController.swift in Sources */,
+				F8AD8FF92D0A4FE3001CAADE /* ConfirmRideResponse.swift in Sources */,
 				F80761722D0669EC0011D3A6 /* BaseCoordinator.swift in Sources */,
 				F80761732D0669EC0011D3A6 /* BaseViewModel.swift in Sources */,
 				F80761742D0669EC0011D3A6 /* Codable+Extensions.swift in Sources */,

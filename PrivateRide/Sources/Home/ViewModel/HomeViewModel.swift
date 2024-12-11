@@ -278,7 +278,7 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
             customerId: userId,
             origin: currentAddress,
             destination: dropOffAddress,
-            distance: routeReponse.distance,
+            distance: routeReponse.distance / 1000,
             duration: String(routeReponse.duration),
             driver: requestDriver,
             value: driver.value
@@ -292,29 +292,8 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
             do {
                 let response = try await self.services.confirmRide(model: model)
                 
-                self.routesObject = response
-                
-                let origin = response.origin
-                let destination = response.destination
-                
-                self.currentAddressCoordinate = CLLocationCoordinate2D(
-                    latitude: origin.latitude, longitude: origin.longitude
-                )
-                
-                self.dropOffAddressCoordinate = CLLocationCoordinate2D(
-                    latitude: destination.latitude, longitude: destination.longitude
-                )
-                
-                if let encodedPolyline = response.routeResponse?.routes.first?.polyline.encodedPolyline {
-                    self.decodeAndSetPolyline(encodedPolyline)
-                }
-                
-                self.updateRegionForSelectedAddresses()
-                
-                self.isAddressEditable = false
-                self.isBottomSheetVisible = true
             } catch {
-                self.handleNetworkError(error)
+                self.handleNetworkError(error, alertPosition: .top)
             }
         }
     }
@@ -515,3 +494,8 @@ extension HomeViewModel: CLLocationManagerDelegate {
 //  "destination": "Av. Paulista, 1538 - Bela Vista, São Paulo - SP, 01310-200",
 //  "customer_id": "1234"
 //}
+
+
+//Av. Thomas Edison, 365 - Barra Funda, São Paulo - SP, 01140-000
+//
+//Av. Paulista, 1538 - Bela Vista, São Paulo - SP, 01310-200

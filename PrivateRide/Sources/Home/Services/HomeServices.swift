@@ -24,10 +24,10 @@ final class HomeServices: HomeServicesProtocol {
         return response
     }
     
-    func confirmRide(model: ConfirmRideRequest) async throws -> RouteResponse {
+    func confirmRide(model: ConfirmRideRequest) async throws -> ConfirmRideResponse {
         let response = try await network.sendRequest(
             endpoint: HomeEndpoint.confirmRide(model: model),
-            responseModel: RouteResponse.self
+            responseModel: ConfirmRideResponse.self
         )
 
         return response
