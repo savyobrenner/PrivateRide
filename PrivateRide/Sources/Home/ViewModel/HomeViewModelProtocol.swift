@@ -13,10 +13,13 @@ protocol HomeViewModelProtocol: BaseViewModelProtocol {
     var userId: String { get set }
     var currentAddress: String { get set }
     var dropOffAddress: String { get set }
+    var route: MKRoute? { get set }
     var autocompleteResults: [String] { get set }
     var isSwapping: Bool { get set }
     var isButtonEnabled: Bool { get set }
     var selectedField: HomeViewModel.Field { get set }
+    var currentAddressCoordinate: CLLocationCoordinate2D? { get set }
+    var dropOffAddressCoordinate: CLLocationCoordinate2D? { get set }
     
     func swapAddresses()
     func searchRide()

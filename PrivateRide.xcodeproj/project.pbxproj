@@ -67,6 +67,8 @@
 		F89DD1152D067E9100EC2319 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89DD10E2D067E9100EC2319 /* HomeViewModel.swift */; };
 		F8AD8E302D09197A001CAADE /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F8AD8E2F2D09197A001CAADE /* IQKeyboardManagerSwift */; };
 		F8AD8E332D09E4D7001CAADE /* HomeEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AD8E322D09E4D5001CAADE /* HomeEndpoint.swift */; };
+		F8AD8F862D0A062F001CAADE /* PRMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AD8F852D0A062D001CAADE /* PRMapView.swift */; };
+		F8AD8F882D0A0ACF001CAADE /* MkCoordinatorRegion+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AD8F872D0A0AC7001CAADE /* MkCoordinatorRegion+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -130,6 +132,8 @@
 		F89DD10E2D067E9100EC2319 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		F89DD10F2D067E9100EC2319 /* HomeViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModelProtocol.swift; sourceTree = "<group>"; };
 		F8AD8E322D09E4D5001CAADE /* HomeEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeEndpoint.swift; sourceTree = "<group>"; };
+		F8AD8F852D0A062D001CAADE /* PRMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRMapView.swift; sourceTree = "<group>"; };
+		F8AD8F872D0A0AC7001CAADE /* MkCoordinatorRegion+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MkCoordinatorRegion+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -244,6 +248,7 @@
 		F807613C2D0669EC0011D3A6 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				F8AD8F872D0A0AC7001CAADE /* MkCoordinatorRegion+Extensions.swift */,
 				F80761382D0669EC0011D3A6 /* Codable+Extensions.swift */,
 				F80761392D0669EC0011D3A6 /* Color+Extensions.swift */,
 				F807613A2D0669EC0011D3A6 /* String+Extensions.swift */,
@@ -458,6 +463,7 @@
 		F84DC3E82D08EB000069E1BA /* Atoms */ = {
 			isa = PBXGroup;
 			children = (
+				F8AD8F852D0A062D001CAADE /* PRMapView.swift */,
 				F84DC60A2D090A520069E1BA /* PRButton.swift */,
 				F84DC6082D0904DC0069E1BA /* PRFormSectionHeader.swift */,
 				F84DC4A12D08EBBE0069E1BA /* PRTextField.swift */,
@@ -638,6 +644,7 @@
 				F807616D2D0669EC0011D3A6 /* SceneDelegate.swift in Sources */,
 				F807616E2D0669EC0011D3A6 /* AppColors.swift in Sources */,
 				F807616F2D0669EC0011D3A6 /* AppFont.swift in Sources */,
+				F8AD8F882D0A0ACF001CAADE /* MkCoordinatorRegion+Extensions.swift in Sources */,
 				F80761702D0669EC0011D3A6 /* BrandFontName.swift in Sources */,
 				F80761712D0669EC0011D3A6 /* ViewAwareHostingController.swift in Sources */,
 				F80761722D0669EC0011D3A6 /* BaseCoordinator.swift in Sources */,
@@ -681,6 +688,7 @@
 				F89DD1132D067E9100EC2319 /* HomeView.swift in Sources */,
 				F89DD1142D067E9100EC2319 /* HomeServicesProtocol.swift in Sources */,
 				F89DD1152D067E9100EC2319 /* HomeViewModel.swift in Sources */,
+				F8AD8F862D0A062F001CAADE /* PRMapView.swift in Sources */,
 				F84DC6072D08FB950069E1BA /* PRAddressFormView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -38,6 +38,9 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
     }
     
     @Published
+    var route: MKRoute?
+    
+    @Published
     var isSwapping = false
     
     @Published
@@ -48,10 +51,14 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
     
     @Published
     var selectedField: Field = .pickUp
+    
+    @Published
+    var currentAddressCoordinate: CLLocationCoordinate2D?
+    
+    @Published
+    var dropOffAddressCoordinate: CLLocationCoordinate2D?
 
     // MARK: - Private Properties
-    private var currentAddressCoordinate: CLLocationCoordinate2D?
-    private var dropOffAddressCoordinate: CLLocationCoordinate2D?
     private var debounceTimer: Timer?
     private let debounceDelay: TimeInterval = 0.5
     private var isAutoCompleteSelected = false
@@ -104,16 +111,19 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
         guard let userLocation else { return }
 
         isAutoCompleteSelected = true
+        
         updateRegion(to: userLocation)
+        
         let geocoder = CLGeocoder()
         let location = CLLocation(latitude: userLocation.latitude, longitude: userLocation.longitude)
 
         geocoder.reverseGeocodeLocation(location) { [weak self] placemarks, error in
-            guard let self = self else { return }
-            if let error = error {
+            guard let self else { return }
+            if let error {
                 print("Failed to reverse geocode: \(error.localizedDescription)")
                 return
             }
+            
             if let placemark = placemarks?.first {
                 let address = [
                     placemark.thoroughfare,
@@ -127,12 +137,38 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
 
                 DispatchQueue.main.async {
                     self.currentAddress = address
+                    self.currentAddressCoordinate = location.coordinate
                 }
 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     self.isAutoCompleteSelected = false
                     self.validateForm()
                 }
+            }
+        }
+    }
+    
+    func calculateRoute() {
+        guard let current = currentAddressCoordinate, let dropOff = dropOffAddressCoordinate else { return }
+
+        let request = MKDirections.Request()
+        request.source = MKMapItem(placemark: MKPlacemark(coordinate: current))
+        request.destination = MKMapItem(placemark: MKPlacemark(coordinate: dropOff))
+        request.transportType = .automobile
+
+        let directions = MKDirections(request: request)
+        directions.calculate { [weak self] response, error in
+            guard let self else { return }
+            if let error {
+                print("Error calculating route: \(error.localizedDescription)")
+                return
+            }
+
+            guard let route = response?.routes.first else { return }
+            
+            DispatchQueue.main.async {
+                self.route = route
+                self.updateRegionToFitRoute(route)
             }
         }
     }
@@ -254,10 +290,14 @@ private extension HomeViewModel {
                 latitude: (current.latitude + dropOff.latitude) / 2,
                 longitude: (current.longitude + dropOff.longitude) / 2
             )
+            
             let span = MKCoordinateSpan(
                 latitudeDelta: abs(current.latitude - dropOff.latitude) * 2,
                 longitudeDelta: abs(current.longitude - dropOff.longitude) * 2
             )
+            
+            calculateRoute()
+            
             updateRegion(to: center, span: span)
         } else if let current = currentAddressCoordinate {
             updateRegion(to: current)
@@ -266,9 +306,20 @@ private extension HomeViewModel {
         }
     }
 
-    func updateRegion(to center: CLLocationCoordinate2D, span: MKCoordinateSpan = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)) {
+    func updateRegion(
+        to center: CLLocationCoordinate2D,
+        span: MKCoordinateSpan = MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
+    ) {
         withAnimation {
             self.region = MKCoordinateRegion(center: center, span: span)
+        }
+    }
+    
+    func updateRegionToFitRoute(_ route: MKRoute) {
+        let routeRect = route.polyline.boundingMapRect
+        
+        withAnimation {
+            self.region = MKCoordinateRegion(routeRect)
         }
     }
 }

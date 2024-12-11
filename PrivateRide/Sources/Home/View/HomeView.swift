@@ -15,12 +15,19 @@ struct HomeView<ViewModel: HomeViewModelProtocol>: View {
     init(viewModel: ViewModel) {
         _viewModel = ObservedObject(wrappedValue: viewModel)
     }
-
+    
     var body: some View {
         ZStack {
-            Map(coordinateRegion: $viewModel.region, showsUserLocation: true)
-                .ignoresSafeArea()
-
+            PRMapView(
+                region: $viewModel.region,
+                pins: [
+                    viewModel.currentAddressCoordinate,
+                    viewModel.dropOffAddressCoordinate
+                ].compactMap { $0 },
+                route: viewModel.route?.polyline
+            )
+            .ignoresSafeArea()
+            
             VStack(alignment: .leading, spacing: 16) {
                 PRAddressFormView(
                     identification: $viewModel.userId,
