@@ -72,6 +72,16 @@ final class NetworkClient: NetworkProtocol {
         var request = URLRequest(url: finalURL)
         request.httpMethod = endpoint.request.methodName
         endpoint.requestSpecificHeaders.forEach { request.addValue($1, forHTTPHeaderField: $0) }
+        
+        if let bodyParameters = endpoint.bodyParameters {
+            do {
+                let jsonData = try JSONSerialization.data(withJSONObject: bodyParameters, options: [])
+                request.httpBody = jsonData
+            } catch {
+                throw AppError.invalidRequest("Failed to serialize body parameters.")
+            }
+        }
+        
         return request
     }
 }

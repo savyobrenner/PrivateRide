@@ -7,10 +7,12 @@
 
 enum HttpMethods {
     case get
+    case post
 
     var methodName: String {
         switch self {
         case .get: return "GET"
+        case .post: return "POST"
         }
     }
 }

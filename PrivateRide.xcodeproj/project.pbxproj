@@ -66,6 +66,7 @@
 		F89DD1142D067E9100EC2319 /* HomeServicesProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89DD10C2D067E9100EC2319 /* HomeServicesProtocol.swift */; };
 		F89DD1152D067E9100EC2319 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89DD10E2D067E9100EC2319 /* HomeViewModel.swift */; };
 		F8AD8E302D09197A001CAADE /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F8AD8E2F2D09197A001CAADE /* IQKeyboardManagerSwift */; };
+		F8AD8E332D09E4D7001CAADE /* HomeEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AD8E322D09E4D5001CAADE /* HomeEndpoint.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -128,6 +129,7 @@
 		F89DD10D2D067E9100EC2319 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		F89DD10E2D067E9100EC2319 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		F89DD10F2D067E9100EC2319 /* HomeViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModelProtocol.swift; sourceTree = "<group>"; };
+		F8AD8E322D09E4D5001CAADE /* HomeEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeEndpoint.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -378,6 +380,7 @@
 				F80761322D0669EC0011D3A6 /* Assets */,
 				F80761372D0669EC0011D3A6 /* Base */,
 				F84DC3E72D08EAF80069E1BA /* DesignSystem */,
+				F8AD8E312D09E4CE001CAADE /* Endpoints */,
 				F807613C2D0669EC0011D3A6 /* Extensions */,
 				F807613E2D0669EC0011D3A6 /* Factory */,
 				F80761412D0669EC0011D3A6 /* Helpers */,
@@ -536,6 +539,14 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		F8AD8E312D09E4CE001CAADE /* Endpoints */ = {
+			isa = PBXGroup;
+			children = (
+				F8AD8E322D09E4D5001CAADE /* HomeEndpoint.swift */,
+			);
+			path = Endpoints;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -638,6 +649,7 @@
 				F80761772D0669EC0011D3A6 /* View+Extensions.swift in Sources */,
 				F80761782D0669EC0011D3A6 /* Factory+Container.swift in Sources */,
 				F80761792D0669EC0011D3A6 /* AppConstants.swift in Sources */,
+				F8AD8E332D09E4D7001CAADE /* HomeEndpoint.swift in Sources */,
 				F807617A2D0669EC0011D3A6 /* AppEnvironment.swift in Sources */,
 				F807617B2D0669EC0011D3A6 /* UserSettings.swift in Sources */,
 				F807617C2D0669EC0011D3A6 /* UserDefaultsStorage.swift in Sources */,

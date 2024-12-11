@@ -10,6 +10,7 @@ import Foundation
 enum AppError: Error, Equatable {
     case invalidURL
     case invalidResponse
+    case invalidRequest(String)
     case statusCode(Int)
     case urlError(URLError)
     case unknown
