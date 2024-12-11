@@ -45,29 +45,39 @@ struct PRAddressFormView: View {
             PRFormSectionHeader(title: "Where To?", isExpanded: $isWhereToExpanded)
             
             if isWhereToExpanded {
-                VStack(alignment: .leading, spacing: 0) {
-                    PRTextField(
-                        icon: .circlePinIcon,
-                        placeholder: "Pick Up",
-                        text: $currentAddress
-                    )
-                    .opacity(isSwapping ? 0.5 : 1)
-                    .offset(y: isSwapping ? +10 : 0)
-                    .animation(.easeInOut(duration: 0.3), value: isSwapping)
+                HStack {
+                    VStack(alignment: .leading, spacing: 0) {
+                        PRTextField(
+                            icon: .circlePinIcon,
+                            placeholder: "Pick Up",
+                            text: $currentAddress
+                        )
+                        .opacity(isSwapping ? 0.5 : 1)
+                        .offset(y: isSwapping ? +10 : 0)
+                        .animation(.easeInOut(duration: 0.3), value: isSwapping)
+                        
+                        Rectangle()
+                            .foregroundStyle(Color.Brand.lightGray)
+                            .frame(width: 1, height: 40)
+                            .padding(.leading, 12)
+                        
+                        PRTextField(
+                            icon: .flagCircleIcon,
+                            placeholder: "Drop Off",
+                            text: $dropOffAddress
+                        )
+                        .opacity(isSwapping ? 0.5 : 1)
+                        .offset(y: isSwapping ? -10 : 0)
+                        .animation(.easeInOut(duration: 0.3), value: isSwapping)
+                    }
                     
-                    Rectangle()
-                        .foregroundStyle(Color.Brand.lightGray)
-                        .frame(width: 1, height: 40)
-                        .padding(.leading, 12)
-                    
-                    PRTextField(
-                        icon: .flagCircleIcon,
-                        placeholder: "Drop Off",
-                        text: $dropOffAddress
-                    )
-                    .opacity(isSwapping ? 0.5 : 1)
-                    .offset(y: isSwapping ? -10 : 0)
-                    .animation(.easeInOut(duration: 0.3), value: isSwapping)
+                    Button {
+                        action()
+                    } label: {
+                        Image(.changeAddressIcon)
+                            .resizable()
+                            .frame(width: 30, height: 30)
+                    }
                 }
             }
         }
