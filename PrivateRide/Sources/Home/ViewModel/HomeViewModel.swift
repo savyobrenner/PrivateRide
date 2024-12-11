@@ -266,7 +266,57 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
     }
     
     func confirmTrip(with id: Int) {
+        guard
+            !isLoading,
+            let routeReponse = routesObject,
+            let driver = routeReponse.options.first(where: { $0.id == id })
+        else { return }
         
+        let requestDriver = ConfirmRideRequest.Driver(id: driver.id, name: driver.name)
+        
+        let model = ConfirmRideRequest(
+            customerId: userId,
+            origin: currentAddress,
+            destination: dropOffAddress,
+            distance: routeReponse.distance,
+            duration: String(routeReponse.duration),
+            driver: requestDriver,
+            value: driver.value
+        )
+        
+        isLoading = true
+        
+        coordinator?.autoCancellingTask { @MainActor in
+            defer { self.isLoading = false }
+            
+            do {
+                let response = try await self.services.confirmRide(model: model)
+                
+                self.routesObject = response
+                
+                let origin = response.origin
+                let destination = response.destination
+                
+                self.currentAddressCoordinate = CLLocationCoordinate2D(
+                    latitude: origin.latitude, longitude: origin.longitude
+                )
+                
+                self.dropOffAddressCoordinate = CLLocationCoordinate2D(
+                    latitude: destination.latitude, longitude: destination.longitude
+                )
+                
+                if let encodedPolyline = response.routeResponse?.routes.first?.polyline.encodedPolyline {
+                    self.decodeAndSetPolyline(encodedPolyline)
+                }
+                
+                self.updateRegionForSelectedAddresses()
+                
+                self.isAddressEditable = false
+                self.isBottomSheetVisible = true
+            } catch {
+                self.handleNetworkError(error)
+            }
+        }
     }
 }
 

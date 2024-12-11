@@ -5,7 +5,7 @@
 //  Created by Savyo Brenner on 11/12/24.
 //
 
-struct ConfirmeRideRequest: Codable {
+struct ConfirmRideRequest: Codable {
     let customerId: String
     let origin: String
     let destination: String
@@ -25,7 +25,7 @@ struct ConfirmeRideRequest: Codable {
     }
 }
 
-extension ConfirmeRideRequest {
+extension ConfirmRideRequest {
     struct Driver: Codable {
         let id: Int
         let name: String

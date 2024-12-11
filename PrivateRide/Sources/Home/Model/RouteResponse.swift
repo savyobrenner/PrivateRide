@@ -10,7 +10,7 @@ import Foundation
 struct RouteResponse: Codable {
     let origin: Location
     let destination: Location
-    let distance: Int
+    let distance: Double
     let duration: Int
     let options: [Option]
     let routeResponse: RouteDetails?
@@ -81,7 +81,7 @@ struct RouteResponse: Codable {
 
         origin = try container.decode(Location.self, forKey: .origin)
         destination = try container.decode(Location.self, forKey: .destination)
-        distance = try container.decode(Int.self, forKey: .distance)
+        distance = try container.decode(Double.self, forKey: .distance)
         duration = try container.decode(Int.self, forKey: .duration)
         options = try container.decode([Option].self, forKey: .options)
 

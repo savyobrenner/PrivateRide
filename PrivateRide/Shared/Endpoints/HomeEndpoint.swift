@@ -9,7 +9,7 @@ import Foundation
 
 enum HomeEndpoint {
     case estimateRide(userId: String, origin: String, destination: String)
-    case confirmRide(model: ConfirmeRideRequest)
+    case confirmRide(model: ConfirmRideRequest)
 }
 
 extension HomeEndpoint: Endpoint {
