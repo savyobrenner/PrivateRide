@@ -79,11 +79,11 @@ struct RouteResponse: Codable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
-        origin = try container.decodeIfPresent(Location.self, forKey: .origin) ?? Location(latitude: 0.0, longitude: 0.0)
-        destination = try container.decodeIfPresent(Location.self, forKey: .destination) ?? Location(latitude: 0.0, longitude: 0.0)
-        distance = try container.decodeIfPresent(Int.self, forKey: .distance) ?? 0
-        duration = try container.decodeIfPresent(Int.self, forKey: .duration) ?? 0
-        options = try container.decodeIfPresent([Option].self, forKey: .options) ?? []
+        origin = try container.decode(Location.self, forKey: .origin)
+        destination = try container.decode(Location.self, forKey: .destination)
+        distance = try container.decode(Int.self, forKey: .distance)
+        duration = try container.decode(Int.self, forKey: .duration)
+        options = try container.decode([Option].self, forKey: .options)
 
         let routeResponseContainer = try? container.nestedContainer(
             keyedBy: RouteDetails.CodingKeys.self, forKey: .routeResponse

@@ -17,6 +17,7 @@ protocol HomeViewModelProtocol: BaseViewModelProtocol {
     var autocompleteResults: [String] { get set }
     var isSwapping: Bool { get set }
     var isButtonEnabled: Bool { get set }
+    var isAddressEditable: Bool { get set }
     var selectedField: HomeViewModel.Field { get set }
     var currentAddressCoordinate: CLLocationCoordinate2D? { get set }
     var dropOffAddressCoordinate: CLLocationCoordinate2D? { get set }
@@ -24,5 +25,6 @@ protocol HomeViewModelProtocol: BaseViewModelProtocol {
     func swapAddresses()
     func searchRide()
     func locateUser()
+    func addressIsNotEditible()
     func selectAutocompleteResult(_ result: String, and field: HomeViewModel.Field)
 }

@@ -47,6 +47,9 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
     var isButtonEnabled = false
     
     @Published
+    var isAddressEditable = true
+    
+    @Published
     var autocompleteResults: [String] = []
     
     @Published
@@ -139,6 +142,8 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
                 }
                 
                 self.updateRegionForSelectedAddresses()
+                
+                self.isAddressEditable = false
             } catch {
                 self.handleNetworkError(error)
             }
@@ -235,6 +240,10 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
             self.isAutoCompleteSelected = false
             self.validateForm()
         }
+    }
+    
+    func addressIsNotEditible() {
+        showAlert(message: "You need to complete or cancel the current trip first.", type: .warning, position: .top)
     }
 }
 

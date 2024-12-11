@@ -35,13 +35,16 @@ struct HomeView<ViewModel: HomeViewModelProtocol>: View {
                     dropOffAddress: $viewModel.dropOffAddress,
                     isSwapping: $viewModel.isSwapping,
                     isLoading: $viewModel.isLoading,
-                    isButtonEnabled: $viewModel.isButtonEnabled
+                    isButtonEnabled: $viewModel.isButtonEnabled,
+                    isEditable: $viewModel.isAddressEditable
                 ) { action in
                     switch action {
                     case .swapAddresses:
                         viewModel.swapAddresses()
                     case .searchRide:
                         viewModel.searchRide()
+                    case .addressIsNotEditible:
+                        viewModel.addressIsNotEditible()
                     }
                 }
                 
@@ -84,27 +87,29 @@ struct HomeView<ViewModel: HomeViewModelProtocol>: View {
             }
             .padding(.horizontal, 20)
 
-            VStack {
-                Spacer()
-                
-                HStack {
+            if viewModel.isAddressEditable {
+                VStack {
                     Spacer()
                     
-                    Button {
-                        viewModel.locateUser()
-                    } label: {
-                        Image(systemName: "location.fill")
-                            .resizable()
-                            .frame(width: 24, height: 24)
-                            .foregroundStyle(Color.Brand.primary)
-                            .padding()
-                            .background(
-                                Circle()
-                                    .fill(Color.Brand.white)
-                                    .shadow(radius: 3)
-                            )
+                    HStack {
+                        Spacer()
+                        
+                        Button {
+                            viewModel.locateUser()
+                        } label: {
+                            Image(systemName: "location.fill")
+                                .resizable()
+                                .frame(width: 24, height: 24)
+                                .foregroundStyle(Color.Brand.primary)
+                                .padding()
+                                .background {
+                                    Circle()
+                                        .fill(Color.Brand.white)
+                                        .shadow(radius: 3)
+                                }
+                        }
+                        .padding()
                     }
-                    .padding()
                 }
             }
         }

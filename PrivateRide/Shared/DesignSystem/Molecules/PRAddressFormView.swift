@@ -11,6 +11,7 @@ struct PRAddressFormView: View {
     enum Action {
         case swapAddresses
         case searchRide
+        case addressIsNotEditible
     }
     
     @Binding
@@ -30,6 +31,9 @@ struct PRAddressFormView: View {
 
     @Binding
     var isButtonEnabled: Bool
+    
+    @Binding
+    var isEditable: Bool
 
     @State
     private var isIdentificationExpanded = true
@@ -108,6 +112,15 @@ struct PRAddressFormView: View {
                 .fill(Color.Brand.white)
                 .shadow(color: Color.Brand.gray.opacity(0.2), radius: 5, x: 0, y: 2)
         )
+        .overlay {
+            if !isEditable {
+                RoundedRectangle(cornerRadius: 12)
+                    .fill(Color.Brand.black.opacity(0.4))
+                    .onTapGesture {
+                        action(.addressIsNotEditible)
+                    }
+            }
+        }
     }
 }
 
@@ -118,7 +131,8 @@ struct PRAddressFormView: View {
         dropOffAddress: .constant("Shopping Jardins"),
         isSwapping: .constant(false),
         isLoading: .constant(true),
-        isButtonEnabled: .constant(true)
+        isButtonEnabled: .constant(true),
+        isEditable: .constant(false)
     ) {_ in }
     .padding()
 }
