@@ -20,10 +20,7 @@ struct HomeView<ViewModel: HomeViewModelProtocol>: View {
         ZStack {
             PRMapView(
                 region: $viewModel.region,
-                pins: [
-                    viewModel.currentAddressCoordinate,
-                    viewModel.dropOffAddressCoordinate
-                ].compactMap { $0 },
+                pins: viewModel.pins,
                 polyline: viewModel.polyline
             )
             .ignoresSafeArea()
@@ -111,6 +108,26 @@ struct HomeView<ViewModel: HomeViewModelProtocol>: View {
                         .padding()
                     }
                 }
+            }
+            
+            if viewModel.isBottomSheetVisible, let routesObject = viewModel.routesObject {
+                VStack {
+                    Spacer()
+                    
+                    PRBottomSheet(
+                        isLoading: $viewModel.isLoading,
+                        model: .fromResponse(routesObject)
+                    ) { action in
+                        switch action {
+                        case .cancel:
+                            viewModel.cancelTrip()
+                        case let .confirm(driverId):
+                            viewModel.confirmTrip(with: driverId)
+                        }
+                    }
+                }
+                .transition(.move(edge: .bottom))
+                .ignoresSafeArea()
             }
         }
         .onAppear { }

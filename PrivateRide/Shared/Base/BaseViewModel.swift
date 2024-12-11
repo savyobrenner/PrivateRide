@@ -38,16 +38,16 @@ class BaseViewModel<CoordinatorType: BaseCoordinator>: NSObject, BaseViewModelPr
         coordinator?.dismiss(animated: animated)
     }
     
-    func handleNetworkError(_ error: Error) {
+    func handleNetworkError(_ error: Error, alertPosition: PRFloatingAlertModel.PRAlertPosition = .bottom) {
         if let appError = error as? AppError {
             switch appError {
             case .backendError(let backendError):
-                showAlert(message: backendError.errorLocalized)
+                showAlert(message: backendError.errorLocalized, position: alertPosition)
             default:
-                showAlert(message: appError.localizedDescription)
+                showAlert(message: appError.localizedDescription, position: alertPosition)
             }
         } else {
-            showAlert(message: "Something went wrong. Please try again later.")
+            showAlert(message: "Something went wrong. Please try again later.", position: alertPosition)
         }
     }
     

@@ -89,36 +89,59 @@ struct PRBottomSheet: View {
                     }
                 }
             }
-            .padding([.top, .horizontal], 16)
+            .padding([.horizontal], 16)
             
-            VStack(alignment: .leading, spacing: 0) {
-                Text(model.title)
-                    .font(.brand(.bold, size: 18))
-                    .foregroundStyle(Color.Brand.black)
-                
-                Text(model.description)
-                    .font(.brand(.regular, size: 14))
-                    .foregroundStyle(Color.Brand.gray)
-                    .padding(.top, 4)
-                
-                if let warning = model.warning {
-                    Text(warning)
-                        .padding()
-                        .font(.brand(.regular, size: 12))
-                        .foregroundStyle(Color.Brand.white)
-                        .frame(maxWidth: .infinity)
-                        .background {
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(Color.red)
-                        }
-                        .padding(.top, 20)
+            if !model.title.isEmpty {
+                VStack(alignment: .leading, spacing: 0) {
+                    Text(model.title)
+                        .font(.brand(.bold, size: 18))
+                        .foregroundStyle(Color.Brand.black)
+                    
+                    Text(model.description)
+                        .font(.brand(.regular, size: 14))
+                        .foregroundStyle(Color.Brand.gray)
+                        .padding(.top, 4)
+                    
+                    if let warning = model.warning {
+                        Text(warning)
+                            .padding()
+                            .font(.brand(.regular, size: 12))
+                            .foregroundStyle(Color.Brand.white)
+                            .frame(maxWidth: .infinity)
+                            .background {
+                                RoundedRectangle(cornerRadius: 10)
+                                    .fill(Color.red)
+                            }
+                            .padding(.top, 20)
+                    }
+                    
                 }
-                
+                .padding(.horizontal, 16)
+                .frame(maxWidth: .infinity)
             }
-            .padding(.horizontal, 16)
             
             if model.drivers.isEmpty {
-                
+                HStack {
+                    Spacer()
+                    
+                    VStack {
+                        Text("No drivers available in your area.")
+                            .font(.brand(.semibold, size: 14))
+                            .foregroundStyle(Color.Brand.gray)
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal, 16)
+                        
+                        Text("Please adjust your pickup or drop-off location to find available rides.")
+                            .font(.brand(.regular, size: 12))
+                            .foregroundStyle(Color.Brand.gray.opacity(0.8))
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal, 16)
+                            .padding(.top, 8)
+                    }
+                    .padding(.vertical, 20)
+                    
+                    Spacer()
+                }
             } else {
                 Text("Please choose between one of our \(model.drivers.count) drivers")
                     .font(.brand(.regular, size: 12))
@@ -152,7 +175,7 @@ struct PRBottomSheet: View {
             }
         }
         .frame(maxWidth: .infinity)
-        .frame(maxHeight: 430)
+        .frame(maxHeight: model.drivers.isEmpty ? 200 : 440)
         .background(
             RoundedRectangle(cornerRadius: 16)
                 .fill(Color.Brand.white)

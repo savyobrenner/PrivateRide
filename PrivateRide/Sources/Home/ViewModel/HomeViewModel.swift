@@ -50,7 +50,13 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
     var isAddressEditable = true
     
     @Published
+    var isBottomSheetVisible = false
+    
+    @Published
     var autocompleteResults: [String] = []
+    
+    @Published
+    var pins: [CLLocationCoordinate2D] = []
     
     @Published
     var selectedField: Field = .pickUp
@@ -60,6 +66,9 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
     
     @Published
     var dropOffAddressCoordinate: CLLocationCoordinate2D?
+    
+    @Published
+    var routesObject: RouteResponse?
     
     // MARK: - Private Properties
     private var debounceTimer: Timer?
@@ -126,6 +135,8 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
                     destination: self.dropOffAddress
                 )
                 
+                self.routesObject = response
+                
                 let origin = response.origin
                 let destination = response.destination
                 
@@ -144,6 +155,7 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
                 self.updateRegionForSelectedAddresses()
                 
                 self.isAddressEditable = false
+                self.isBottomSheetVisible = true
             } catch {
                 self.handleNetworkError(error)
             }
@@ -245,6 +257,17 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
     func addressIsNotEditible() {
         showAlert(message: "You need to complete or cancel the current trip first.", type: .warning, position: .top)
     }
+    
+    func cancelTrip() {
+        withAnimation {
+            isBottomSheetVisible = false
+            isAddressEditable = true
+        }
+    }
+    
+    func confirmTrip(with id: Int) {
+        
+    }
 }
 
 // MARK: - Private Extension
@@ -253,6 +276,8 @@ private extension HomeViewModel {
         validateForm()
         
         guard !isAutoCompleteSelected, !query.trimmed.isEmpty else { return }
+        
+        updatePins()
         
         if query == lastAutocompleteQuery {
             return
@@ -412,6 +437,14 @@ private extension HomeViewModel {
         
         withAnimation {
             self.region = MKCoordinateRegion(routeRect)
+        }
+    }
+    
+    private func updatePins() {
+        if let current = currentAddressCoordinate, let dropOff = dropOffAddressCoordinate {
+            pins = [current, dropOff]
+        } else {
+            pins = []
         }
     }
 }

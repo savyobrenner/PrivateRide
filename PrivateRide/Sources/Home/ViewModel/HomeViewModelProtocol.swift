@@ -18,13 +18,18 @@ protocol HomeViewModelProtocol: BaseViewModelProtocol {
     var isSwapping: Bool { get set }
     var isButtonEnabled: Bool { get set }
     var isAddressEditable: Bool { get set }
+    var isBottomSheetVisible: Bool { get set }
+    var pins: [CLLocationCoordinate2D] { get set }
     var selectedField: HomeViewModel.Field { get set }
     var currentAddressCoordinate: CLLocationCoordinate2D? { get set }
     var dropOffAddressCoordinate: CLLocationCoordinate2D? { get set }
+    var routesObject: RouteResponse? { get set }
     
     func swapAddresses()
     func searchRide()
     func locateUser()
     func addressIsNotEditible()
     func selectAutocompleteResult(_ result: String, and field: HomeViewModel.Field)
+    func cancelTrip()
+    func confirmTrip(with id: Int)
 }
