@@ -65,6 +65,7 @@
 		F89DD1132D067E9100EC2319 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89DD10D2D067E9100EC2319 /* HomeView.swift */; };
 		F89DD1142D067E9100EC2319 /* HomeServicesProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89DD10C2D067E9100EC2319 /* HomeServicesProtocol.swift */; };
 		F89DD1152D067E9100EC2319 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89DD10E2D067E9100EC2319 /* HomeViewModel.swift */; };
+		F8AD8E302D09197A001CAADE /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F8AD8E2F2D09197A001CAADE /* IQKeyboardManagerSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -135,6 +136,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F89DD1042D0670DB00EC2319 /* Factory in Frameworks */,
+				F8AD8E302D09197A001CAADE /* IQKeyboardManagerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -552,6 +554,7 @@
 			name = PrivateRide;
 			packageProductDependencies = (
 				F89DD1032D0670DB00EC2319 /* Factory */,
+				F8AD8E2F2D09197A001CAADE /* IQKeyboardManagerSwift */,
 			);
 			productName = PrivateRide;
 			productReference = F80760AE2D0669E20011D3A6 /* PrivateRide.app */;
@@ -584,6 +587,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				F89DD1022D0670DB00EC2319 /* XCRemoteSwiftPackageReference "Factory" */,
+				F8AD8E2E2D09197A001CAADE /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 			);
 			productRefGroup = F80760AF2D0669E20011D3A6 /* Products */;
 			projectDirPath = "";
@@ -877,6 +881,14 @@
 				minimumVersion = 2.4.3;
 			};
 		};
+		F8AD8E2E2D09197A001CAADE /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -884,6 +896,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = F89DD1022D0670DB00EC2319 /* XCRemoteSwiftPackageReference "Factory" */;
 			productName = Factory;
+		};
+		F8AD8E2F2D09197A001CAADE /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F8AD8E2E2D09197A001CAADE /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

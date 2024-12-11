@@ -5,6 +5,7 @@
 //  Created by Savyo Brenner on 09/12/24.
 //
 
+import IQKeyboardManagerSwift
 import SwiftUI
 
 @UIApplicationMain
@@ -20,6 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func configureApp(_ application: UIApplication) {
-
+        IQKeyboardManager.shared.isEnabled = true
     }
 }

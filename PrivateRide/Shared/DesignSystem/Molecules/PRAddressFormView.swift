@@ -13,6 +13,11 @@ struct PRAddressFormView: View {
         case searchRide
     }
     
+    enum Field {
+        case pickUp
+        case dropOff
+    }
+    
     @Binding
     var identification: String
     
@@ -21,6 +26,9 @@ struct PRAddressFormView: View {
     
     @Binding
     var dropOffAddress: String
+    
+    @Binding
+    var autocompleteResults: [String]
     
     @Binding
     var isSwapping: Bool
@@ -37,6 +45,9 @@ struct PRAddressFormView: View {
     @State
     private var isWhereToExpanded = true
 
+    @State
+    private var activeField: Field?
+    
     let action: ((Action) -> Void)
 
     var body: some View {
@@ -52,7 +63,7 @@ struct PRAddressFormView: View {
                     )
                 }
             }
-
+            
             PRFormSectionHeader(title: "Where To?", isExpanded: $isWhereToExpanded)
             
             if isWhereToExpanded {
@@ -63,6 +74,9 @@ struct PRAddressFormView: View {
                             placeholder: "Pick Up",
                             text: $currentAddress
                         )
+                        .onTapGesture {
+                            activeField = .pickUp
+                        }
                         .opacity(isSwapping ? 0.5 : 1)
                         .offset(y: isSwapping ? +10 : 0)
                         .animation(.easeInOut(duration: 0.3), value: isSwapping)
@@ -77,9 +91,32 @@ struct PRAddressFormView: View {
                             placeholder: "Drop Off",
                             text: $dropOffAddress
                         )
+                        .onTapGesture {
+                            activeField = .dropOff
+                        }
                         .opacity(isSwapping ? 0.5 : 1)
                         .offset(y: isSwapping ? -10 : 0)
                         .animation(.easeInOut(duration: 0.3), value: isSwapping)
+                        
+                        if !autocompleteResults.isEmpty {
+                            VStack(alignment: .leading, spacing: 4) {
+                                ForEach(autocompleteResults, id: \.self) { result in
+                                    Text(result)
+                                        .padding()
+                                        .background(Color.gray.opacity(0.1))
+                                        .cornerRadius(8)
+                                        .onTapGesture {
+                                            if activeField == .pickUp {
+                                                currentAddress = result
+                                            } else if activeField == .dropOff {
+                                                dropOffAddress = result
+                                            }
+                                            autocompleteResults = []
+                                        }
+                                }
+                            }
+                            .padding(.top, 8)
+                        }
                     }
                     
                     Button {
@@ -111,6 +148,7 @@ struct PRAddressFormView: View {
         identification: .constant("123dd"),
         currentAddress: .constant("Rua Palmira Ramos Teles 1600"),
         dropOffAddress: .constant("Shopping Jardins"),
+        autocompleteResults: .constant([]),
         isSwapping: .constant(false),
         isLoading: .constant(true),
         isButtonEnabled: .constant(true)

@@ -26,6 +26,7 @@ struct HomeView<ViewModel: HomeViewModelProtocol>: View {
                     identification: $viewModel.userId,
                     currentAddress: $viewModel.currentAddress,
                     dropOffAddress: $viewModel.dropOffAddress,
+                    autocompleteResults: $viewModel.autocompleteResults,
                     isSwapping: $viewModel.isSwapping,
                     isLoading: $viewModel.isLoading,
                     isButtonEnabled: $viewModel.isButtonEnabled

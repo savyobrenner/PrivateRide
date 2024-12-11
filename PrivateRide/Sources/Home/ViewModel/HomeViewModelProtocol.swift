@@ -13,6 +13,7 @@ protocol HomeViewModelProtocol: BaseViewModelProtocol {
     var userId: String { get set }
     var currentAddress: String { get set }
     var dropOffAddress: String { get set }
+    var autocompleteResults: [String] { get set }
     var isSwapping: Bool { get set }
     var isButtonEnabled: Bool { get set }
     

@@ -12,8 +12,8 @@ import SwiftUI
 class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
     @Published
     var region: MKCoordinateRegion = MKCoordinateRegion(
-        center: CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194), // Default Value
-        span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)       // Default Zoom
+        center: CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194), // Default Location
+        span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
     )
     
     @Published
@@ -23,12 +23,12 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
     
     @Published
     var currentAddress: String = "" {
-        didSet { validateForm() }
+        didSet { triggerAutocomplete(for: currentAddress, field: .pickUp) }
     }
     
     @Published
     var dropOffAddress: String = "" {
-        didSet { validateForm() }
+        didSet { triggerAutocomplete(for: dropOffAddress, field: .dropOff) }
     }
     
     @Published
@@ -37,18 +37,8 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
     @Published
     var isButtonEnabled = false
     
-    // MARK: - Validators
-    private var isUserIdValid: Bool {
-        !userId.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
-    }
-    
-    private var isCurrentAddressValid: Bool {
-        !currentAddress.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
-    }
-    
-    private var isDropOffAddressValid: Bool {
-        !dropOffAddress.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
-    }
+    @Published
+    var autocompleteResults: [String] = []
     
     private var userLocation: CLLocationCoordinate2D? {
         didSet {
@@ -66,7 +56,7 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
     }
     
     func swapAddresses() {
-        guard isCurrentAddressValid && isDropOffAddressValid else { return }
+        guard !currentAddress.isEmpty && !dropOffAddress.isEmpty else { return }
         
         withAnimation {
             isSwapping = true
@@ -85,18 +75,67 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
     
     func searchRide() {
         guard isButtonEnabled else { return }
-        
-        // TODO: Implementar a lógica para buscar rides
+        print("Searching for ride...")
+        // TODO: Implementar lógica de busca de ride
     }
     
     func locateUser() {
         guard let userLocation else { return }
         
         updateRegion(to: userLocation)
+        let geocoder = CLGeocoder()
+        let location = CLLocation(latitude: userLocation.latitude, longitude: userLocation.longitude)
+        
+        geocoder.reverseGeocodeLocation(location) { [weak self] placemarks, error in
+            guard let self = self else { return }
+            if let error = error {
+                print("Failed to reverse geocode: \(error.localizedDescription)")
+                return
+            }
+            if let placemark = placemarks?.first {
+                let address = [
+                    placemark.thoroughfare,
+                    placemark.subThoroughfare,
+                    placemark.locality,
+                    placemark.administrativeArea,
+                    placemark.postalCode
+                ]
+                    .compactMap { $0 }
+                    .joined(separator: ", ")
+                
+                DispatchQueue.main.async {
+                    self.currentAddress = address
+                }
+            }
+        }
+    }
+    
+    private func triggerAutocomplete(for query: String, field: PRAddressFormView.Field) {
+        guard !query.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+            autocompleteResults = []
+            return
+        }
+        
+        let request = MKLocalSearch.Request()
+        request.naturalLanguageQuery = query
+        request.resultTypes = .address
+        
+        let search = MKLocalSearch(request: request)
+        search.start { [weak self] response, error in
+            guard let self = self else { return }
+            if let error = error {
+                print("Autocomplete error: \(error.localizedDescription)")
+                return
+            }
+            
+            self.autocompleteResults = response?.mapItems.compactMap { $0.placemark.title } ?? []
+        }
     }
     
     private func validateForm() {
-        isButtonEnabled = isUserIdValid && isCurrentAddressValid && isDropOffAddressValid
+        isButtonEnabled = !userId.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
+        !currentAddress.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
+        !dropOffAddress.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
     }
     
     private func configureLocationManager() {
