@@ -69,6 +69,10 @@
 		F8AD8E332D09E4D7001CAADE /* HomeEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AD8E322D09E4D5001CAADE /* HomeEndpoint.swift */; };
 		F8AD8F862D0A062F001CAADE /* PRMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AD8F852D0A062D001CAADE /* PRMapView.swift */; };
 		F8AD8F882D0A0ACF001CAADE /* MkCoordinatorRegion+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AD8F872D0A0AC7001CAADE /* MkCoordinatorRegion+Extensions.swift */; };
+		F8AD8F8D2D0A0E96001CAADE /* PRFloatingAlertType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AD8F8A2D0A0E96001CAADE /* PRFloatingAlertType.swift */; };
+		F8AD8F8E2D0A0E96001CAADE /* PRFloatingAlertModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AD8F892D0A0E96001CAADE /* PRFloatingAlertModel.swift */; };
+		F8AD8F8F2D0A0E96001CAADE /* PRFloatingAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AD8F8B2D0A0E96001CAADE /* PRFloatingAlertView.swift */; };
+		F8AD8F932D0A0F46001CAADE /* PRFloatingAlertViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AD8F922D0A0F46001CAADE /* PRFloatingAlertViewModifier.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -134,6 +138,10 @@
 		F8AD8E322D09E4D5001CAADE /* HomeEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeEndpoint.swift; sourceTree = "<group>"; };
 		F8AD8F852D0A062D001CAADE /* PRMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRMapView.swift; sourceTree = "<group>"; };
 		F8AD8F872D0A0AC7001CAADE /* MkCoordinatorRegion+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MkCoordinatorRegion+Extensions.swift"; sourceTree = "<group>"; };
+		F8AD8F892D0A0E96001CAADE /* PRFloatingAlertModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRFloatingAlertModel.swift; sourceTree = "<group>"; };
+		F8AD8F8A2D0A0E96001CAADE /* PRFloatingAlertType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRFloatingAlertType.swift; sourceTree = "<group>"; };
+		F8AD8F8B2D0A0E96001CAADE /* PRFloatingAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRFloatingAlertView.swift; sourceTree = "<group>"; };
+		F8AD8F922D0A0F46001CAADE /* PRFloatingAlertViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRFloatingAlertViewModifier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -372,6 +380,7 @@
 		F807615E2D0669EC0011D3A6 /* ViewModifier */ = {
 			isa = PBXGroup;
 			children = (
+				F8AD8F922D0A0F46001CAADE /* PRFloatingAlertViewModifier.swift */,
 				F807615D2D0669EC0011D3A6 /* RunOnceViewModifier.swift */,
 			);
 			path = ViewModifier;
@@ -488,6 +497,7 @@
 			isa = PBXGroup;
 			children = (
 				F84DC6062D08FB8D0069E1BA /* PRAddressFormView.swift */,
+				F8AD8F8C2D0A0E96001CAADE /* PRFloatingAlert */,
 			);
 			path = Molecules;
 			sourceTree = "<group>";
@@ -551,6 +561,16 @@
 				F8AD8E322D09E4D5001CAADE /* HomeEndpoint.swift */,
 			);
 			path = Endpoints;
+			sourceTree = "<group>";
+		};
+		F8AD8F8C2D0A0E96001CAADE /* PRFloatingAlert */ = {
+			isa = PBXGroup;
+			children = (
+				F8AD8F892D0A0E96001CAADE /* PRFloatingAlertModel.swift */,
+				F8AD8F8A2D0A0E96001CAADE /* PRFloatingAlertType.swift */,
+				F8AD8F8B2D0A0E96001CAADE /* PRFloatingAlertView.swift */,
+			);
+			path = PRFloatingAlert;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -664,11 +684,15 @@
 				F807617E2D0669EC0011D3A6 /* CacheManagerProtocol.swift in Sources */,
 				F807617F2D0669EC0011D3A6 /* CacheProtocol.swift in Sources */,
 				F80761802D0669EC0011D3A6 /* StorageError.swift in Sources */,
+				F8AD8F8D2D0A0E96001CAADE /* PRFloatingAlertType.swift in Sources */,
+				F8AD8F8E2D0A0E96001CAADE /* PRFloatingAlertModel.swift in Sources */,
+				F8AD8F8F2D0A0E96001CAADE /* PRFloatingAlertView.swift in Sources */,
 				F80761812D0669EC0011D3A6 /* StorageKey.swift in Sources */,
 				F80761822D0669EC0011D3A6 /* AppError.swift in Sources */,
 				F80761832D0669EC0011D3A6 /* Endpoint.swift in Sources */,
 				F80761842D0669EC0011D3A6 /* HttpMethods.swift in Sources */,
 				F80761852D0669EC0011D3A6 /* NetworkClient.swift in Sources */,
+				F8AD8F932D0A0F46001CAADE /* PRFloatingAlertViewModifier.swift in Sources */,
 				F80761862D0669EC0011D3A6 /* NetworkProtocol.swift in Sources */,
 				F80761872D0669EC0011D3A6 /* ServiceLocator.swift in Sources */,
 				F84DC4A22D08EBC20069E1BA /* PRTextField.swift in Sources */,
