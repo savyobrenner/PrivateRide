@@ -29,7 +29,7 @@ struct RouteResponse: Codable {
         let value: Double
 
         struct Review: Codable {
-            let rating: Int
+            let rating: Double
             let comment: String
         }
     }
