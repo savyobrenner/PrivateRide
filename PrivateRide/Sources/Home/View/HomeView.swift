@@ -68,7 +68,7 @@ struct HomeView<ViewModel: HomeViewModelProtocol>: View {
                     .padding(.vertical, 8)
                     .background(
                         RoundedRectangle(cornerRadius: 12)
-                            .fill(Color.Brand.white)
+                            .fill(Color.Brand.white.opacity(0.9))
                             .shadow(color: Color.Brand.gray.opacity(0.1), radius: 5, x: 0, y: 2)
                     )
                 }

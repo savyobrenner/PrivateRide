@@ -95,6 +95,7 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
     func locateUser() {
         guard let userLocation else { return }
         
+        isAutoCompleteSelected = true
         updateRegion(to: userLocation)
         let geocoder = CLGeocoder()
         let location = CLLocation(latitude: userLocation.latitude, longitude: userLocation.longitude)
@@ -118,6 +119,11 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
                 
                 DispatchQueue.main.async {
                     self.currentAddress = address
+                }
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    self.isAutoCompleteSelected = false
+                    self.validateForm()
                 }
             }
         }
@@ -176,6 +182,10 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
         isButtonEnabled = !userId.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
         !currentAddress.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
         !dropOffAddress.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+        
+        if isButtonEnabled {
+            autocompleteResults = []
+        }
     }
     
     private func configureLocationManager() {
