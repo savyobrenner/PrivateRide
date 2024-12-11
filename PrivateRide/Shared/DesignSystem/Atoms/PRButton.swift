@@ -16,9 +16,14 @@ struct PRButton: View {
     let title: String
     let style: Style
     let isLoading: Bool
+    let isEnabled: Bool
     let action: () -> Void
 
     private var backgroundColor: Color {
+        if !isEnabled {
+            return Color.Brand.gray.opacity(0.5)
+        }
+        
         switch style {
         case .defaultStyle:
             return Color.Brand.primary
@@ -28,6 +33,10 @@ struct PRButton: View {
     }
 
     private var textColor: Color {
+        if !isEnabled {
+            return Color.Brand.gray
+        }
+        
         switch style {
         case .defaultStyle:
             return Color.Brand.white
@@ -37,6 +46,10 @@ struct PRButton: View {
     }
 
     private var borderColor: Color {
+        if !isEnabled {
+            return Color.Brand.gray.opacity(0.5)
+        }
+        
         switch style {
         case .defaultStyle:
             return Color.Brand.clear
@@ -47,7 +60,7 @@ struct PRButton: View {
 
     var body: some View {
         Button {
-            guard !isLoading else { return }
+            guard isEnabled, !isLoading else { return }
             
             action()
         } label: {
@@ -71,18 +84,30 @@ struct PRButton: View {
                     .stroke(borderColor, lineWidth: style == .outline ? 1 : 0)
             )
         }
-        .disabled(isLoading)
+        .disabled(isLoading || !isEnabled)
     }
 }
 
 #Preview {
     VStack(spacing: 16) {
-        PRButton(title: "Default", style: .defaultStyle, isLoading: false) {
-            print("Default button tapped")
+        PRButton(title: "Enabled Default", style: .defaultStyle, isLoading: false, isEnabled: true) {
+            print("Enabled Default button tapped")
         }
 
-        PRButton(title: "Outline", style: .outline, isLoading: true) {
-            print("Outline button tapped")
+        PRButton(title: "Disabled Default", style: .defaultStyle, isLoading: false, isEnabled: false) {
+            print("Disabled Default button tapped")
+        }
+
+        PRButton(title: "Enabled Outline", style: .outline, isLoading: false, isEnabled: true) {
+            print("Enabled Outline button tapped")
+        }
+
+        PRButton(title: "Disabled Outline", style: .outline, isLoading: false, isEnabled: false) {
+            print("Disabled Outline button tapped")
+        }
+
+        PRButton(title: "Loading", style: .defaultStyle, isLoading: true, isEnabled: true) {
+            print("Loading button tapped")
         }
     }
     .padding()

@@ -16,22 +16,46 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
     )
     
     @Published
-    var currentAddress: String
+    var userId: String = "" {
+        didSet { validateForm() }
+    }
     
     @Published
-    var dropOffAddress: String
+    var currentAddress: String = "" {
+        didSet { validateForm() }
+    }
+    
+    @Published
+    var dropOffAddress: String = "" {
+        didSet { validateForm() }
+    }
     
     @Published
     var isSwapping = false
     
+    @Published
+    var isButtonEnabled = false
+    
+    // MARK: - Validators
+    var isUserIdValid: Bool {
+        !userId.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    }
+    
+    var isCurrentAddressValid: Bool {
+        !currentAddress.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    }
+    
+    var isDropOffAddressValid: Bool {
+        !dropOffAddress.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    }
+    
     override init(coordinator: HomeCoordinator?) {
-        self.currentAddress = "457 Castle Street, New York"
-        self.dropOffAddress = "Universal Airport, New York"
-        
         super.init(coordinator: coordinator)
     }
     
     func swapAddresses() {
+        guard isCurrentAddressValid && isDropOffAddressValid else { return }
+        
         withAnimation {
             isSwapping = true
         }
@@ -45,5 +69,15 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
                 self.isSwapping = false
             }
         }
+    }
+    
+    func searchRide() {
+        guard isButtonEnabled else { return }
+        
+        // TODO: Implementar a lógica para buscar rides
+    }
+    
+    private func validateForm() {
+        isButtonEnabled = isUserIdValid && isCurrentAddressValid && isDropOffAddressValid
     }
 }

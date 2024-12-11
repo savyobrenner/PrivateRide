@@ -23,12 +23,19 @@ struct HomeView<ViewModel: HomeViewModelProtocol>: View {
             
             VStack {
                 PRAddressFormView(
-                    identification: .constant("123"),
+                    identification: $viewModel.userId,
                     currentAddress: $viewModel.currentAddress,
                     dropOffAddress: $viewModel.dropOffAddress,
-                    isSwapping: $viewModel.isSwapping
-                ) {
-                    viewModel.swapAddresses()
+                    isSwapping: $viewModel.isSwapping,
+                    isLoading: $viewModel.isLoading,
+                    isButtonEnabled: $viewModel.isButtonEnabled
+                ) { action in
+                    switch action {
+                    case .swapAddresses:
+                        viewModel.swapAddresses()
+                    case .searchRide:
+                        viewModel.swapAddresses()
+                    }
                 }
                 
                 Spacer()

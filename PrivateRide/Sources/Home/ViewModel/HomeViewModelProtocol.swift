@@ -10,9 +10,12 @@ import MapKit
 
 protocol HomeViewModelProtocol: BaseViewModelProtocol {
     var region: MKCoordinateRegion { get }
+    var userId: String { get set }
     var currentAddress: String { get set }
     var dropOffAddress: String { get set }
     var isSwapping: Bool { get set }
+    var isButtonEnabled: Bool { get set }
     
     func swapAddresses()
+    func searchRide()
 }

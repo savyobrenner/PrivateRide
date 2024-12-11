@@ -8,6 +8,11 @@
 import SwiftUI
 
 struct PRAddressFormView: View {
+    enum Action {
+        case swapAddresses
+        case searchRide
+    }
+    
     @Binding
     var identification: String
     
@@ -20,13 +25,19 @@ struct PRAddressFormView: View {
     @Binding
     var isSwapping: Bool
 
+    @Binding
+    var isLoading: Bool
+
+    @Binding
+    var isButtonEnabled: Bool
+
     @State
     private var isIdentificationExpanded = true
     
     @State
     private var isWhereToExpanded = true
 
-    let action: (() -> Void)
+    let action: ((Action) -> Void)
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -72,7 +83,7 @@ struct PRAddressFormView: View {
                     }
                     
                     Button {
-                        action()
+                        action(.swapAddresses)
                     } label: {
                         Image(.changeAddressIcon)
                             .resizable()
@@ -80,6 +91,11 @@ struct PRAddressFormView: View {
                     }
                 }
             }
+            
+            PRButton(title: "Search", style: .defaultStyle, isLoading: isLoading, isEnabled: isButtonEnabled) {
+                action(.searchRide)
+            }
+            .padding(.top, 8)
         }
         .padding(16)
         .background(
@@ -95,7 +111,9 @@ struct PRAddressFormView: View {
         identification: .constant("123dd"),
         currentAddress: .constant("Rua Palmira Ramos Teles 1600"),
         dropOffAddress: .constant("Shopping Jardins"),
-        isSwapping: .constant(false)
-    ) {}
+        isSwapping: .constant(false),
+        isLoading: .constant(true),
+        isButtonEnabled: .constant(true)
+    ) {_ in }
     .padding()
 }
