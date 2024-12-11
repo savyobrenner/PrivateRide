@@ -8,7 +8,6 @@
 protocol NetworkProtocol {
     func sendRequest<Response: Decodable>(
         endpoint: Endpoint,
-        responseModel: Response.Type,
-        completion: @escaping (Result<Response, AppError>) -> Void
-    )
+        responseModel: Response.Type
+    ) async throws -> Response
 }

@@ -15,63 +15,61 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
         case dropOff
     }
 
-    @Published
-    var region: MKCoordinateRegion = MKCoordinateRegion(
+    // MARK: - Published Properties
+    @Published var region: MKCoordinateRegion = MKCoordinateRegion(
         center: CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194),
         span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
     )
-
-    @Published
-    var userId: String = "" {
+    
+    @Published var userId: String = "" {
         didSet { validateForm() }
     }
-
-    @Published
-    var currentAddress: String = "" {
+    
+    @Published var currentAddress: String = "" {
         didSet {
             checkAndTriggerAutocomplete(for: currentAddress, field: .pickUp)
         }
     }
-
-    @Published
-    var dropOffAddress: String = "" {
+    
+    @Published var dropOffAddress: String = "" {
         didSet {
             checkAndTriggerAutocomplete(for: dropOffAddress, field: .dropOff)
         }
     }
-
+    
     @Published
     var isSwapping = false
-
+    
     @Published
     var isButtonEnabled = false
-
+    
     @Published
     var autocompleteResults: [String] = []
-
+    
     @Published
     var selectedField: Field = .pickUp
 
+    // MARK: - Private Properties
     private var debounceTimer: Timer?
     private let debounceDelay: TimeInterval = 0.5
     private var isAutoCompleteSelected = false
     private var lastAutocompleteQuery: String?
-
+    
     private var userLocation: CLLocationCoordinate2D? {
         didSet {
             guard let location = userLocation else { return }
             updateRegion(to: location)
         }
     }
-
     private let locationManager = CLLocationManager()
 
+    // MARK: - Initializer
     override init(coordinator: HomeCoordinator?) {
         super.init(coordinator: coordinator)
-        
         configureLocationManager()
     }
 
+    // MARK: - Public Methods
     func swapAddresses() {
         guard !currentAddress.isEmpty && !dropOffAddress.isEmpty else { return }
 
@@ -93,7 +91,7 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
     func searchRide() {
         guard isButtonEnabled else { return }
         print("Searching for ride...")
-        // TODO: Implementar lógica de busca de ride
+        // TODO: Implement ride search logic
     }
 
     func locateUser() {
@@ -150,8 +148,11 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
             self.validateForm()
         }
     }
+}
 
-    private func checkAndTriggerAutocomplete(for query: String, field: Field) {
+// MARK: - Private Extension
+private extension HomeViewModel {
+    func checkAndTriggerAutocomplete(for query: String, field: Field) {
         guard !isAutoCompleteSelected, !query.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
 
         if query == lastAutocompleteQuery {
@@ -162,7 +163,7 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
         triggerAutocomplete(for: query, field: field)
     }
 
-    private func triggerAutocomplete(for query: String, field: Field) {
+    func triggerAutocomplete(for query: String, field: Field) {
         debounceTimer?.invalidate()
         selectedField = field
 
@@ -176,7 +177,7 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
         }
     }
 
-    private func performAutocomplete(for query: String, field: Field) {
+    func performAutocomplete(for query: String, field: Field) {
         let request = MKLocalSearch.Request()
         request.naturalLanguageQuery = query
         request.resultTypes = .address
@@ -193,7 +194,7 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
         }
     }
 
-    private func validateForm() {
+    func validateForm() {
         isButtonEnabled = !userId.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
         !currentAddress.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
         !dropOffAddress.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
@@ -203,14 +204,14 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
         }
     }
 
-    private func configureLocationManager() {
+    func configureLocationManager() {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
     }
 
-    private func updateRegion(to location: CLLocationCoordinate2D) {
+    func updateRegion(to location: CLLocationCoordinate2D) {
         withAnimation {
             self.region = MKCoordinateRegion(
                 center: location,
@@ -220,6 +221,7 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
     }
 }
 
+// MARK: - CLLocationManagerDelegate
 extension HomeViewModel: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }

@@ -8,10 +8,19 @@
 import Foundation
 
 final class HomeServices: HomeServicesProtocol {
+    
+    private let network: NetworkProtocol
 
-    private let network: NetworkClient
-
-    init(network: NetworkClient) {
+    init(network: NetworkProtocol) {
         self.network = network
+    }
+    
+    func estimateRide(id: String, origin: String, destination: String) async throws -> String {
+        let response = try await network.sendRequest(
+            endpoint: HomeEndpoint.estimateRide(userId: id, origin: origin, destination: destination),
+            responseModel: String.self
+        )
+
+        return response
     }
 }
