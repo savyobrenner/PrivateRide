@@ -75,6 +75,7 @@
 		F8AD8F932D0A0F46001CAADE /* PRFloatingAlertViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AD8F922D0A0F46001CAADE /* PRFloatingAlertViewModifier.swift */; };
 		F8AD8F962D0A1713001CAADE /* RouteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AD8F952D0A1713001CAADE /* RouteResponse.swift */; };
 		F8AD8FF32D0A3646001CAADE /* PRBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AD8FF22D0A3644001CAADE /* PRBottomSheet.swift */; };
+		F8AD8FF52D0A417F001CAADE /* PRRideOptionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AD8FF42D0A417F001CAADE /* PRRideOptionCard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -146,6 +147,7 @@
 		F8AD8F922D0A0F46001CAADE /* PRFloatingAlertViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRFloatingAlertViewModifier.swift; sourceTree = "<group>"; };
 		F8AD8F952D0A1713001CAADE /* RouteResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteResponse.swift; sourceTree = "<group>"; };
 		F8AD8FF22D0A3644001CAADE /* PRBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRBottomSheet.swift; sourceTree = "<group>"; };
+		F8AD8FF42D0A417F001CAADE /* PRRideOptionCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRRideOptionCard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -479,6 +481,7 @@
 				F84DC60A2D090A520069E1BA /* PRButton.swift */,
 				F84DC6082D0904DC0069E1BA /* PRFormSectionHeader.swift */,
 				F8AD8F852D0A062D001CAADE /* PRMapView.swift */,
+				F8AD8FF42D0A417F001CAADE /* PRRideOptionCard.swift */,
 				F84DC4A12D08EBBE0069E1BA /* PRTextField.swift */,
 			);
 			path = Atoms;
@@ -677,6 +680,7 @@
 				F807616C2D0669EC0011D3A6 /* AppDelegate.swift in Sources */,
 				F807616D2D0669EC0011D3A6 /* SceneDelegate.swift in Sources */,
 				F807616E2D0669EC0011D3A6 /* AppColors.swift in Sources */,
+				F8AD8FF52D0A417F001CAADE /* PRRideOptionCard.swift in Sources */,
 				F807616F2D0669EC0011D3A6 /* AppFont.swift in Sources */,
 				F8AD8F882D0A0ACF001CAADE /* MkCoordinatorRegion+Extensions.swift in Sources */,
 				F80761702D0669EC0011D3A6 /* BrandFontName.swift in Sources */,

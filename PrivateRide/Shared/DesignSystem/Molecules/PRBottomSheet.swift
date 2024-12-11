@@ -58,7 +58,6 @@ extension PRBottomSheet.Model {
         let rating: Double?
         let comment: String?
         let value: Double
-        
     }
 }
 
@@ -105,73 +104,36 @@ struct PRBottomSheet: View {
             }
             .padding(.horizontal, 16)
             
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 16) {
-                    ForEach(1...5, id: \.self) { index in
-                        RideOptionCard(
-                            name: "Option \(index)",
-                            price: Double(index * 5),
-                            distance: "5km",
-                            rating: Double(index % 5)
+            if model.drivers.isEmpty {
+                
+            } else {
+                Text("Please choose between one of our \(model.drivers.count) drivers")
+                    .font(.brand(.regular, size: 12))
+                    .foregroundStyle(Color.Brand.black)
+                    .padding(.horizontal, 16)
+                
+                TabView {
+                    ForEach(model.drivers, id: \.id) { driver in
+                        PRRideOptionCard(
+                            name: driver.name,
+                            price: driver.value,
+                            description: driver.description,
+                            vehicle: driver.vehicle,
+                            rating: driver.rating,
+                            comment: driver.comment
                         )
                     }
                 }
-                .padding(.horizontal)
+                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
+                .frame(height: 180)
             }
-            .frame(height: 150)
-            
-            Spacer()
         }
         .frame(maxWidth: .infinity)
-        .frame(maxHeight: 400)
+        .frame(maxHeight: 430)
         .background(
             RoundedRectangle(cornerRadius: 16)
                 .fill(Color.Brand.white)
                 .shadow(radius: 8)
-        )
-    }
-}
-
-struct RideOptionCard: View {
-    let name: String
-    let price: Double
-    let distance: String
-    let rating: Double
-    
-    var body: some View {
-        VStack(spacing: 8) {
-            Rectangle()
-                .fill(Color.gray.opacity(0.3))
-                .frame(width: 100, height: 60)
-                .cornerRadius(8)
-            
-            Text(name)
-                .font(.subheadline)
-                .bold()
-            
-            HStack(spacing: 4) {
-                Text("$\(String(format: "%.2f", price))")
-                    .font(.headline)
-                    .foregroundColor(.green)
-                Text("/\(distance)")
-                    .font(.subheadline)
-                    .foregroundColor(.gray)
-            }
-            
-            HStack(spacing: 2) {
-                ForEach(0..<5) { star in
-                    Image(systemName: star < Int(rating) ? "star.fill" : "star")
-                        .resizable()
-                        .frame(width: 10, height: 10)
-                        .foregroundColor(.yellow)
-                }
-            }
-        }
-        .padding()
-        .frame(width: 120, height: 150)
-        .background(
-            RoundedRectangle(cornerRadius: 12)
-                .stroke(Color.green, lineWidth: 2)
         )
     }
 }
@@ -190,7 +152,35 @@ struct RideOptionCard: View {
                 title: "Marginal Pinheiros",
                 description: "3,5 KM | 20 minutos",
                 warning: "Este trajeto inclui estradas restritas mediante a matrícula.",
-                drivers: []
+                drivers: [
+                    .init(
+                        id: 1,
+                        name: "Homer Simpson",
+                        description: "Olá! Sou o Homer, seu motorista camarada! Relaxe e aproveite o passeio, com direito a rosquinhas e boas risadas (e talvez alguns desvios).",
+                        vehicle: "Plymouth Valiant 1973 rosa e enferrujado",
+                        rating: 2,
+                        comment: "Motorista simpático, mas errou o caminho 3 vezes. O carro cheira a donuts.",
+                        value: 50.5
+                    ),
+                    .init(
+                        id: 1,
+                        name: "Homer Simpson",
+                        description: "Olá! Sou o Homer, seu motorista camarada! Relaxe e aproveite o passeio, com direito a rosquinhas e boas risadas (e talvez alguns desvios).",
+                        vehicle: "Plymouth Valiant 1973 rosa e enferrujado",
+                        rating: 2,
+                        comment: "Motorista simpático, mas errou o caminho 3 vezes. O carro cheira a donuts.",
+                        value: 50.5
+                    ),
+                    .init(
+                        id: 1,
+                        name: "Homer Simpson",
+                        description: "Olá! Sou o Homer, seu motorista camarada! Relaxe e aproveite o passeio, com direito a rosquinhas e boas risadas (e talvez alguns desvios).",
+                        vehicle: "Plymouth Valiant 1973 rosa e enferrujado",
+                        rating: 2,
+                        comment: "Motorista simpático, mas errou o caminho 3 vezes. O carro cheira a donuts.",
+                        value: 50.5
+                    )
+                ]
             )
         ) {
             
