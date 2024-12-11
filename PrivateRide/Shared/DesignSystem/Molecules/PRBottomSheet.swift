@@ -20,7 +20,7 @@ extension PRBottomSheet {
                 return .init(title: "", description: "", warning: "", drivers: [])
             }
             
-            let description = "\(route.localizedValues.distance) | \(route.localizedValues.duration)"
+            let description = "\(route.localizedValues.distance.text) | \(route.localizedValues.duration.text)"
             
             var warnings: String?
             if !route.warnings.isEmpty {

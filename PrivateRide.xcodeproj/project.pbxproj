@@ -589,8 +589,8 @@
 		F8AD8F942D0A1710001CAADE /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				F8AD8FF82D0A4FDE001CAADE /* ConfirmRideResponse.swift */,
 				F8AD8FF62D0A4B01001CAADE /* ConfirmeRideRequest.swift */,
+				F8AD8FF82D0A4FDE001CAADE /* ConfirmRideResponse.swift */,
 				F8AD8F952D0A1713001CAADE /* RouteResponse.swift */,
 			);
 			path = Model;
