@@ -489,6 +489,8 @@ extension HomeViewModel: CLLocationManagerDelegate {
         print("Failed to get user location: \(error.localizedDescription)")
     }
 }
+
+// TODO: - Remove
 //{
 //  "origin": "Av. Pres. Kenedy, 2385 - Remédios, Osasco - SP, 02675-031",
 //  "destination": "Av. Paulista, 1538 - Bela Vista, São Paulo - SP, 01310-200",
