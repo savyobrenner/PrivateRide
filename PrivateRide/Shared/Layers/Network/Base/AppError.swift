@@ -13,6 +13,16 @@ enum AppError: Error, Equatable {
     case invalidRequest(String)
     case statusCode(Int)
     case urlError(URLError)
+    case backendError(PRError)
     case unknown
 }
 
+struct PRError: Codable, Equatable {
+    let code: String
+    let errorLocalized: String
+    
+    private enum CodingKeys: String, CodingKey {
+        case code = "error_code"
+        case errorLocalized = "error_description"
+    }
+}

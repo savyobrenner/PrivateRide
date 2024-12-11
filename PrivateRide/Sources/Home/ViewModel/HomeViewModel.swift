@@ -102,6 +102,8 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
     }
     
     func searchRide() {
+        autocompleteResults = []
+        
         guard isButtonEnabled, !isLoading else { return }
         
         guard !userId.trimmed.isEmpty, !currentAddress.trimmed.isEmpty, !dropOffAddress.trimmed.isEmpty else {
@@ -123,7 +125,7 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
                 
                 print(response)
             } catch {
-                self.coordinator?.handleError(error)
+                self.handleNetworkError(error)
             }
         }
     }
@@ -214,7 +216,7 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
         
         lastAutocompleteQuery = result
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             self.isAutoCompleteSelected = false
             self.validateForm()
         }
@@ -224,6 +226,8 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
 // MARK: - Private Extension
 private extension HomeViewModel {
     func checkAndTriggerAutocomplete(for query: String, field: Field) {
+        validateForm()
+        
         guard !isAutoCompleteSelected, !query.trimmed.isEmpty else { return }
         
         if query == lastAutocompleteQuery {

@@ -109,6 +109,7 @@ struct HomeView<ViewModel: HomeViewModelProtocol>: View {
             }
         }
         .onAppear { }
+        .showPRAlert(alert: $viewModel.currentAlert)
     }
 }
 

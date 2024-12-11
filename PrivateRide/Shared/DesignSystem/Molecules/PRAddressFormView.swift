@@ -93,6 +93,11 @@ struct PRAddressFormView: View {
             }
             
             PRButton(title: "Search", style: .defaultStyle, isLoading: isLoading, isEnabled: isButtonEnabled) {
+                withAnimation {
+                    isIdentificationExpanded = false
+                    isWhereToExpanded = false
+                }
+                
                 action(.searchRide)
             }
             .padding(.top, 8)

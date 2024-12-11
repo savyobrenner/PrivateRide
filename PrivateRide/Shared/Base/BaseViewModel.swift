@@ -39,7 +39,16 @@ class BaseViewModel<CoordinatorType: BaseCoordinator>: NSObject, BaseViewModelPr
     }
     
     func handleNetworkError(_ error: Error) {
-        
+        if let appError = error as? AppError {
+            switch appError {
+            case .backendError(let backendError):
+                showAlert(message: backendError.errorLocalized)
+            default:
+                showAlert(message: appError.localizedDescription)
+            }
+        } else {
+            showAlert(message: "Something went wrong. Please try again later.")
+        }
     }
     
     func showAlert(

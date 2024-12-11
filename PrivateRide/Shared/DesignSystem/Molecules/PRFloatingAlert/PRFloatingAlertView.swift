@@ -13,11 +13,11 @@ struct PRFloatingAlertView: View {
     var body: some View {
         HStack {
             alert.type.icon
-                .foregroundStyle(Color.Brand.gray)
+                .foregroundStyle(Color.Brand.white)
             
             Text(alert.title)
                 .font(.brand(.semibold, size: 14))
-                .foregroundStyle(Color.Brand.gray)
+                .foregroundStyle(Color.Brand.white)
             
             Spacer()
         }

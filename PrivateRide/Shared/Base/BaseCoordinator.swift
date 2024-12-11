@@ -38,8 +38,4 @@ extension BaseCoordinator {
         
         tasks.append(task)
     }
-    
-    func handleError(_ error: Error) {
-
-    }
 }

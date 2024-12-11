@@ -73,6 +73,7 @@
 		F8AD8F8E2D0A0E96001CAADE /* PRFloatingAlertModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AD8F892D0A0E96001CAADE /* PRFloatingAlertModel.swift */; };
 		F8AD8F8F2D0A0E96001CAADE /* PRFloatingAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AD8F8B2D0A0E96001CAADE /* PRFloatingAlertView.swift */; };
 		F8AD8F932D0A0F46001CAADE /* PRFloatingAlertViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AD8F922D0A0F46001CAADE /* PRFloatingAlertViewModifier.swift */; };
+		F8AD8F962D0A1713001CAADE /* RouteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AD8F952D0A1713001CAADE /* RouteResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -142,6 +143,7 @@
 		F8AD8F8A2D0A0E96001CAADE /* PRFloatingAlertType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRFloatingAlertType.swift; sourceTree = "<group>"; };
 		F8AD8F8B2D0A0E96001CAADE /* PRFloatingAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRFloatingAlertView.swift; sourceTree = "<group>"; };
 		F8AD8F922D0A0F46001CAADE /* PRFloatingAlertViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRFloatingAlertViewModifier.swift; sourceTree = "<group>"; };
+		F8AD8F952D0A1713001CAADE /* RouteResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -514,6 +516,7 @@
 			isa = PBXGroup;
 			children = (
 				F89DD1162D067EA500EC2319 /* Coordinator */,
+				F8AD8F942D0A1710001CAADE /* Model */,
 				F89DD1192D067EB700EC2319 /* Services */,
 				F89DD1172D067EA900EC2319 /* View */,
 				F89DD1182D067EB200EC2319 /* ViewModel */,
@@ -571,6 +574,14 @@
 				F8AD8F8B2D0A0E96001CAADE /* PRFloatingAlertView.swift */,
 			);
 			path = PRFloatingAlert;
+			sourceTree = "<group>";
+		};
+		F8AD8F942D0A1710001CAADE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F8AD8F952D0A1713001CAADE /* RouteResponse.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -679,6 +690,7 @@
 				F8AD8E332D09E4D7001CAADE /* HomeEndpoint.swift in Sources */,
 				F807617A2D0669EC0011D3A6 /* AppEnvironment.swift in Sources */,
 				F807617B2D0669EC0011D3A6 /* UserSettings.swift in Sources */,
+				F8AD8F962D0A1713001CAADE /* RouteResponse.swift in Sources */,
 				F807617C2D0669EC0011D3A6 /* UserDefaultsStorage.swift in Sources */,
 				F807617D2D0669EC0011D3A6 /* CacheManager.swift in Sources */,
 				F807617E2D0669EC0011D3A6 /* CacheManagerProtocol.swift in Sources */,

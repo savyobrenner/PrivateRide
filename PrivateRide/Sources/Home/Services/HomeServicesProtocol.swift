@@ -8,5 +8,5 @@
 import Foundation
 
 protocol HomeServicesProtocol {
-    func estimateRide(id: String, origin: String, destination: String) async throws -> String
+    func estimateRide(id: String, origin: String, destination: String) async throws -> RouteResponse
 }

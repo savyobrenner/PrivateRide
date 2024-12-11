@@ -15,10 +15,10 @@ final class HomeServices: HomeServicesProtocol {
         self.network = network
     }
     
-    func estimateRide(id: String, origin: String, destination: String) async throws -> String {
+    func estimateRide(id: String, origin: String, destination: String) async throws -> RouteResponse {
         let response = try await network.sendRequest(
             endpoint: HomeEndpoint.estimateRide(userId: id, origin: origin, destination: destination),
-            responseModel: String.self
+            responseModel: RouteResponse.self
         )
 
         return response

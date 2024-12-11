@@ -28,9 +28,13 @@ final class NetworkClient: NetworkProtocol {
             }
             
             guard (200...299).contains(httpResponse.statusCode) else {
+                if let backendError = try? JSONDecoder().decode(PRError.self, from: data) {
+                    throw AppError.backendError(backendError)
+                }
+                
                 throw AppError.statusCode(httpResponse.statusCode)
             }
-            
+                        
             do {
                 let decodedResponse = try JSONDecoder().decode(responseModel, from: data)
                 return decodedResponse
