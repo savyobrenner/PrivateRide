@@ -144,20 +144,26 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
                 let origin = response.origin
                 let destination = response.destination
                 
-                self.currentAddressCoordinate = CLLocationCoordinate2D(
-                    latitude: origin.latitude, longitude: origin.longitude
-                )
-                
-                self.dropOffAddressCoordinate = CLLocationCoordinate2D(
-                    latitude: destination.latitude, longitude: destination.longitude
-                )
+                if !origin.latitude.isZero,
+                   !origin.longitude.isZero,
+                   !destination.latitude.isZero,
+                   !destination.longitude.isZero {
+                    self.currentAddressCoordinate = CLLocationCoordinate2D(
+                        latitude: origin.latitude, longitude: origin.longitude
+                    )
+                    
+                    self.dropOffAddressCoordinate = CLLocationCoordinate2D(
+                        latitude: destination.latitude, longitude: destination.longitude
+                    )
+                    
+                    self.updatePins()
+                    self.updateRegionForSelectedAddresses()
+                }
                 
                 if let encodedPolyline = response.routeResponse?.routes.first?.polyline.encodedPolyline {
                     self.decodeAndSetPolyline(encodedPolyline)
                 }
-                
-                self.updateRegionForSelectedAddresses()
-                
+                                
                 self.isAddressEditable = false
                 self.isBottomSheetVisible = true
             } catch {
@@ -219,7 +225,7 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
         let directions = MKDirections(request: request)
         directions.calculate { [weak self] response, error in
             guard let self else { return }
-            if let error {
+            if error != nil {
                 return
             }
             
