@@ -1,0 +1,205 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "“%@”": {},
+    "Filter by Driver": {
+      "localizations": {
+        "pt-br": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Filtrar por Motorista"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Filtrar por Conductor"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Filtrer par Conducteur"
+          }
+        }
+      }
+    },
+    "No drivers available in your area.": {
+      "localizations": {
+        "pt-br": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nenhum motorista disponível na sua área."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No hay conductores disponibles en tu área."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucun conducteur disponible dans votre région."
+          }
+        }
+      }
+    },
+    "No trips matchs the criteria :(": {
+      "localizations": {
+        "pt-br": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nenhuma viagem corresponde aos critérios :("
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ningún viaje coincide con los criterios :("
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucun trajet ne correspond aux critères :("
+          }
+        }
+      }
+    },
+    "Please adjust the criteria and try again!": {
+      "localizations": {
+        "pt-br": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajuste os critérios e tente novamente!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajusta los criterios e inténtalo de nuevo!"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajustez les critères et réessayez!"
+          }
+        }
+      }
+    },
+    "Please adjust your pickup or drop-off location to find available rides.": {
+      "localizations": {
+        "pt-br": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajuste seu local de partida ou destino para encontrar viagens disponíveis."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajusta tu ubicación de recogida o destino para encontrar viajes disponibles."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Veuillez ajuster votre lieu de départ ou d'arrivée pour trouver des trajets disponibles."
+          }
+        }
+      }
+    },
+    "Please choose between one of our %lld drivers": {
+      "localizations": {
+        "pt-br": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escolha entre um dos nossos %lld motoristas"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elige entre uno de nuestros %lld conductores"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Veuillez choisir parmi l'un de nos %lld conducteurs"
+          }
+        }
+      }
+    },
+    "R$%@": {
+      "localizations": {
+        "pt-br": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "R$%@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "R$%@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "R$%@"
+          }
+        }
+      }
+    },
+    "Suggestions": {
+      "localizations": {
+        "pt-br": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sugestões"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sugerencias"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suggestions"
+          }
+        }
+      }
+    },
+    "Trips History": {
+      "localizations": {
+        "pt-br": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Histórico de Viagens"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Historial de Viajes"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Historique des Trajets"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}
