@@ -8,6 +8,20 @@
 import SwiftUI
 
 class TripHistoryViewModel: BaseViewModel<TripHistoryCoordinator>, TripHistoryViewModelProtocol {
+    @Published
+    var userId: String = ""
+    
+    @Published
+    var selectedDriverID: Int?
+    
+    @Published
+    var drivers: [ConfirmRideRequest.Driver] = []
+    
+    @Published
+    var trips: [String] = []
+    
+    @Published
+    var isButtonEnabled = true
 
     private let services: TripHistoryServicesProtocol
     
@@ -15,5 +29,9 @@ class TripHistoryViewModel: BaseViewModel<TripHistoryCoordinator>, TripHistoryVi
         self.services = services
         
         super.init(coordinator: coordinator)
+    }
+    
+    func searchTrips() {
+        
     }
 }

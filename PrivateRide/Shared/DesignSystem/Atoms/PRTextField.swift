@@ -14,22 +14,26 @@ struct PRTextField: View {
     @Binding
     var text: String
     
+    var iconSize: CGFloat = 24
+    var placeHolderSize: CGFloat = 12
+    var textFieldSize: CGFloat = 14
+    
     var body: some View {
         HStack(spacing: 14) {
             Image(icon)
                 .resizable()
-                .frame(width: 24, height: 24)
+                .frame(width: iconSize, height: iconSize)
             
             VStack(alignment: .leading, spacing: 4) {
                 if !text.isEmpty {
                     Text(placeholder)
-                        .font(.brand(.regular, size: 12))
+                        .font(.brand(.regular, size: placeHolderSize))
                         .foregroundStyle(Color.Brand.gray)
                         .transition(.move(edge: .top).combined(with: .opacity))
                 }
                 
                 TextField(placeholder, text: $text)
-                    .font(.brand(.semibold, size: 14))
+                    .font(.brand(.semibold, size: textFieldSize))
                     .foregroundStyle(Color.Brand.black)
             }
             .animation(.easeInOut(duration: 0.2), value: text)
