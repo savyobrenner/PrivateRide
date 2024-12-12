@@ -20,12 +20,13 @@ class HomeCoordinator: BaseCoordinator {
     }
     
     enum Navigation {
-        case home
+        case tripsHistory
     }
     
     func navigate(to path: Navigation) {
         switch path {
-        case .home: break
+        case .tripsHistory:
+            present(TripHistoryCoordinator.init(navigationController: .init()), animated: true)
         }
     }
 }

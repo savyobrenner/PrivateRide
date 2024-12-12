@@ -32,4 +32,5 @@ protocol HomeViewModelProtocol: BaseViewModelProtocol {
     func selectAutocompleteResult(_ result: String, and field: HomeViewModel.Field)
     func cancelTrip()
     func confirmTrip(with id: Int)
+    func navigateToTripsHistory()
 }

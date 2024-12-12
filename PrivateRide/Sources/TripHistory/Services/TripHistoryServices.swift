@@ -9,9 +9,18 @@ import Foundation
 
 final class TripHistoryServices: TripHistoryServicesProtocol {
 
-    private let network: NetworkClient
+    private let network: NetworkProtocol
 
-    init(network: NetworkClient) {
+    init(network: NetworkProtocol) {
         self.network = network
+    }
+    
+    func getTripsHistory(id: String, driverId: String) async throws -> RouteResponse {
+        let response = try await network.sendRequest(
+            endpoint: TripsHistoryEndpoint.tripsHistory(userId: id, driverId: driverId),
+            responseModel: RouteResponse.self
+        )
+
+        return response
     }
 }

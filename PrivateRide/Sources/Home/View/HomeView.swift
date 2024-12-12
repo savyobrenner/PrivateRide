@@ -11,7 +11,7 @@ import SwiftUI
 struct HomeView<ViewModel: HomeViewModelProtocol>: View {
     @ObservedObject
     private var viewModel: ViewModel
-
+    
     init(viewModel: ViewModel) {
         _viewModel = ObservedObject(wrappedValue: viewModel)
     }
@@ -83,10 +83,28 @@ struct HomeView<ViewModel: HomeViewModelProtocol>: View {
                 Spacer()
             }
             .padding(.horizontal, 20)
-
+            
             if viewModel.isAddressEditable {
-                VStack {
+                VStack(alignment: .trailing, spacing: 10) {
                     Spacer()
+                    
+                    HStack {
+                        Spacer()
+                        
+                        Button {
+                            viewModel.navigateToTripsHistory()
+                        } label: {
+                            Image(systemName: "car.2.fill")
+                                .foregroundStyle(Color.Brand.primary)
+                                .frame(width: 24, height: 24)
+                                .padding()
+                                .background {
+                                    Circle()
+                                        .fill(Color.Brand.white)
+                                        .shadow(radius: 3)
+                                }
+                        }
+                    }
                     
                     HStack {
                         Spacer()
@@ -105,9 +123,9 @@ struct HomeView<ViewModel: HomeViewModelProtocol>: View {
                                         .shadow(radius: 3)
                                 }
                         }
-                        .padding()
                     }
                 }
+                .padding([.bottom, .horizontal])
             }
             
             if viewModel.isBottomSheetVisible, let routesObject = viewModel.routesObject {
@@ -139,8 +157,8 @@ struct HomeView<ViewModel: HomeViewModelProtocol>: View {
 import Factory
 
 #Preview {
-HomeView(viewModel: HomeViewModel(
-    coordinator: HomeCoordinator(navigationController: .init()), services: Container.shared.homeServices()
+    HomeView(viewModel: HomeViewModel(
+        coordinator: HomeCoordinator(navigationController: .init()), services: Container.shared.homeServices()
     ))
 }
 #endif

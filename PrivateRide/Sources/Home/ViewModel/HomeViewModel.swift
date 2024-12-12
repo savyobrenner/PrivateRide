@@ -290,12 +290,19 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
             defer { self.isLoading = false }
             
             do {
-                let response = try await self.services.confirmRide(model: model)
+                let _ = try await self.services.confirmRide(model: model)
                 
+                self.isBottomSheetVisible = false
+                self.isAddressEditable = true
+                self.coordinator?.navigate(to: .tripsHistory)
             } catch {
                 self.handleNetworkError(error, alertPosition: .top)
             }
         }
+    }
+    
+    func navigateToTripsHistory() {
+        coordinator?.navigate(to: .tripsHistory)
     }
 }
 

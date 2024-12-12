@@ -9,7 +9,11 @@ import SwiftUI
 
 class TripHistoryViewModel: BaseViewModel<TripHistoryCoordinator>, TripHistoryViewModelProtocol {
 
-    override init(coordinator: TripHistoryCoordinator?) {
+    private let services: TripHistoryServicesProtocol
+    
+    init(coordinator: TripHistoryCoordinator?, services: TripHistoryServicesProtocol) {
+        self.services = services
+        
         super.init(coordinator: coordinator)
     }
 }

@@ -12,20 +12,10 @@ class TripHistoryCoordinator: BaseCoordinator {
     
     override func start() {
         let viewcontroller = TripHistoryView(
-            viewModel: TripHistoryViewModel(coordinator: self)
+            viewModel: TripHistoryViewModel(coordinator: self, services: Container.shared.tripHistoryServices())
         )
             .insideHostingController()
         
-        navigationController.setViewControllers([viewcontroller], animated: false)
-    }
-    
-    enum Navigation {
-        case home
-    }
-    
-    func navigate(to path: Navigation) {
-        switch path {
-        case .home: break
-        }
+        navigationController.pushViewController(viewcontroller, animated: true)
     }
 }

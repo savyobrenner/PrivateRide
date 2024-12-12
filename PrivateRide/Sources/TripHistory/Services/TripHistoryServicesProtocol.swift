@@ -8,5 +8,5 @@
 import Foundation
 
 protocol TripHistoryServicesProtocol {
-
+    func getTripsHistory(id: String, driverId: String) async throws -> RouteResponse
 }

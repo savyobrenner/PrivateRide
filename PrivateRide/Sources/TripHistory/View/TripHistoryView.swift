@@ -17,21 +17,63 @@ struct TripHistoryView<ViewModel: TripHistoryViewModelProtocol>: View {
 
     var body: some View {
         ZStack {
-            VStack(alignment: .center) {
+            Color.Brand.lightGray.opacity(0.5)
+                .edgesIgnoringSafeArea(.all)
+            
+            VStack(spacing: 0) {
                 HStack {
-                    Spacer()
-                    
-                    Text("Trips History")
-                        .font(.brand(.black, size: 20))
-                        .foregroundStyle(Color.Brand.black)
+                    Button {
+                        viewModel.dismiss(animated: true)
+                    } label: {
+                        Image(systemName: "arrow.left.circle")
+                            .resizable()
+                            .frame(width: 30, height: 30)
+                            .foregroundStyle(Color.Brand.black)
+                    }
                     
                     Spacer()
                 }
                 .padding(.horizontal, 16)
                 
                 Spacer()
+            }
+            
+            VStack(alignment: .center, spacing: 0) {
+                HStack {
+                    Spacer()
+                    
+                    Text("Trips History")
+                        .font(.brand(.regular, size: 20))
+                        .foregroundStyle(Color.Brand.black)
+                    
+                    Spacer()
+                }
                 
+                ScrollView(.vertical, showsIndicators: false) {
+                    VStack(spacing: 16) {
+//                        ForEach(model.drivers, id: \.id) { driver in
+//                            PRRideOptionCard(
+//                                name: driver.name,
+//                                price: driver.value,
+//                                description: driver.description,
+//                                vehicle: driver.vehicle,
+//                                rating: driver.rating,
+//                                comment: driver.comment,
+//                                isSelected: selectedDriverID == driver.id
+//                            )
+//                            .onTapGesture {
+//                                if selectedDriverID == driver.id {
+//                                    selectedDriverID = nil
+//                                } else {
+//                                    selectedDriverID = driver.id
+//                                }
+//                            }
+//                        }
+                    }
+                    .padding(.horizontal, 16)
+                }
                 
+                Spacer()
             }
         }
         .onAppear { }
@@ -43,7 +85,7 @@ import Factory
 
 #Preview {
 TripHistoryView(viewModel: TripHistoryViewModel(
-        coordinator: TripHistoryCoordinator(navigationController: .init())
+    coordinator: TripHistoryCoordinator(navigationController: .init()), services: Container.shared.tripHistoryServices()
     ))
 }
 #endif

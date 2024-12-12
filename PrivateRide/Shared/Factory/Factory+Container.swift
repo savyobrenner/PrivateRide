@@ -33,5 +33,9 @@ extension Container {
     var homeServices: Factory<HomeServicesProtocol> {
         self { HomeServices(network: self.networkService.resolve()) }
     }
+    
+    var tripHistoryServices: Factory<TripHistoryServicesProtocol> {
+        self { TripHistoryServices(network: self.networkService.resolve()) }
+    }
 }
 
