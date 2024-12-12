@@ -50,8 +50,13 @@
 		F810B87B2D0AEF9A008DA402 /* PRAnalyticsEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = F810B87A2D0AEF97008DA402 /* PRAnalyticsEvents.swift */; };
 		F810B87D2D0AEFB3008DA402 /* SimulatedAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = F810B87C2D0AEFAB008DA402 /* SimulatedAnalytics.swift */; };
 		F810B8812D0AF473008DA402 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = F810B8802D0AF473008DA402 /* Localizable.xcstrings */; };
-		F810B8912D0AFCB7008DA402 /* PrivateRideTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F810B88F2D0AFCB7008DA402 /* PrivateRideTests.swift */; };
 		F810B92C2D0AFDBB008DA402 /* MockNetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F810B92B2D0AFDBB008DA402 /* MockNetworkClient.swift */; };
+		F810B92E2D0B1E73008DA402 /* HomeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F810B92D2D0B1E73008DA402 /* HomeViewModelTests.swift */; };
+		F810B9322D0B1E8A008DA402 /* TripHistoryViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F810B9312D0B1E8A008DA402 /* TripHistoryViewModelTests.swift */; };
+		F810B9342D0B1E90008DA402 /* MockTripHistoryServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = F810B9332D0B1E90008DA402 /* MockTripHistoryServices.swift */; };
+		F810B9362D0B1FC4008DA402 /* MockHomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F810B9352D0B1FC4008DA402 /* MockHomeCoordinator.swift */; };
+		F810B9382D0B205B008DA402 /* MockHomeServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = F810B9372D0B205B008DA402 /* MockHomeServices.swift */; };
+		F810B93A2D0B2144008DA402 /* MockTripHistoryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F810B9392D0B2144008DA402 /* MockTripHistoryCoordinator.swift */; };
 		F84DC4A22D08EBC20069E1BA /* PRTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84DC4A12D08EBBE0069E1BA /* PRTextField.swift */; };
 		F84DC4AC2D08EC6B0069E1BA /* Inter-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F84DC4A42D08EC6B0069E1BA /* Inter-Bold.ttf */; };
 		F84DC4AE2D08EC6B0069E1BA /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F84DC4A92D08EC6B0069E1BA /* Inter-Regular.ttf */; };
@@ -141,8 +146,13 @@
 		F810B87C2D0AEFAB008DA402 /* SimulatedAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulatedAnalytics.swift; sourceTree = "<group>"; };
 		F810B8802D0AF473008DA402 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		F810B8862D0AFCB0008DA402 /* PrivateRideTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PrivateRideTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F810B88F2D0AFCB7008DA402 /* PrivateRideTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateRideTests.swift; sourceTree = "<group>"; };
 		F810B92B2D0AFDBB008DA402 /* MockNetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkClient.swift; sourceTree = "<group>"; };
+		F810B92D2D0B1E73008DA402 /* HomeViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModelTests.swift; sourceTree = "<group>"; };
+		F810B9312D0B1E8A008DA402 /* TripHistoryViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripHistoryViewModelTests.swift; sourceTree = "<group>"; };
+		F810B9332D0B1E90008DA402 /* MockTripHistoryServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTripHistoryServices.swift; sourceTree = "<group>"; };
+		F810B9352D0B1FC4008DA402 /* MockHomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockHomeCoordinator.swift; sourceTree = "<group>"; };
+		F810B9372D0B205B008DA402 /* MockHomeServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockHomeServices.swift; sourceTree = "<group>"; };
+		F810B9392D0B2144008DA402 /* MockTripHistoryCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTripHistoryCoordinator.swift; sourceTree = "<group>"; };
 		F84DC4A12D08EBBE0069E1BA /* PRTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRTextField.swift; sourceTree = "<group>"; };
 		F84DC4A32D08EC6B0069E1BA /* Inter-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Black.ttf"; sourceTree = "<group>"; };
 		F84DC4A42D08EC6B0069E1BA /* Inter-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Bold.ttf"; sourceTree = "<group>"; };
@@ -528,7 +538,6 @@
 		F810B8902D0AFCB7008DA402 /* PrivateRideTests */ = {
 			isa = PBXGroup;
 			children = (
-				F810B88F2D0AFCB7008DA402 /* PrivateRideTests.swift */,
 				F810B9292D0AFDA3008DA402 /* Mock */,
 				F810B92A2D0AFDAB008DA402 /* Sources */,
 			);
@@ -538,7 +547,11 @@
 		F810B9292D0AFDA3008DA402 /* Mock */ = {
 			isa = PBXGroup;
 			children = (
+				F810B9352D0B1FC4008DA402 /* MockHomeCoordinator.swift */,
+				F810B9372D0B205B008DA402 /* MockHomeServices.swift */,
 				F810B92B2D0AFDBB008DA402 /* MockNetworkClient.swift */,
+				F810B9392D0B2144008DA402 /* MockTripHistoryCoordinator.swift */,
+				F810B9332D0B1E90008DA402 /* MockTripHistoryServices.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -546,6 +559,8 @@
 		F810B92A2D0AFDAB008DA402 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				F810B92D2D0B1E73008DA402 /* HomeViewModelTests.swift */,
+				F810B9312D0B1E8A008DA402 /* TripHistoryViewModelTests.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -869,8 +884,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F810B8912D0AFCB7008DA402 /* PrivateRideTests.swift in Sources */,
+				F810B9382D0B205B008DA402 /* MockHomeServices.swift in Sources */,
+				F810B9362D0B1FC4008DA402 /* MockHomeCoordinator.swift in Sources */,
+				F810B93A2D0B2144008DA402 /* MockTripHistoryCoordinator.swift in Sources */,
+				F810B9322D0B1E8A008DA402 /* TripHistoryViewModelTests.swift in Sources */,
 				F810B92C2D0AFDBB008DA402 /* MockNetworkClient.swift in Sources */,
+				F810B92E2D0B1E73008DA402 /* HomeViewModelTests.swift in Sources */,
+				F810B9342D0B1E90008DA402 /* MockTripHistoryServices.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

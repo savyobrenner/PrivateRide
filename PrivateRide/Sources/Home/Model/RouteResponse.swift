@@ -95,4 +95,19 @@ struct RouteResponse: Codable {
             routeResponse = nil
         }
     }
+    
+    init(
+        origin: Location,
+        destination: Location,
+        distance: Double, duration: Int,
+        options: [Option],
+        routeResponse: RouteDetails?
+    ) {
+        self.origin = origin
+        self.destination = destination
+        self.distance = distance
+        self.duration = duration
+        self.options = options
+        self.routeResponse = routeResponse
+    }
 }

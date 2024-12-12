@@ -13,6 +13,11 @@ struct TripHistoryResponse: Codable {
         case customerId = "customer_id"
         case rides
     }
+    
+    init(customerId: String, rides: [Trip]) {
+        self.customerId = customerId
+        self.rides = rides
+    }
 }
 
 extension TripHistoryResponse {

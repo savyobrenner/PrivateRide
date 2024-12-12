@@ -316,6 +316,16 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
         
         coordinator?.navigate(to: .tripsHistory)
     }
+    
+    func validateForm() {
+        isButtonEnabled = !userId.trimmed.isEmpty &&
+        !currentAddress.trimmed.isEmpty &&
+        !dropOffAddress.trimmed.isEmpty
+        
+        if isButtonEnabled {
+            autocompleteResults = []
+        }
+    }
 }
 
 // MARK: - Private Extension
@@ -362,16 +372,6 @@ private extension HomeViewModel {
             }
             
             self.autocompleteResults = response?.mapItems.compactMap { $0.placemark.title } ?? []
-        }
-    }
-    
-    func validateForm() {
-        isButtonEnabled = !userId.trimmed.isEmpty &&
-        !currentAddress.trimmed.isEmpty &&
-        !dropOffAddress.trimmed.isEmpty
-        
-        if isButtonEnabled {
-            autocompleteResults = []
         }
     }
     

@@ -111,10 +111,7 @@ class TripHistoryViewModel: BaseViewModel<TripHistoryCoordinator>, TripHistoryVi
         
         coordinator?.dismiss(animated: animated)
     }
-}
-
-// MARK: - Private Methods
-private extension TripHistoryViewModel {
+    
     func validateFields() {
         isButtonEnabled = !userId.trimmed.isEmpty && selectedDriverID != nil
     }
