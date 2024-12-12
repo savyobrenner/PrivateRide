@@ -11,7 +11,7 @@ protocol TripHistoryViewModelProtocol: BaseViewModelProtocol {
     var userId: String { get set }
     var selectedDriverID: Int? { get set }
     var drivers: [ConfirmRideRequest.Driver] { get }
-    var trips: [String] { get set }
+    var trips: [PRTripCard.Model] { get set }
     var isButtonEnabled: Bool { get set }
     
     func searchTrips()

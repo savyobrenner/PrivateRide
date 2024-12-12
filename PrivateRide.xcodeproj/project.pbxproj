@@ -53,7 +53,7 @@
 		F810B82E2D0A5806008DA402 /* TripHistoryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F810B8252D0A5806008DA402 /* TripHistoryCoordinator.swift */; };
 		F810B82F2D0A5806008DA402 /* TripHistoryServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = F810B8262D0A5806008DA402 /* TripHistoryServices.swift */; };
 		F810B8302D0A5806008DA402 /* TripHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F810B8292D0A5806008DA402 /* TripHistoryViewModel.swift */; };
-		F810B8362D0A5C46008DA402 /* PRAddressCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F810B8352D0A5C42008DA402 /* PRAddressCard.swift */; };
+		F810B8362D0A5C46008DA402 /* PRTripCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F810B8352D0A5C42008DA402 /* PRTripCard.swift */; };
 		F810B8382D0A63FB008DA402 /* TripsHistoryEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = F810B8372D0A63FB008DA402 /* TripsHistoryEndpoint.swift */; };
 		F810B8792D0A730A008DA402 /* TripHistoryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F810B8782D0A7305008DA402 /* TripHistoryResponse.swift */; };
 		F84DC4A22D08EBC20069E1BA /* PRTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84DC4A12D08EBBE0069E1BA /* PRTextField.swift */; };
@@ -137,7 +137,7 @@
 		F810B8282D0A5806008DA402 /* TripHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripHistoryView.swift; sourceTree = "<group>"; };
 		F810B8292D0A5806008DA402 /* TripHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripHistoryViewModel.swift; sourceTree = "<group>"; };
 		F810B82A2D0A5806008DA402 /* TripHistoryViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripHistoryViewModelProtocol.swift; sourceTree = "<group>"; };
-		F810B8352D0A5C42008DA402 /* PRAddressCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRAddressCard.swift; sourceTree = "<group>"; };
+		F810B8352D0A5C42008DA402 /* PRTripCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRTripCard.swift; sourceTree = "<group>"; };
 		F810B8372D0A63FB008DA402 /* TripsHistoryEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripsHistoryEndpoint.swift; sourceTree = "<group>"; };
 		F810B8782D0A7305008DA402 /* TripHistoryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripHistoryResponse.swift; sourceTree = "<group>"; };
 		F84DC4A12D08EBBE0069E1BA /* PRTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRTextField.swift; sourceTree = "<group>"; };
@@ -580,7 +580,7 @@
 		F84DC6052D08FB0F0069E1BA /* Molecules */ = {
 			isa = PBXGroup;
 			children = (
-				F810B8352D0A5C42008DA402 /* PRAddressCard.swift */,
+				F810B8352D0A5C42008DA402 /* PRTripCard.swift */,
 				F84DC6062D08FB8D0069E1BA /* PRAddressFormView.swift */,
 				F8AD8FF22D0A3644001CAADE /* PRBottomSheet.swift */,
 				F8AD8F8C2D0A0E96001CAADE /* PRFloatingAlert */,
@@ -786,7 +786,7 @@
 				F810B82E2D0A5806008DA402 /* TripHistoryCoordinator.swift in Sources */,
 				F810B8382D0A63FB008DA402 /* TripsHistoryEndpoint.swift in Sources */,
 				F810B82F2D0A5806008DA402 /* TripHistoryServices.swift in Sources */,
-				F810B8362D0A5C46008DA402 /* PRAddressCard.swift in Sources */,
+				F810B8362D0A5C46008DA402 /* PRTripCard.swift in Sources */,
 				F810B8302D0A5806008DA402 /* TripHistoryViewModel.swift in Sources */,
 				F807617C2D0669EC0011D3A6 /* UserDefaultsStorage.swift in Sources */,
 				F807617D2D0669EC0011D3A6 /* CacheManager.swift in Sources */,

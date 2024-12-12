@@ -133,27 +133,13 @@ struct TripHistoryView<ViewModel: TripHistoryViewModelProtocol>: View {
                 } else {
                     ScrollView(.vertical, showsIndicators: false) {
                         VStack(spacing: 16) {
-                            //                        ForEach(model.drivers, id: \.id) { driver in
-                            //                            PRRideOptionCard(
-                            //                                name: driver.name,
-                            //                                price: driver.value,
-                            //                                description: driver.description,
-                            //                                vehicle: driver.vehicle,
-                            //                                rating: driver.rating,
-                            //                                comment: driver.comment,
-                            //                                isSelected: selectedDriverID == driver.id
-                            //                            )
-                            //                            .onTapGesture {
-                            //                                if selectedDriverID == driver.id {
-                            //                                    selectedDriverID = nil
-                            //                                } else {
-                            //                                    selectedDriverID = driver.id
-                            //                                }
-                            //                            }
-                            //                        }
+                            ForEach(viewModel.trips) { trip in
+                                PRTripCard(model: trip)
+                            }
                         }
                         .padding(.horizontal, 16)
                     }
+                    .padding(.vertical, 20)
                 }
                 
                 Spacer()

@@ -1,5 +1,5 @@
 //
-//  PRAddressCard.swift
+//  PRTripCard.swift
 //  PrivateRide
 //
 //  Created by Savyo Brenner on 12/12/24.
@@ -7,25 +7,32 @@
 
 import SwiftUI
 
-struct PRAddressCard: View {
-    let date: String
-    let origin: String
-    let destination: String
-    let driverName: String
-    let vehicle: String
-    let value: String
-    let distance: String
+extension PRTripCard {
+    struct Model: Identifiable {
+        let id = UUID()
+        let date: String
+        let origin: String
+        let destination: String
+        let driverName: String
+        let vehicle: String
+        let value: String
+        let distance: String
+    }
+}
+
+struct PRTripCard: View {
+    let model: Model
     
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             HStack {
-                Text(date)
+                Text(model.date)
                     .font(.brand(.semibold, size: 12))
                     .foregroundStyle(Color.Brand.black)
                 
                 Spacer()
                 
-                Text(distance)
+                Text(model.distance)
                     .font(.brand(.semibold, size: 12))
                     .foregroundStyle(Color.Brand.gray)
             }
@@ -41,7 +48,7 @@ struct PRAddressCard: View {
                         .resizable()
                         .frame(width: 24, height: 24)
                     
-                    Text(origin)
+                    Text(model.origin)
                         .font(.brand(.regular, size: 14))
                         .foregroundStyle(Color.Brand.black)
                 }
@@ -56,7 +63,7 @@ struct PRAddressCard: View {
                         .resizable()
                         .frame(width: 24, height: 24)
                     
-                    Text(destination)
+                    Text(model.destination)
                         .font(.brand(.regular, size: 14))
                         .foregroundStyle(Color.Brand.black)
                 }
@@ -69,18 +76,18 @@ struct PRAddressCard: View {
             
             HStack(alignment: .top) {
                 VStack(alignment: .leading, spacing: 0) {
-                    Text(driverName)
+                    Text(model.driverName)
                         .font(.brand(.semibold, size: 14))
                         .foregroundStyle(Color.Brand.black)
                     
-                    Text(vehicle)
+                    Text(model.vehicle)
                         .font(.brand(.regular, size: 12))
                         .foregroundStyle(Color.Brand.gray)
                 }
                 
                 Spacer()
                 
-                Text(value)
+                Text(model.value)
                     .font(.brand(.semibold, size: 18))
                     .foregroundStyle(Color.Brand.primary)
             }
@@ -100,7 +107,7 @@ struct PRAddressCard: View {
     ZStack {
         Color.Brand.black
         
-        PRAddressCard(
+        PRTripCard(model: .init (
             date: "Dec 12 2024",
             origin: "Av. Paulista, 1538 - Bela Vista, São Paulo - SP, 01310-200",
             destination: "Av. Thomas Edison, 365 - Barra Funda, São Paulo - SP, 01140-000",
@@ -108,6 +115,6 @@ struct PRAddressCard: View {
             vehicle: "Fiat Uno",
             value: "R$ 20,00",
             distance: "10 kilometros | 20 minutes"
-        )
+        ))
     }
 }
