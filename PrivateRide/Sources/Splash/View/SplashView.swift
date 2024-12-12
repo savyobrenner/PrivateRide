@@ -43,7 +43,8 @@ import Factory
 
 #Preview {
     SplashView(viewModel: SplashViewModel(
-        coordinator: SplashCoordinator(navigationController: .init())
+        coordinator: SplashCoordinator(navigationController: .init()),
+        analytics: Container.shared.analyticsCollector()
     ))
 }
 #endif

@@ -148,7 +148,6 @@ struct HomeView<ViewModel: HomeViewModelProtocol>: View {
                 .ignoresSafeArea()
             }
         }
-        .onAppear { }
         .showPRAlert(alert: $viewModel.currentAlert)
     }
 }
@@ -158,7 +157,9 @@ import Factory
 
 #Preview {
     HomeView(viewModel: HomeViewModel(
-        coordinator: HomeCoordinator(navigationController: .init()), services: Container.shared.homeServices()
+        coordinator: HomeCoordinator(navigationController: .init()),
+        services: Container.shared.homeServices(),
+        analytics: Container.shared.analyticsCollector()
     ))
 }
 #endif

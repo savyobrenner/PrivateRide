@@ -85,12 +85,15 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
     }
     
     private let services: HomeServicesProtocol
+    private let analytics: AnalyticsCollectible
     
     // MARK: - Initializer
-    init(coordinator: HomeCoordinator?, services: HomeServicesProtocol) {
+    init(coordinator: HomeCoordinator?, services: HomeServicesProtocol, analytics: AnalyticsCollectible) {
         self.services = services
+        self.analytics = analytics
         super.init(coordinator: coordinator)
         
+        analytics.collect(event: PRAnalyticsEvents.homeScreen)
         configureLocationManager()
     }
     
@@ -119,11 +122,12 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
         guard isButtonEnabled, !isLoading else { return }
         
         guard !userId.trimmed.isEmpty, !currentAddress.trimmed.isEmpty, !dropOffAddress.trimmed.isEmpty else {
-            // TODO: - Maybe add a error treatment ?
             return
         }
         
         isLoading = true
+        
+        analytics.collect(event: PRAnalyticsEvents.searchRide(userId: userId))
         
         coordinator?.autoCancellingTask { @MainActor in
             defer { self.isLoading = false }
@@ -164,6 +168,8 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
     
     func locateUser() {
         guard let userLocation else { return }
+        
+        analytics.collect(event: PRAnalyticsEvents.locateUser)
         
         isAutoCompleteSelected = true
         
@@ -259,6 +265,8 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
     }
     
     func cancelTrip() {
+        analytics.collect(event: PRAnalyticsEvents.cancelRide(userId: userId))
+        
         withAnimation {
             isBottomSheetVisible = false
             isAddressEditable = true
@@ -271,6 +279,8 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
             let routeReponse = routesObject,
             let driver = routeReponse.options.first(where: { $0.id == id })
         else { return }
+        
+        analytics.collect(event: PRAnalyticsEvents.confirmRide(userId: userId))
         
         let requestDriver = ConfirmRideRequest.Driver(id: driver.id, name: driver.name)
         
@@ -302,6 +312,10 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
     }
     
     func navigateToTripsHistory() {
+        analytics.collect(event: PRAnalyticsEvents.homeScreenTime(duration: screenTime))
+        
+        analytics.collect(event: PRAnalyticsEvents.navigateToTripHistory)
+        
         coordinator?.navigate(to: .tripsHistory)
     }
 }

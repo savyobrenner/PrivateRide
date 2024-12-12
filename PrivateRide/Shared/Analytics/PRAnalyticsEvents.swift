@@ -10,7 +10,7 @@ enum PRAnalyticsEvents: AnalyticsEventable {
     case appLaunch
     
     case homeScreen
-    case homeScreenTime(duration: Double)
+    case homeScreenTime(duration: Int)
     case locateUser
     case searchRide(userId: String)
     case cancelRide(userId: String)
@@ -18,7 +18,7 @@ enum PRAnalyticsEvents: AnalyticsEventable {
     
     case navigateToTripHistory
     case tripHistoryScreen
-    case tripHistoryScreenTime(duration: Double)
+    case tripHistoryScreenTime(duration: Int)
     case tripHistoryBackButton
     
     var name: String {

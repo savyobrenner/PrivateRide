@@ -145,7 +145,6 @@ struct TripHistoryView<ViewModel: TripHistoryViewModelProtocol>: View {
                 Spacer()
             }
         }
-        .onAppear { }
         .showPRAlert(alert: $viewModel.currentAlert)
     }
 }
@@ -154,8 +153,10 @@ struct TripHistoryView<ViewModel: TripHistoryViewModelProtocol>: View {
 import Factory
 
 #Preview {
-TripHistoryView(viewModel: TripHistoryViewModel(
-    coordinator: TripHistoryCoordinator(navigationController: .init()), services: Container.shared.tripHistoryServices()
+    TripHistoryView(viewModel: TripHistoryViewModel(
+        coordinator: TripHistoryCoordinator(navigationController: .init()),
+        services: Container.shared.tripHistoryServices(),
+        analytics: Container.shared.analyticsCollector()
     ))
 }
 #endif

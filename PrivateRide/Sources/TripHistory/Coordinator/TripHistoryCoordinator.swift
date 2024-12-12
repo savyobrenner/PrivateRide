@@ -12,7 +12,11 @@ class TripHistoryCoordinator: BaseCoordinator {
     
     override func start() {
         let viewcontroller = TripHistoryView(
-            viewModel: TripHistoryViewModel(coordinator: self, services: Container.shared.tripHistoryServices())
+            viewModel: TripHistoryViewModel(
+                coordinator: self,
+                services: Container.shared.tripHistoryServices(),
+                analytics: Container.shared.analyticsCollector()
+            )
         )
             .insideHostingController()
         

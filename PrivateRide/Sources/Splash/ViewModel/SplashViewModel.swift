@@ -8,13 +8,18 @@
 import SwiftUI
 
 class SplashViewModel: BaseViewModel<SplashCoordinator>, SplashViewModelProtocol {
-        
-    override init(coordinator: SplashCoordinator?) {
+    
+    private let analytics: AnalyticsCollectible
+    
+    init(coordinator: SplashCoordinator?, analytics: AnalyticsCollectible) {
+        self.analytics = analytics
         
         super.init(coordinator: coordinator)
     }
     
     func load() {
+        analytics.collect(event: PRAnalyticsEvents.appLaunch)
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             self.coordinator?.navigate(to: .home)
         }

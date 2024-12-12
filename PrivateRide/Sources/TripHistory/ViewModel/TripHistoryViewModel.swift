@@ -40,11 +40,15 @@ class TripHistoryViewModel: BaseViewModel<TripHistoryCoordinator>, TripHistoryVi
     var firstLoad = true
 
     private let services: TripHistoryServicesProtocol
+    private let analytics: AnalyticsCollectible
     
-    init(coordinator: TripHistoryCoordinator?, services: TripHistoryServicesProtocol) {
+    init(coordinator: TripHistoryCoordinator?, services: TripHistoryServicesProtocol, analytics: AnalyticsCollectible) {
         self.services = services
+        self.analytics = analytics
         
         super.init(coordinator: coordinator)
+        
+        analytics.collect(event: PRAnalyticsEvents.tripHistoryScreen)
     }
     
     func searchTrips() {
@@ -98,6 +102,13 @@ class TripHistoryViewModel: BaseViewModel<TripHistoryCoordinator>, TripHistoryVi
                 self.handleNetworkError(error)
             }
         }
+    }
+    
+    override func dismiss(animated: Bool = true) {
+        analytics.collect(event: PRAnalyticsEvents.tripHistoryBackButton)
+        analytics.collect(event: PRAnalyticsEvents.tripHistoryScreenTime(duration: screenTime))
+        
+        coordinator?.dismiss(animated: animated)
     }
 }
 

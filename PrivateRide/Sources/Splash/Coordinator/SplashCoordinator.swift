@@ -13,7 +13,7 @@ class SplashCoordinator: BaseCoordinator {
     
     override func start() {
         let viewcontroller = SplashView(
-            viewModel: SplashViewModel(coordinator: self)
+            viewModel: SplashViewModel(coordinator: self, analytics: Container.shared.analyticsCollector())
         )
             .insideHostingController()
         

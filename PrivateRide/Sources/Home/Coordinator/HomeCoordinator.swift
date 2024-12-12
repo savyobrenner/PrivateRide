@@ -12,7 +12,11 @@ class HomeCoordinator: BaseCoordinator {
     
     override func start() {
         let viewcontroller = HomeView(
-            viewModel: HomeViewModel(coordinator: self, services: Container.shared.homeServices())
+            viewModel: HomeViewModel(
+                coordinator: self,
+                services: Container.shared.homeServices(),
+                analytics: Container.shared.analyticsCollector()
+            )
         )
             .insideHostingController()
         
