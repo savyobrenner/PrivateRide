@@ -22,5 +22,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func configureApp(_ application: UIApplication) {
         IQKeyboardManager.shared.isEnabled = true
+        IQKeyboardManager.shared.enableAutoToolbar = true
     }
 }

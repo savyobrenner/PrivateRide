@@ -64,7 +64,7 @@ final class TripHistoryViewModelTests: XCTestCase {
             XCTAssertFalse(self.viewModel.trips.isEmpty)
             XCTAssertEqual(self.viewModel.trips.first?.origin, "A")
             XCTAssertEqual(self.viewModel.trips.first?.destination, "B")
-            XCTAssertEqual(self.viewModel.trips.first?.value, "R$ 100,00")
+            XCTAssertEqual(self.viewModel.trips.first?.value, "R$ 100.00")
             expectation.fulfill()
         }
         
