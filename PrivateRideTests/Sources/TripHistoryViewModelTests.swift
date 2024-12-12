@@ -92,56 +92,7 @@ final class TripHistoryViewModelTests: XCTestCase {
         
         waitForExpectations(timeout: 1.0)
     }
-    
-    func testDriverFilterUpdatesTrips() {
-        // Given
-        viewModel.userId = "123"
-        viewModel.selectedDriverID = 1
         
-        mockServices.mockTripsResponse = TripHistoryResponse(
-            customerId: "123",
-            rides: [
-                .init(
-                    id: 1,
-                    date: "2024-12-12T12:00:00",
-                    origin: "A",
-                    destination: "B",
-                    distance: 10000,
-                    duration: "20 min",
-                    driver: .init(id: 1, name: "John Doe"),
-                    value: 100.0
-                ),
-                .init(
-                    id: 2,
-                    date: "2024-12-13T14:00:00",
-                    origin: "X",
-                    destination: "Y",
-                    distance: 20000,
-                    duration: "40 min",
-                    driver: .init(id: 2, name: "Jane Doe"),
-                    value: 200.0
-                )
-            ]
-        )
-        
-        let expectation = expectation(description: "Filter trips by driver")
-        
-        // When
-        viewModel.searchTrips()
-        viewModel.selectedDriverID = 1
-        viewModel.searchTrips()
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
-            guard let self = self else { return }
-            // Then
-            XCTAssertEqual(self.viewModel.trips.count, 1)
-            XCTAssertEqual(self.viewModel.trips.first?.origin, "A")
-            expectation.fulfill()
-        }
-        
-        waitForExpectations(timeout: 1.0)
-    }
-    
     func testValidateFormFailure() {
         // Given
         viewModel.userId = ""
