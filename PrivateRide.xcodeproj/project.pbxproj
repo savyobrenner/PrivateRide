@@ -50,6 +50,8 @@
 		F810B87B2D0AEF9A008DA402 /* PRAnalyticsEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = F810B87A2D0AEF97008DA402 /* PRAnalyticsEvents.swift */; };
 		F810B87D2D0AEFB3008DA402 /* SimulatedAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = F810B87C2D0AEFAB008DA402 /* SimulatedAnalytics.swift */; };
 		F810B8812D0AF473008DA402 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = F810B8802D0AF473008DA402 /* Localizable.xcstrings */; };
+		F810B8912D0AFCB7008DA402 /* PrivateRideTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F810B88F2D0AFCB7008DA402 /* PrivateRideTests.swift */; };
+		F810B92C2D0AFDBB008DA402 /* MockNetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F810B92B2D0AFDBB008DA402 /* MockNetworkClient.swift */; };
 		F84DC4A22D08EBC20069E1BA /* PRTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84DC4A12D08EBBE0069E1BA /* PRTextField.swift */; };
 		F84DC4AC2D08EC6B0069E1BA /* Inter-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F84DC4A42D08EC6B0069E1BA /* Inter-Bold.ttf */; };
 		F84DC4AE2D08EC6B0069E1BA /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F84DC4A92D08EC6B0069E1BA /* Inter-Regular.ttf */; };
@@ -82,6 +84,16 @@
 		F8AD8FF72D0A4B06001CAADE /* ConfirmeRideRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AD8FF62D0A4B01001CAADE /* ConfirmeRideRequest.swift */; };
 		F8AD8FF92D0A4FE3001CAADE /* ConfirmRideResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AD8FF82D0A4FDE001CAADE /* ConfirmRideResponse.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F810B88A2D0AFCB0008DA402 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F80760A62D0669E20011D3A6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F80760AD2D0669E20011D3A6;
+			remoteInfo = PrivateRide;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		F80760AE2D0669E20011D3A6 /* PrivateRide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PrivateRide.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -128,6 +140,9 @@
 		F810B87A2D0AEF97008DA402 /* PRAnalyticsEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRAnalyticsEvents.swift; sourceTree = "<group>"; };
 		F810B87C2D0AEFAB008DA402 /* SimulatedAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulatedAnalytics.swift; sourceTree = "<group>"; };
 		F810B8802D0AF473008DA402 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		F810B8862D0AFCB0008DA402 /* PrivateRideTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PrivateRideTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F810B88F2D0AFCB7008DA402 /* PrivateRideTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateRideTests.swift; sourceTree = "<group>"; };
+		F810B92B2D0AFDBB008DA402 /* MockNetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkClient.swift; sourceTree = "<group>"; };
 		F84DC4A12D08EBBE0069E1BA /* PRTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRTextField.swift; sourceTree = "<group>"; };
 		F84DC4A32D08EC6B0069E1BA /* Inter-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Black.ttf"; sourceTree = "<group>"; };
 		F84DC4A42D08EC6B0069E1BA /* Inter-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Bold.ttf"; sourceTree = "<group>"; };
@@ -170,6 +185,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F810B8832D0AFCB0008DA402 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -177,6 +199,7 @@
 			isa = PBXGroup;
 			children = (
 				F807616A2D0669EC0011D3A6 /* PrivateRide */,
+				F810B8902D0AFCB7008DA402 /* PrivateRideTests */,
 				F80760AF2D0669E20011D3A6 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -185,6 +208,7 @@
 			isa = PBXGroup;
 			children = (
 				F80760AE2D0669E20011D3A6 /* PrivateRide.app */,
+				F810B8862D0AFCB0008DA402 /* PrivateRideTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -501,6 +525,31 @@
 			path = Localization;
 			sourceTree = "<group>";
 		};
+		F810B8902D0AFCB7008DA402 /* PrivateRideTests */ = {
+			isa = PBXGroup;
+			children = (
+				F810B88F2D0AFCB7008DA402 /* PrivateRideTests.swift */,
+				F810B9292D0AFDA3008DA402 /* Mock */,
+				F810B92A2D0AFDAB008DA402 /* Sources */,
+			);
+			path = PrivateRideTests;
+			sourceTree = "<group>";
+		};
+		F810B9292D0AFDA3008DA402 /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				F810B92B2D0AFDBB008DA402 /* MockNetworkClient.swift */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
+		F810B92A2D0AFDAB008DA402 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
 		F84DC3E72D08EAF80069E1BA /* DesignSystem */ = {
 			isa = PBXGroup;
 			children = (
@@ -653,6 +702,26 @@
 			productReference = F80760AE2D0669E20011D3A6 /* PrivateRide.app */;
 			productType = "com.apple.product-type.application";
 		};
+		F810B8852D0AFCB0008DA402 /* PrivateRideTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F810B88C2D0AFCB0008DA402 /* Build configuration list for PBXNativeTarget "PrivateRideTests" */;
+			buildPhases = (
+				F810B8822D0AFCB0008DA402 /* Sources */,
+				F810B8832D0AFCB0008DA402 /* Frameworks */,
+				F810B8842D0AFCB0008DA402 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F810B88B2D0AFCB0008DA402 /* PBXTargetDependency */,
+			);
+			name = PrivateRideTests;
+			packageProductDependencies = (
+			);
+			productName = PrivateRideTests;
+			productReference = F810B8862D0AFCB0008DA402 /* PrivateRideTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -665,6 +734,10 @@
 				TargetAttributes = {
 					F80760AD2D0669E20011D3A6 = {
 						CreatedOnToolsVersion = 16.1;
+					};
+					F810B8852D0AFCB0008DA402 = {
+						CreatedOnToolsVersion = 16.1;
+						TestTargetID = F80760AD2D0669E20011D3A6;
 					};
 				};
 			};
@@ -690,6 +763,7 @@
 			projectRoot = "";
 			targets = (
 				F80760AD2D0669E20011D3A6 /* PrivateRide */,
+				F810B8852D0AFCB0008DA402 /* PrivateRideTests */,
 			);
 		};
 /* End PBXProject section */
@@ -709,6 +783,13 @@
 				F84DC4B22D08EC6B0069E1BA /* Inter-SemiBold.ttf in Resources */,
 				F84DC4B32D08EC6B0069E1BA /* Inter-Black.ttf in Resources */,
 				F84DC4B42D08EC6B0069E1BA /* Inter-Light.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F810B8842D0AFCB0008DA402 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -784,7 +865,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F810B8822D0AFCB0008DA402 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F810B8912D0AFCB7008DA402 /* PrivateRideTests.swift in Sources */,
+				F810B92C2D0AFDBB008DA402 /* MockNetworkClient.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F810B88B2D0AFCB0008DA402 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F80760AD2D0669E20011D3A6 /* PrivateRide */;
+			targetProxy = F810B88A2D0AFCB0008DA402 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		F807611D2D0669E40011D3A6 /* Debug */ = {
@@ -962,6 +1060,40 @@
 			};
 			name = Release;
 		};
+		F810B88D2D0AFCB0008DA402 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.brenner.PrivateRideTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PrivateRide.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PrivateRide";
+			};
+			name = Debug;
+		};
+		F810B88E2D0AFCB0008DA402 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.brenner.PrivateRideTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PrivateRide.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PrivateRide";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -979,6 +1111,15 @@
 			buildConfigurations = (
 				F80761202D0669E40011D3A6 /* Debug */,
 				F80761212D0669E40011D3A6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F810B88C2D0AFCB0008DA402 /* Build configuration list for PBXNativeTarget "PrivateRideTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F810B88D2D0AFCB0008DA402 /* Debug */,
+				F810B88E2D0AFCB0008DA402 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

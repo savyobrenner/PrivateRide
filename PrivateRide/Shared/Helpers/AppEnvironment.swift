@@ -9,7 +9,7 @@ import Foundation
 
 enum AppEnvironment {
     static var baseURL: String {
-        return "Replace here"
+        return "https://xd5zl5kk2yltomvw5fb37y3bm40vsyrx.lambda-url.sa-east-1.on.aws"
     }
     
     static var isDebug: Bool {
