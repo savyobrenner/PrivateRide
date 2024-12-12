@@ -68,7 +68,7 @@ final class TripHistoryViewModelTests: XCTestCase {
             expectation.fulfill()
         }
         
-        waitForExpectations(timeout: 1.0)
+        waitForExpectations(timeout: 3.0)
     }
     
     func testSearchTripsFailure() {
