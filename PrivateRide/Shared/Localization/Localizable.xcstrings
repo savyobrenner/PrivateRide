@@ -160,6 +160,29 @@
         }
       }
     },
+    "minutes" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "minutos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "minutes"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "minutos"
+          }
+        }
+      }
+    },
     "No drivers available in your area." : {
       "localizations" : {
         "es" : {
@@ -382,9 +405,15 @@
         }
       }
     },
-    "Where To" : {
+    "whereTo" : {
       "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Where To?"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",

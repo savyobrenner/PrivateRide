@@ -57,7 +57,7 @@ struct PRAddressFormView: View {
                 }
             }
             
-            PRFormSectionHeader(title: "Where To?".localized, isExpanded: $isWhereToExpanded)
+            PRFormSectionHeader(title: "whereTo".localized, isExpanded: $isWhereToExpanded)
             
             if isWhereToExpanded {
                 HStack {

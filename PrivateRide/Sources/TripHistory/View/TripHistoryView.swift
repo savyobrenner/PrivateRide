@@ -96,7 +96,7 @@ struct TripHistoryView<ViewModel: TripHistoryViewModelProtocol>: View {
                     }
                     
                     PRButton(
-                        title: "Search",
+                        title: "Search".localized,
                         style: .defaultStyle,
                         isLoading: viewModel.isLoading,
                         isEnabled: viewModel.isButtonEnabled

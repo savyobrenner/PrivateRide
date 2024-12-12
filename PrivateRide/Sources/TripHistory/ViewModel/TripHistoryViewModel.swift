@@ -79,7 +79,8 @@ class TripHistoryViewModel: BaseViewModel<TripHistoryCoordinator>, TripHistoryVi
                         }
                     }
                     
-                    let formattedDistance = "\(String(format: "%.2f", trip.distance)) km | \(durationMinutes) minutes"
+                    let minutesText = "minutes".localized
+                    let formattedDistance = "\(String(format: "%.2f", trip.distance)) km | \(durationMinutes) \(minutesText)"
                     let formattedValue = "R$ \(String(format: "%.2f", trip.value))"
 
                     return .init(
