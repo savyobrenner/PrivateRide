@@ -37,5 +37,9 @@ extension Container {
     var tripHistoryServices: Factory<TripHistoryServicesProtocol> {
         self { TripHistoryServices(network: self.networkService.resolve()) }
     }
+    
+    var analyticsCollector: Factory<AnalyticsCollectible> {
+        self { SimulatedAnalytics() }
+    }
 }
 
