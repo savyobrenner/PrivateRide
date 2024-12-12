@@ -73,7 +73,7 @@ struct PRTripCard: View {
                 .frame(maxWidth: .infinity)
                 .frame(height: 1)
             
-            HStack(alignment: .top) {
+            HStack(alignment: .center) {
                 Text(model.driverName)
                     .font(.brand(.semibold, size: 16))
                     .foregroundStyle(Color.Brand.black)

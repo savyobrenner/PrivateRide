@@ -76,6 +76,7 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
     private var isAutoCompleteSelected = false
     private var lastAutocompleteQuery: String?
     private let locationManager = CLLocationManager()
+    private var lastRegionUpdate: MKCoordinateRegion?
     
     private var userLocation: CLLocationCoordinate2D? {
         didSet {
@@ -274,6 +275,9 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
         withAnimation {
             isBottomSheetVisible = false
             isAddressEditable = true
+            routesObject = nil
+            polyline = nil
+            pins = []
         }
     }
     
@@ -465,8 +469,6 @@ private extension HomeViewModel {
                 longitudeDelta: abs(current.longitude - dropOff.longitude) * 2
             )
             
-            calculateRoute()
-            
             updateRegion(to: center, span: span)
         } else if let current = currentAddressCoordinate {
             updateRegion(to: current)
@@ -474,13 +476,16 @@ private extension HomeViewModel {
             updateRegion(to: dropOff)
         }
     }
-    
-    func updateRegion(
-        to center: CLLocationCoordinate2D,
-        span: MKCoordinateSpan = MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
-    ) {
-        withAnimation {
-            self.region = MKCoordinateRegion(center: center, span: span)
+
+    func updateRegion(to center: CLLocationCoordinate2D, span: MKCoordinateSpan = MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)) {
+        let newRegion = MKCoordinateRegion(center: center, span: span)
+        
+        // Verifica se a nova região é diferente da última atualizada
+        if newRegion != lastRegionUpdate {
+            withAnimation {
+                self.region = newRegion
+            }
+            lastRegionUpdate = newRegion
         }
     }
     
