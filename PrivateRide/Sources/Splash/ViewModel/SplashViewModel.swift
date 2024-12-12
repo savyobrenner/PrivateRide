@@ -8,15 +8,8 @@
 import SwiftUI
 
 class SplashViewModel: BaseViewModel<SplashCoordinator>, SplashViewModelProtocol {
-    
-    private var user: String? {
-        serviceLocator.userSettings.user
-    }
-    
-    let serviceLocator: ServiceLocatorProtocol
-    
-    init(coordinator: SplashCoordinator?, serviceLocator: ServiceLocatorProtocol) {
-        self.serviceLocator = serviceLocator
+        
+    override init(coordinator: SplashCoordinator?) {
         
         super.init(coordinator: coordinator)
     }

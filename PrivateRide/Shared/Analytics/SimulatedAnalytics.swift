@@ -8,7 +8,9 @@
 struct SimulatedAnalytics: AnalyticsCollectible {
     
     func collect(event: AnalyticsEventable) {
-        let analyticsEnabled = AppEnvironment.isDebug // This should be disabled for Debug mode, but since this app will only run in Debug mode, I’ve modified the standard market logic.
+        // This should be disabled for Debug mode, but since this app will only run in Debug mode
+        // I’ve modified the standard market logic.
+        let analyticsEnabled = AppEnvironment.isDebug
         
         guard analyticsEnabled else { return }
         

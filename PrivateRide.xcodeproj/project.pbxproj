@@ -23,20 +23,11 @@
 		F80761782D0669EC0011D3A6 /* Factory+Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = F807613D2D0669EC0011D3A6 /* Factory+Container.swift */; };
 		F80761792D0669EC0011D3A6 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F807613F2D0669EC0011D3A6 /* AppConstants.swift */; };
 		F807617A2D0669EC0011D3A6 /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80761402D0669EC0011D3A6 /* AppEnvironment.swift */; };
-		F807617B2D0669EC0011D3A6 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80761422D0669EC0011D3A6 /* UserSettings.swift */; };
-		F807617C2D0669EC0011D3A6 /* UserDefaultsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80761442D0669EC0011D3A6 /* UserDefaultsStorage.swift */; };
-		F807617D2D0669EC0011D3A6 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80761462D0669EC0011D3A6 /* CacheManager.swift */; };
-		F807617E2D0669EC0011D3A6 /* CacheManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80761472D0669EC0011D3A6 /* CacheManagerProtocol.swift */; };
-		F807617F2D0669EC0011D3A6 /* CacheProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80761482D0669EC0011D3A6 /* CacheProtocol.swift */; };
-		F80761802D0669EC0011D3A6 /* StorageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80761492D0669EC0011D3A6 /* StorageError.swift */; };
-		F80761812D0669EC0011D3A6 /* StorageKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = F807614A2D0669EC0011D3A6 /* StorageKey.swift */; };
 		F80761822D0669EC0011D3A6 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F807614C2D0669EC0011D3A6 /* AppError.swift */; };
 		F80761832D0669EC0011D3A6 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = F807614D2D0669EC0011D3A6 /* Endpoint.swift */; };
 		F80761842D0669EC0011D3A6 /* HttpMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = F807614E2D0669EC0011D3A6 /* HttpMethods.swift */; };
 		F80761852D0669EC0011D3A6 /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80761502D0669EC0011D3A6 /* NetworkClient.swift */; };
 		F80761862D0669EC0011D3A6 /* NetworkProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80761522D0669EC0011D3A6 /* NetworkProtocol.swift */; };
-		F80761872D0669EC0011D3A6 /* ServiceLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80761552D0669EC0011D3A6 /* ServiceLocator.swift */; };
-		F80761882D0669EC0011D3A6 /* ServiceLocatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80761562D0669EC0011D3A6 /* ServiceLocatorProtocol.swift */; };
 		F80761892D0669EC0011D3A6 /* AppNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80761592D0669EC0011D3A6 /* AppNavigationController.swift */; };
 		F807618A2D0669EC0011D3A6 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F807615A2D0669EC0011D3A6 /* Coordinator.swift */; };
 		F807618B2D0669EC0011D3A6 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F807615B2D0669EC0011D3A6 /* MainCoordinator.swift */; };
@@ -110,20 +101,11 @@
 		F807613D2D0669EC0011D3A6 /* Factory+Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Factory+Container.swift"; sourceTree = "<group>"; };
 		F807613F2D0669EC0011D3A6 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		F80761402D0669EC0011D3A6 /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
-		F80761422D0669EC0011D3A6 /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
-		F80761442D0669EC0011D3A6 /* UserDefaultsStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsStorage.swift; sourceTree = "<group>"; };
-		F80761462D0669EC0011D3A6 /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
-		F80761472D0669EC0011D3A6 /* CacheManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManagerProtocol.swift; sourceTree = "<group>"; };
-		F80761482D0669EC0011D3A6 /* CacheProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheProtocol.swift; sourceTree = "<group>"; };
-		F80761492D0669EC0011D3A6 /* StorageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageError.swift; sourceTree = "<group>"; };
-		F807614A2D0669EC0011D3A6 /* StorageKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageKey.swift; sourceTree = "<group>"; };
 		F807614C2D0669EC0011D3A6 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 		F807614D2D0669EC0011D3A6 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		F807614E2D0669EC0011D3A6 /* HttpMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpMethods.swift; sourceTree = "<group>"; };
 		F80761502D0669EC0011D3A6 /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
 		F80761522D0669EC0011D3A6 /* NetworkProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProtocol.swift; sourceTree = "<group>"; };
-		F80761552D0669EC0011D3A6 /* ServiceLocator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceLocator.swift; sourceTree = "<group>"; };
-		F80761562D0669EC0011D3A6 /* ServiceLocatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceLocatorProtocol.swift; sourceTree = "<group>"; };
 		F80761592D0669EC0011D3A6 /* AppNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNavigationController.swift; sourceTree = "<group>"; };
 		F807615A2D0669EC0011D3A6 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		F807615B2D0669EC0011D3A6 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
@@ -316,35 +298,6 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
-		F80761432D0669EC0011D3A6 /* Business */ = {
-			isa = PBXGroup;
-			children = (
-				F80761422D0669EC0011D3A6 /* UserSettings.swift */,
-			);
-			path = Business;
-			sourceTree = "<group>";
-		};
-		F80761452D0669EC0011D3A6 /* Storages */ = {
-			isa = PBXGroup;
-			children = (
-				F80761442D0669EC0011D3A6 /* UserDefaultsStorage.swift */,
-			);
-			path = Storages;
-			sourceTree = "<group>";
-		};
-		F807614B2D0669EC0011D3A6 /* Cache */ = {
-			isa = PBXGroup;
-			children = (
-				F80761452D0669EC0011D3A6 /* Storages */,
-				F80761462D0669EC0011D3A6 /* CacheManager.swift */,
-				F80761472D0669EC0011D3A6 /* CacheManagerProtocol.swift */,
-				F80761482D0669EC0011D3A6 /* CacheProtocol.swift */,
-				F80761492D0669EC0011D3A6 /* StorageError.swift */,
-				F807614A2D0669EC0011D3A6 /* StorageKey.swift */,
-			);
-			path = Cache;
-			sourceTree = "<group>";
-		};
 		F807614F2D0669EC0011D3A6 /* Base */ = {
 			isa = PBXGroup;
 			children = (
@@ -381,22 +334,10 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
-		F80761572D0669EC0011D3A6 /* ServiceLocator */ = {
-			isa = PBXGroup;
-			children = (
-				F80761552D0669EC0011D3A6 /* ServiceLocator.swift */,
-				F80761562D0669EC0011D3A6 /* ServiceLocatorProtocol.swift */,
-			);
-			path = ServiceLocator;
-			sourceTree = "<group>";
-		};
 		F80761582D0669EC0011D3A6 /* Layers */ = {
 			isa = PBXGroup;
 			children = (
-				F80761432D0669EC0011D3A6 /* Business */,
-				F807614B2D0669EC0011D3A6 /* Cache */,
 				F80761542D0669EC0011D3A6 /* Network */,
-				F80761572D0669EC0011D3A6 /* ServiceLocator */,
 			);
 			path = Layers;
 			sourceTree = "<group>";
@@ -785,7 +726,6 @@
 				F80761792D0669EC0011D3A6 /* AppConstants.swift in Sources */,
 				F8AD8E332D09E4D7001CAADE /* HomeEndpoint.swift in Sources */,
 				F807617A2D0669EC0011D3A6 /* AppEnvironment.swift in Sources */,
-				F807617B2D0669EC0011D3A6 /* UserSettings.swift in Sources */,
 				F8AD8F962D0A1713001CAADE /* RouteResponse.swift in Sources */,
 				F810B82B2D0A5806008DA402 /* TripHistoryViewModelProtocol.swift in Sources */,
 				F810B82C2D0A5806008DA402 /* TripHistoryView.swift in Sources */,
@@ -795,16 +735,10 @@
 				F810B82F2D0A5806008DA402 /* TripHistoryServices.swift in Sources */,
 				F810B8362D0A5C46008DA402 /* PRTripCard.swift in Sources */,
 				F810B8302D0A5806008DA402 /* TripHistoryViewModel.swift in Sources */,
-				F807617C2D0669EC0011D3A6 /* UserDefaultsStorage.swift in Sources */,
-				F807617D2D0669EC0011D3A6 /* CacheManager.swift in Sources */,
-				F807617E2D0669EC0011D3A6 /* CacheManagerProtocol.swift in Sources */,
-				F807617F2D0669EC0011D3A6 /* CacheProtocol.swift in Sources */,
-				F80761802D0669EC0011D3A6 /* StorageError.swift in Sources */,
 				F8AD8FF72D0A4B06001CAADE /* ConfirmeRideRequest.swift in Sources */,
 				F8AD8F8D2D0A0E96001CAADE /* PRFloatingAlertType.swift in Sources */,
 				F8AD8F8E2D0A0E96001CAADE /* PRFloatingAlertModel.swift in Sources */,
 				F8AD8F8F2D0A0E96001CAADE /* PRFloatingAlertView.swift in Sources */,
-				F80761812D0669EC0011D3A6 /* StorageKey.swift in Sources */,
 				F80761822D0669EC0011D3A6 /* AppError.swift in Sources */,
 				F810B8792D0A730A008DA402 /* TripHistoryResponse.swift in Sources */,
 				F80761832D0669EC0011D3A6 /* Endpoint.swift in Sources */,
@@ -812,9 +746,7 @@
 				F80761852D0669EC0011D3A6 /* NetworkClient.swift in Sources */,
 				F8AD8F932D0A0F46001CAADE /* PRFloatingAlertViewModifier.swift in Sources */,
 				F80761862D0669EC0011D3A6 /* NetworkProtocol.swift in Sources */,
-				F80761872D0669EC0011D3A6 /* ServiceLocator.swift in Sources */,
 				F84DC4A22D08EBC20069E1BA /* PRTextField.swift in Sources */,
-				F80761882D0669EC0011D3A6 /* ServiceLocatorProtocol.swift in Sources */,
 				F80761892D0669EC0011D3A6 /* AppNavigationController.swift in Sources */,
 				F807618A2D0669EC0011D3A6 /* Coordinator.swift in Sources */,
 				F807618B2D0669EC0011D3A6 /* MainCoordinator.swift in Sources */,
