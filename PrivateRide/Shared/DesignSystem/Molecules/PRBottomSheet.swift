@@ -79,11 +79,11 @@ struct PRBottomSheet: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             HStack {
-                PRButton(title: "Cancel", style: .outline, isLoading: false, isEnabled: !isLoading) {
+                PRButton(title: "Cancel".localized, style: .outline, isLoading: false, isEnabled: !isLoading) {
                     action(.cancel)
                 }
                 
-                PRButton(title: "Confirm", style: .defaultStyle, isLoading: isLoading, isEnabled: selectedDriverID != nil) {
+                PRButton(title: "Confirm".localized, style: .defaultStyle, isLoading: isLoading, isEnabled: selectedDriverID != nil) {
                     if let selectedDriverID {
                         action(.confirm(selectedDriverID))
                     }

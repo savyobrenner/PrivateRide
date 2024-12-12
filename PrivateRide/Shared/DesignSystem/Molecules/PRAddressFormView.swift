@@ -45,26 +45,26 @@ struct PRAddressFormView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            PRFormSectionHeader(title: "Identification", isExpanded: $isIdentificationExpanded)
+            PRFormSectionHeader(title: "Identification".localized, isExpanded: $isIdentificationExpanded)
             
             if isIdentificationExpanded {
                 VStack(alignment: .leading, spacing: 16) {
                     PRTextField(
                         icon: .personCircleIcon,
-                        placeholder: "ID Number",
+                        placeholder: "ID Number".localized,
                         text: $identification
                     )
                 }
             }
             
-            PRFormSectionHeader(title: "Where To?", isExpanded: $isWhereToExpanded)
+            PRFormSectionHeader(title: "Where To?".localized, isExpanded: $isWhereToExpanded)
             
             if isWhereToExpanded {
                 HStack {
                     VStack(alignment: .leading, spacing: 0) {
                         PRTextField(
                             icon: .circlePinIcon,
-                            placeholder: "Pick Up",
+                            placeholder: "Pick Up".localized,
                             text: $currentAddress
                         )
                         .opacity(isSwapping ? 0.5 : 1)
@@ -78,7 +78,7 @@ struct PRAddressFormView: View {
                         
                         PRTextField(
                             icon: .flagCircleIcon,
-                            placeholder: "Drop Off",
+                            placeholder: "Drop Off".localized,
                             text: $dropOffAddress
                         )
                         .opacity(isSwapping ? 0.5 : 1)
@@ -97,7 +97,7 @@ struct PRAddressFormView: View {
             }
             
             PRButton(
-                title: "Search",
+                title: "Search".localized,
                 style: .defaultStyle,
                 isLoading: isLoading && isEditable,
                 isEnabled: isButtonEnabled

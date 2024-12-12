@@ -181,7 +181,6 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
         geocoder.reverseGeocodeLocation(location) { [weak self] placemarks, error in
             guard let self else { return }
             if let error {
-                print("Failed to reverse geocode: \(error.localizedDescription)")
                 return
             }
             
@@ -221,7 +220,6 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
         directions.calculate { [weak self] response, error in
             guard let self else { return }
             if let error {
-                print("Error calculating route: \(error.localizedDescription)")
                 return
             }
             
@@ -360,7 +358,6 @@ private extension HomeViewModel {
         search.start { [weak self] response, error in
             guard let self else { return }
             if let error {
-                print("Autocomplete error: \(error.localizedDescription)")
                 return
             }
             
@@ -398,7 +395,6 @@ private extension HomeViewModel {
         let geocoder = CLGeocoder()
         geocoder.geocodeAddressString(address) { placemarks, error in
             if let error = error {
-                print("Geocoding error: \(error.localizedDescription)")
                 completion(nil)
                 return
             }
@@ -506,7 +502,5 @@ extension HomeViewModel: CLLocationManagerDelegate {
         userLocation = location.coordinate
     }
     
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("Failed to get user location: \(error.localizedDescription)")
-    }
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) { }
 }
