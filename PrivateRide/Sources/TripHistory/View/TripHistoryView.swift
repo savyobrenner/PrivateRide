@@ -160,16 +160,17 @@ struct TripHistoryView<ViewModel: TripHistoryViewModelProtocol>: View {
             }
         }
         .onAppear { }
+        .showPRAlert(alert: $viewModel.currentAlert)
     }
 }
 
-//#if DEBUG
-//import Factory
-//
-//#Preview {
-//TripHistoryView(viewModel: TripHistoryViewModel(
-//    coordinator: TripHistoryCoordinator(navigationController: .init()), services: Container.shared.tripHistoryServices()
-//    ))
-//}
-//#endif
-//
+#if DEBUG
+import Factory
+
+#Preview {
+TripHistoryView(viewModel: TripHistoryViewModel(
+    coordinator: TripHistoryCoordinator(navigationController: .init()), services: Container.shared.tripHistoryServices()
+    ))
+}
+#endif
+

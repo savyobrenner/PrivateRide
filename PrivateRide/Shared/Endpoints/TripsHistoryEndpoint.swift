@@ -8,7 +8,7 @@
 import Foundation
 
 enum TripsHistoryEndpoint {
-    case tripsHistory(userId: String, driverId: String)
+    case tripsHistory(userId: String, driverId: Int)
 }
 
 extension TripsHistoryEndpoint: Endpoint {
@@ -34,7 +34,7 @@ extension TripsHistoryEndpoint: Endpoint {
         switch self {
         case let .tripsHistory(_, driverId):
             return .init([
-                .init(name: "driver_id", value: driverId),
+                .init(name: "driver_id", value: String(driverId)),
             ])
         }
     }

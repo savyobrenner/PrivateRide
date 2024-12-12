@@ -15,10 +15,10 @@ final class TripHistoryServices: TripHistoryServicesProtocol {
         self.network = network
     }
     
-    func getTripsHistory(id: String, driverId: String) async throws -> RouteResponse {
+    func getTripsHistory(id: String, driverId: Int) async throws -> TripHistoryResponse {
         let response = try await network.sendRequest(
             endpoint: TripsHistoryEndpoint.tripsHistory(userId: id, driverId: driverId),
-            responseModel: RouteResponse.self
+            responseModel: TripHistoryResponse.self
         )
 
         return response

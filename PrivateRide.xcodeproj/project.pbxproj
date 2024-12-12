@@ -55,6 +55,7 @@
 		F810B8302D0A5806008DA402 /* TripHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F810B8292D0A5806008DA402 /* TripHistoryViewModel.swift */; };
 		F810B8362D0A5C46008DA402 /* PRAddressCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F810B8352D0A5C42008DA402 /* PRAddressCard.swift */; };
 		F810B8382D0A63FB008DA402 /* TripsHistoryEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = F810B8372D0A63FB008DA402 /* TripsHistoryEndpoint.swift */; };
+		F810B8792D0A730A008DA402 /* TripHistoryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F810B8782D0A7305008DA402 /* TripHistoryResponse.swift */; };
 		F84DC4A22D08EBC20069E1BA /* PRTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84DC4A12D08EBBE0069E1BA /* PRTextField.swift */; };
 		F84DC4AC2D08EC6B0069E1BA /* Inter-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F84DC4A42D08EC6B0069E1BA /* Inter-Bold.ttf */; };
 		F84DC4AE2D08EC6B0069E1BA /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F84DC4A92D08EC6B0069E1BA /* Inter-Regular.ttf */; };
@@ -138,6 +139,7 @@
 		F810B82A2D0A5806008DA402 /* TripHistoryViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripHistoryViewModelProtocol.swift; sourceTree = "<group>"; };
 		F810B8352D0A5C42008DA402 /* PRAddressCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRAddressCard.swift; sourceTree = "<group>"; };
 		F810B8372D0A63FB008DA402 /* TripsHistoryEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripsHistoryEndpoint.swift; sourceTree = "<group>"; };
+		F810B8782D0A7305008DA402 /* TripHistoryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripHistoryResponse.swift; sourceTree = "<group>"; };
 		F84DC4A12D08EBBE0069E1BA /* PRTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRTextField.swift; sourceTree = "<group>"; };
 		F84DC4A32D08EC6B0069E1BA /* Inter-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Black.ttf"; sourceTree = "<group>"; };
 		F84DC4A42D08EC6B0069E1BA /* Inter-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Bold.ttf"; sourceTree = "<group>"; };
@@ -491,6 +493,7 @@
 			isa = PBXGroup;
 			children = (
 				F810B8312D0A5811008DA402 /* Coordinator */,
+				F810B8772D0A72F8008DA402 /* Model */,
 				F810B8342D0A581D008DA402 /* Services */,
 				F810B8332D0A581A008DA402 /* View */,
 				F810B8322D0A5816008DA402 /* ViewModel */,
@@ -530,6 +533,14 @@
 				F810B8272D0A5806008DA402 /* TripHistoryServicesProtocol.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		F810B8772D0A72F8008DA402 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F810B8782D0A7305008DA402 /* TripHistoryResponse.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		F84DC3E72D08EAF80069E1BA /* DesignSystem */ = {
@@ -788,6 +799,7 @@
 				F8AD8F8F2D0A0E96001CAADE /* PRFloatingAlertView.swift in Sources */,
 				F80761812D0669EC0011D3A6 /* StorageKey.swift in Sources */,
 				F80761822D0669EC0011D3A6 /* AppError.swift in Sources */,
+				F810B8792D0A730A008DA402 /* TripHistoryResponse.swift in Sources */,
 				F80761832D0669EC0011D3A6 /* Endpoint.swift in Sources */,
 				F80761842D0669EC0011D3A6 /* HttpMethods.swift in Sources */,
 				F80761852D0669EC0011D3A6 /* NetworkClient.swift in Sources */,
