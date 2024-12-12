@@ -96,7 +96,12 @@ struct PRAddressFormView: View {
                 }
             }
             
-            PRButton(title: "Search", style: .defaultStyle, isLoading: isLoading, isEnabled: isButtonEnabled) {
+            PRButton(
+                title: "Search",
+                style: .defaultStyle,
+                isLoading: isLoading && isEditable,
+                isEnabled: isButtonEnabled
+            ) {
                 withAnimation {
                     isIdentificationExpanded = false
                     isWhereToExpanded = false
