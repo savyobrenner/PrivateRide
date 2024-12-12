@@ -32,7 +32,7 @@ final class TripHistoryViewModelTests: XCTestCase {
         super.tearDown()
     }
     
-    func testSearchTripsSuccess() async {
+    func testSearchTripsSuccess() {
         // Given
         viewModel.userId = "123"
         viewModel.selectedDriverID = 1
@@ -53,31 +53,47 @@ final class TripHistoryViewModelTests: XCTestCase {
             ]
         )
         
+        let expectation = expectation(description: "Search trips succeeds")
+        
         // When
         viewModel.searchTrips()
         
-        // Then
-        XCTAssertFalse(viewModel.trips.isEmpty)
-        XCTAssertEqual(viewModel.trips.first?.origin, "A")
-        XCTAssertEqual(viewModel.trips.first?.destination, "B")
-        XCTAssertEqual(viewModel.trips.first?.value, "R$ 100,00") // Formatação esperada
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+            guard let self = self else { return }
+            // Then
+            XCTAssertFalse(self.viewModel.trips.isEmpty)
+            XCTAssertEqual(self.viewModel.trips.first?.origin, "A")
+            XCTAssertEqual(self.viewModel.trips.first?.destination, "B")
+            XCTAssertEqual(self.viewModel.trips.first?.value, "R$ 100,00")
+            expectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 1.0)
     }
     
-    func testSearchTripsFailure() async {
+    func testSearchTripsFailure() {
         // Given
         viewModel.userId = "123"
         viewModel.selectedDriverID = 1
         
         mockServices.shouldFail = true
         
+        let expectation = expectation(description: "Search trips fails")
+        
         // When
         viewModel.searchTrips()
         
-        // Then
-        XCTAssertTrue(viewModel.trips.isEmpty)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+            guard let self = self else { return }
+            // Then
+            XCTAssertTrue(self.viewModel.trips.isEmpty)
+            expectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 1.0)
     }
     
-    func testDriverFilterUpdatesTrips() async {
+    func testDriverFilterUpdatesTrips() {
         // Given
         viewModel.userId = "123"
         viewModel.selectedDriverID = 1
@@ -108,14 +124,22 @@ final class TripHistoryViewModelTests: XCTestCase {
             ]
         )
         
+        let expectation = expectation(description: "Filter trips by driver")
+        
         // When
         viewModel.searchTrips()
         viewModel.selectedDriverID = 1
         viewModel.searchTrips()
         
-        // Then
-        XCTAssertEqual(viewModel.trips.count, 1) // Apenas 1 viagem deve corresponder ao filtro
-        XCTAssertEqual(viewModel.trips.first?.origin, "A")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+            guard let self = self else { return }
+            // Then
+            XCTAssertEqual(self.viewModel.trips.count, 1)
+            XCTAssertEqual(self.viewModel.trips.first?.origin, "A")
+            expectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 1.0)
     }
     
     func testValidateFormFailure() {
@@ -142,7 +166,7 @@ final class TripHistoryViewModelTests: XCTestCase {
         XCTAssertTrue(viewModel.isButtonEnabled)
     }
     
-    func testLoadingStateDuringSearchTrips() async {
+    func testLoadingStateDuringSearchTrips() {
         // Given
         viewModel.userId = "123"
         viewModel.selectedDriverID = 1
@@ -162,12 +186,20 @@ final class TripHistoryViewModelTests: XCTestCase {
             ]
         )
         
+        let expectation = expectation(description: "Loading state updates correctly")
+        
         // When
         XCTAssertFalse(viewModel.isLoading)
         viewModel.searchTrips()
         
-        // Then
-        XCTAssertFalse(viewModel.isLoading)
-        XCTAssertFalse(viewModel.trips.isEmpty)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+            guard let self = self else { return }
+            // Then
+            XCTAssertFalse(self.viewModel.isLoading)
+            XCTAssertFalse(self.viewModel.trips.isEmpty)
+            expectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 1.0)
     }
 }

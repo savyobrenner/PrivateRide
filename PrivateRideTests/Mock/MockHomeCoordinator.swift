@@ -10,7 +10,10 @@
 final class MockHomeCoordinator: HomeCoordinator {
     var didNavigateToTripsHistory = false
     
-    func navigateToTripsHistory() {
-        didNavigateToTripsHistory = true
+    override func navigate(to path: Navigation) {
+        switch path {
+        case .tripsHistory:
+            didNavigateToTripsHistory = true
+        }
     }
 }

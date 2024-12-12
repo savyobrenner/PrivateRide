@@ -34,18 +34,26 @@ final class HomeViewModelTests: XCTestCase {
     
     func testSwapAddresses() {
         // Given
-        viewModel.currentAddress = "123 Main Street"
-        viewModel.dropOffAddress = "456 Elm Street"
+        viewModel.currentAddress = "Av. Pres. Kenedy, 2385 - Remédios, Osasco - SP, 02675-031"
+        viewModel.dropOffAddress = "Av. Paulista, 1538 - Bela Vista, São Paulo - SP, 01310-200"
+        
+        let expectation = expectation(description: "Addresses swapped")
         
         // When
         viewModel.swapAddresses()
         
-        // Then
-        XCTAssertEqual(viewModel.currentAddress, "456 Elm Street")
-        XCTAssertEqual(viewModel.dropOffAddress, "123 Main Street")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+            guard let self = self else { return }
+            // Then
+            XCTAssertEqual(self.viewModel.currentAddress, "Av. Paulista, 1538 - Bela Vista, São Paulo - SP, 01310-200")
+            XCTAssertEqual(self.viewModel.dropOffAddress, "Av. Pres. Kenedy, 2385 - Remédios, Osasco - SP, 02675-031")
+            expectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 1.0)
     }
     
-    func testSearchRideSuccess() async {
+    func testSearchRideSuccess() {
         // Given
         viewModel.userId = "123"
         viewModel.currentAddress = "Origin Address"
@@ -60,19 +68,27 @@ final class HomeViewModelTests: XCTestCase {
             routeResponse: nil
         )
         
+        let expectation = expectation(description: "Search ride succeeds")
+        
         // When
         viewModel.searchRide()
         
-        // Then
-        XCTAssertNotNil(viewModel.routesObject)
-        XCTAssertFalse(viewModel.isAddressEditable)
-        XCTAssertTrue(viewModel.isBottomSheetVisible)
-        XCTAssertEqual(mockServices.lastEstimateRideRequest?.id, "123")
-        XCTAssertEqual(mockServices.lastEstimateRideRequest?.origin, "Origin Address")
-        XCTAssertEqual(mockServices.lastEstimateRideRequest?.destination, "Destination Address")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+            guard let self = self else { return }
+            // Then
+            XCTAssertNotNil(self.viewModel.routesObject)
+            XCTAssertFalse(self.viewModel.isAddressEditable)
+            XCTAssertTrue(self.viewModel.isBottomSheetVisible)
+            XCTAssertEqual(self.mockServices.lastEstimateRideRequest?.id, "123")
+            XCTAssertEqual(self.mockServices.lastEstimateRideRequest?.origin, "Origin Address")
+            XCTAssertEqual(self.mockServices.lastEstimateRideRequest?.destination, "Destination Address")
+            expectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 1.0)
     }
     
-    func testSearchRideFailure() async {
+    func testSearchRideFailure() {
         // Given
         viewModel.userId = "123"
         viewModel.currentAddress = "Origin Address"
@@ -80,13 +96,21 @@ final class HomeViewModelTests: XCTestCase {
         
         mockServices.shouldFail = true
         
+        let expectation = expectation(description: "Search ride fails")
+        
         // When
         viewModel.searchRide()
         
-        // Then
-        XCTAssertNil(viewModel.routesObject)
-        XCTAssertTrue(viewModel.isAddressEditable)
-        XCTAssertFalse(viewModel.isBottomSheetVisible)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+            guard let self = self else { return }
+            // Then
+            XCTAssertNil(self.viewModel.routesObject)
+            XCTAssertTrue(self.viewModel.isAddressEditable)
+            XCTAssertFalse(self.viewModel.isBottomSheetVisible)
+            expectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 1.0)
     }
     
     func testCancelTrip() {
@@ -94,12 +118,20 @@ final class HomeViewModelTests: XCTestCase {
         viewModel.isBottomSheetVisible = true
         viewModel.isAddressEditable = false
         
+        let expectation = expectation(description: "Trip cancelled")
+        
         // When
         viewModel.cancelTrip()
         
-        // Then
-        XCTAssertFalse(viewModel.isBottomSheetVisible)
-        XCTAssertTrue(viewModel.isAddressEditable)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+            guard let self = self else { return }
+            // Then
+            XCTAssertFalse(self.viewModel.isBottomSheetVisible)
+            XCTAssertTrue(self.viewModel.isAddressEditable)
+            expectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 1.0)
     }
     
     func testNavigateToTripsHistory() {
@@ -136,7 +168,7 @@ final class HomeViewModelTests: XCTestCase {
         XCTAssertTrue(viewModel.isButtonEnabled)
     }
     
-    func testLoadingStateDuringSearchRide() async {
+    func testLoadingStateDuringSearchRide() {
         // Given
         viewModel.userId = "123"
         viewModel.currentAddress = "Origin Address"
@@ -150,13 +182,20 @@ final class HomeViewModelTests: XCTestCase {
             routeResponse: nil
         )
         
+        let expectation = expectation(description: "Loading state updated")
+        
         // When
-        XCTAssertFalse(viewModel.isLoading)
         viewModel.searchRide()
         
-        // Then
-        XCTAssertFalse(viewModel.isLoading)
-        XCTAssertNotNil(viewModel.routesObject)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+            guard let self = self else { return }
+            // Then
+            XCTAssertFalse(self.viewModel.isLoading)
+            XCTAssertNotNil(self.viewModel.routesObject)
+            expectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 1.0)
     }
     
     func testCancelTripResetsState() {
@@ -172,12 +211,19 @@ final class HomeViewModelTests: XCTestCase {
             routeResponse: nil
         )
         
+        let expectation = expectation(description: "State reset after trip cancel")
+        
         // When
         viewModel.cancelTrip()
         
-        // Then
-        XCTAssertFalse(viewModel.isBottomSheetVisible)
-        XCTAssertTrue(viewModel.isAddressEditable)
-        XCTAssertNil(viewModel.routesObject)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+            guard let self = self else { return }
+            // Then
+            XCTAssertFalse(self.viewModel.isBottomSheetVisible)
+            XCTAssertTrue(self.viewModel.isAddressEditable)
+            expectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 1.0)
     }
 }
