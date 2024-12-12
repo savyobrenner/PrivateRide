@@ -259,7 +259,7 @@ class HomeViewModel: BaseViewModel<HomeCoordinator>, HomeViewModelProtocol {
     }
     
     func addressIsNotEditible() {
-        showAlert(message: "You need to complete or cancel the current trip first.", type: .warning, position: .top)
+        showAlert(message: "You need to complete or cancel the current trip first.".localized, type: .warning, position: .top)
     }
     
     func cancelTrip() {
