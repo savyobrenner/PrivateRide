@@ -108,7 +108,7 @@ struct TripHistoryView<ViewModel: TripHistoryViewModelProtocol>: View {
                 .padding(.top, 40)
                 .padding(.horizontal, 16)
                 
-                if viewModel.trips.isEmpty {
+                if viewModel.trips.isEmpty && !viewModel.firstLoad {
                     HStack {
                         Spacer()
                         
@@ -130,7 +130,7 @@ struct TripHistoryView<ViewModel: TripHistoryViewModelProtocol>: View {
                         
                         Spacer()
                     }
-                } else {
+                } else if !viewModel.trips.isEmpty {
                     ScrollView(.vertical, showsIndicators: false) {
                         VStack(spacing: 16) {
                             ForEach(viewModel.trips) { trip in

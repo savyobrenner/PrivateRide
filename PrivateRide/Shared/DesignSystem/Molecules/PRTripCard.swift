@@ -14,7 +14,6 @@ extension PRTripCard {
         let origin: String
         let destination: String
         let driverName: String
-        let vehicle: String
         let value: String
         let distance: String
     }
@@ -75,20 +74,14 @@ struct PRTripCard: View {
                 .frame(height: 1)
             
             HStack(alignment: .top) {
-                VStack(alignment: .leading, spacing: 0) {
-                    Text(model.driverName)
-                        .font(.brand(.semibold, size: 14))
-                        .foregroundStyle(Color.Brand.black)
-                    
-                    Text(model.vehicle)
-                        .font(.brand(.regular, size: 12))
-                        .foregroundStyle(Color.Brand.gray)
-                }
+                Text(model.driverName)
+                    .font(.brand(.semibold, size: 16))
+                    .foregroundStyle(Color.Brand.black)
                 
                 Spacer()
                 
                 Text(model.value)
-                    .font(.brand(.semibold, size: 18))
+                    .font(.brand(.semibold, size: 20))
                     .foregroundStyle(Color.Brand.primary)
             }
         }
@@ -112,7 +105,6 @@ struct PRTripCard: View {
             origin: "Av. Paulista, 1538 - Bela Vista, São Paulo - SP, 01310-200",
             destination: "Av. Thomas Edison, 365 - Barra Funda, São Paulo - SP, 01140-000",
             driverName: "Homer Simpson",
-            vehicle: "Fiat Uno",
             value: "R$ 20,00",
             distance: "10 kilometros | 20 minutes"
         ))

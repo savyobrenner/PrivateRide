@@ -13,6 +13,7 @@ protocol TripHistoryViewModelProtocol: BaseViewModelProtocol {
     var drivers: [ConfirmRideRequest.Driver] { get }
     var trips: [PRTripCard.Model] { get set }
     var isButtonEnabled: Bool { get set }
+    var firstLoad: Bool { get set }
     
     func searchTrips()
 }

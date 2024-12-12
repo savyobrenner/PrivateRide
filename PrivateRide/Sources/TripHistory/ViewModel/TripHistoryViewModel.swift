@@ -35,6 +35,9 @@ class TripHistoryViewModel: BaseViewModel<TripHistoryCoordinator>, TripHistoryVi
     
     @Published
     var isButtonEnabled = false
+    
+    @Published
+    var firstLoad = true
 
     private let services: TripHistoryServicesProtocol
     
@@ -80,14 +83,18 @@ class TripHistoryViewModel: BaseViewModel<TripHistoryCoordinator>, TripHistoryVi
                         origin: trip.origin,
                         destination: trip.destination,
                         driverName: trip.driver.name,
-                        vehicle: "Fiat Uno",
                         value: formattedValue,
                         distance: formattedDistance
                     )
                 }
                 
                 self.trips = trips
+                
+                self.firstLoad = false
             } catch {
+                self.firstLoad = false
+                self.trips = []
+                
                 self.handleNetworkError(error)
             }
         }
