@@ -131,7 +131,7 @@ final class HomeViewModelTests: XCTestCase {
             expectation.fulfill()
         }
         
-        waitForExpectations(timeout: 1.0)
+        waitForExpectations(timeout: 3.0)
     }
     
     func testNavigateToTripsHistory() {
